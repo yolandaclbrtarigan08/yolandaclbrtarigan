@@ -9,14 +9,12 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-image: url("https://unsplash.com/id/s/foto/perpustakaan-yang-nyaman");
-    background-size: cover;
-    background-position: center;
+    background-color: #9CAF88; /* Sage Green */
     color:white;
 }
 
 .overlay{
-    background-color: rgba(0,0,0,0.65);
+    background-color: rgba(0,0,0,0.55);
     min-height:100vh;
 }
 
@@ -31,6 +29,11 @@ nav a{
     margin:0 15px;
     text-decoration:none;
     font-weight:bold;
+}
+
+nav a:hover{
+    color:#ffd700;
+    transition:0.3s;
 }
 
 .container{
@@ -68,6 +71,10 @@ h1,h2{
     text-align:center;
     margin-top:30px;
 }
+
+iframe{
+    max-width:100%;
+}
 </style>
 
 <script>
@@ -85,19 +92,19 @@ function showMenu(menu){
 <div class="overlay">
 
 <nav>
-<a href="#" onclick="showMenu('dashboard')">Dashboard</a>
-<a href="#" onclick="showMenu('katalog')">Katalog</a>
-<a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
+<a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
+<a href="javascript:void(0)" onclick="showMenu('katalog')">Katalog</a>
+<a href="javascript:void(0)" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
 </nav>
 
 <div class="container">
 
 <div id="dashboard" class="section active">
-<h1>Egan Library</h1>
+<h1>Yolanda Library</h1>
 <p style="text-align:center;">Selamat datang di perpustakaan Yolanda.</p>
 
 <div class="link-box">
-<a href=""https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
+<a href="https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
 About Me
 </a>
 
@@ -110,7 +117,7 @@ My Biodata
 <h3>Video Profil</h3>
 
 <iframe width="560" height="315"
-src="https://youtu.be/mMNvXhEyY3w?si=iRjs3-8U2TV8EJnS"
+src="https://www.youtube.com/embed/mMNvXhEyY3w"
 title="YouTube video"
 frameborder="0"
 allowfullscreen>
@@ -123,9 +130,10 @@ allowfullscreen>
 <div id="katalog" class="section">
 <h2>Daftar Buku</h2>
 <ul>
-<li>Manajemen Perpustakaan Modern</li>
-<li>Digital Library Concepts</li>
-<li>Literasi Informasi untuk Mahasiswa</li>
+<li>Dasar-Dasar Manajemen</li>
+<li>Metodologi Penelitian</li>
+<li>Komunikasi Efektif</li>
+<li>Pemanfaatan Media Digital</li>
 </ul>
 </div>
 
@@ -133,9 +141,9 @@ allowfullscreen>
 <h2>Kegiatan Literasi</h2>
 
 <ul>
-<li>Program Pojok Literasi</li>
-<li>Sosialisasi Digitalisasi Arsip</li>
-<li>Diskusi Buku Mingguan</li>
+<li>Bimbingan Penggunaan OPAC</li>
+<li>Pelatihan Sitasi dan Manajemen Referensi</li>
+<li>Kelas Penulisan Ilmiah</li>
 </ul>
 
 </div>
