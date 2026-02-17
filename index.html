@@ -1,10 +1,147 @@
-<html>
+<!DOCTYPE html>
+<html lang="id">
 <head>
-<title> halaman web yolanda</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yolib</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://unsplash.com/id/s/foto/perpustakaan-yang-nyaman");
+    background-size: cover;
+    background-position: center;
+    color:white;
+}
+
+.overlay{
+    background-color: rgba(0,0,0,0.65);
+    min-height:100vh;
+}
+
+nav{
+    background-color: rgba(0,0,0,0.8);
+    padding:15px;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    padding:40px;
+    max-width:900px;
+    margin:auto;
+}
+
+.section{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+}
+
+.link-box{
+    text-align:center;
+    margin-top:25px;
+}
+
+.link-box a{
+    display:block;
+    margin:10px;
+    color:#ffd700;
+    font-size:18px;
+    text-decoration:none;
+}
+
+.video-box{
+    text-align:center;
+    margin-top:30px;
+}
+</style>
+
+<script>
+function showMenu(menu){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.getElementById(menu).classList.add('active');
+}
+</script>
+
 </head>
+
 <body>
-<h1> WELCOME TO YOLANDA LIBRARY<h1>
-<p>ini adalah aragraf pertama saya.</p>
-<a href="https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp">kunjungi halaman</a>
+<div class="overlay">
+
+<nav>
+<a href="#" onclick="showMenu('dashboard')">Dashboard</a>
+<a href="#" onclick="showMenu('katalog')">Katalog</a>
+<a href="#" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
+</nav>
+
+<div class="container">
+
+<div id="dashboard" class="section active">
+<h1>Egan Library</h1>
+<p style="text-align:center;">Selamat datang di perpustakaan Yolanda.</p>
+
+<div class="link-box">
+<a href=""https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
+About Me
+</a>
+
+<a href="https://drive.google.com/drive/folders/1xMDmr45NHah1l_3l9RLZ3CN6YGeiKBb4" target="_blank">
+My Biodata
+</a>
+</div>
+
+<div class="video-box">
+<h3>Video Profil</h3>
+
+<iframe width="560" height="315"
+src="https://youtu.be/mMNvXhEyY3w?si=iRjs3-8U2TV8EJnS"
+title="YouTube video"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+<div id="katalog" class="section">
+<h2>Daftar Buku</h2>
+<ul>
+<li>Manajemen Perpustakaan Modern</li>
+<li>Digital Library Concepts</li>
+<li>Literasi Informasi untuk Mahasiswa</li>
+</ul>
+</div>
+
+<div id="kegiatan" class="section">
+<h2>Kegiatan Literasi</h2>
+
+<ul>
+<li>Program Pojok Literasi</li>
+<li>Sosialisasi Digitalisasi Arsip</li>
+<li>Diskusi Buku Mingguan</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+
 </body>
-</html> 
+</html>
