@@ -18,7 +18,6 @@ body {
     min-height:100vh;
 }
 
-/* Menghilangkan tampilan login overlay karena tidak lagi menjadi penghalang */
 #login-section {
     display: none; 
 }
@@ -67,7 +66,6 @@ body {
     background-color: #e6c200;
 }
 
-/* Menghapus display: none agar konten utama bisa langsung dilihat */
 #main-content {
     display: block;
 }
@@ -77,12 +75,13 @@ nav{
     padding:15px;
     text-align:center;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Mengatur menu utama di tengah */
     align-items: center;
     position: relative;
-    flex-wrap: wrap; /* Agar menu tidak menumpuk di layar kecil */
+    flex-wrap: wrap;
 }
 
+/* Styling untuk tautan menu */
 nav a{
     color:white;
     margin:0 15px;
@@ -95,9 +94,14 @@ nav a:hover{
     transition:0.3s;
 }
 
-/* Tombol login lama dihapus, digantikan menu link */
-.login-btn {
-    display: none; 
+/* Spacer untuk mendorong menu ke kanan */
+.nav-spacer {
+    flex-grow: 1;
+}
+
+/* Posisi menu di kanan */
+.nav-right {
+    margin-left: auto; 
 }
 
 .container{
@@ -175,6 +179,36 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
     background-color: #e6c200;
 }
+
+/* Styling WhatsApp Popup */
+.wa-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.wa-popup:hover {
+    transform: scale(1.1);
+    background-color: #20b557;
+}
+
+.wa-icon {
+    width: 35px;
+    height: 35px;
+    fill: white;
+}
 </style>
 
 <script>
@@ -192,136 +226,4 @@ function login(event) {
     // Simple check: username 'admin', password 'password'
     if (username === 'admin' && password === 'password') {
         alert('Login Berhasil! Selamat Datang Admin.');
-        // Karena konten utama sudah terbuka, kita tidak perlu menyembunyikan/menampilkan elemen lagi.
-    } else {
-        alert('Username atau password salah!');
-    }
-}
-</script>
-
-</head>
-<body>
-<div class="overlay">
-
-<!-- Section login overlay disembunyikan, logika dipindahkan ke menu -->
-<div id="login-section">
-    <div class="login-form">
-        <h2>Login</h2>
-        <form onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-    </div>
-</div>
-
-<div id="main-content">
-
-<nav>
-    <a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
-    <a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
-    <a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
-    
-    <!-- Perubahan: Menu Sign In (Mengarah ke Form Login), Login (Mengarah ke Form Daftar), dan Daftar -->
-    <a href="javascript:void(0)" onclick="showMenu('login-page')">Sign In</a>
-    <a href="javascript:void(0)" onclick="showMenu('register')">Login</a>
-    <a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>
-</nav>
-
-<div class="container">
-
-<div id="dashboard" class="section active">
-<h1>Yolanda Library</h1>
-<p style="text-align:center;">Selamat Datang di Perpustakaan Yolanda.</p>
-
-<div class="link-box">
-<a href="https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
-Who Am I
-</a>
-
-<a href="https://drive.google.com/drive/folders/1xMDmr45NHah1l_3l9RLZ3CN6YGeiKBb4" target="_blank">
-Profil
-</a>
-</div>
-
-<div class="video-box">
-<h3>Video Profil</h3>
-
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/mMNvXhEyY3w"
-title="YouTube video"
-frameborder="0"
-allowfullscreen>
-</iframe>
-
-</div>
-
-</div>
-
-<div id="koleksi" class="section">
-<h2>Daftar Buku</h2>
-<ul>
-<li>Dasar-Dasar Manajemen</li>
-<li>Metodologi Penelitian</li>
-<li>Komunikasi Efektif</li>
-<li>Pemanfaatan Media Digital</li>
-</ul>
-</div>
-
-<div id="program" class="section">
-<h2>Program Literasi</h2>
-<ul>
-<li>Bimbingan Penggunaan OPAC</li>
-<li>Pelatihan Sitasi dan Manajemen Referensi</li>
-<li>Kelas Penulisan Ilmiah</li>
-</ul>
-</div>
-
-<!-- Menu Login (Formulir Username & Password) -->
-<div id="login-page" class="section">
-    <h2>Sign In</h2>
-    <div class="login-form" style="margin: auto;">
-        <form onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
-    </div>
-</div>
-
-<div id="register" class="section">
-<h2>Daftar Anggota</h2>
-<form>
-<label for="fname">First Name:</label>
-<input type="text" id="fname" name="fname" required>
-
-<label for="lname">Last Name:</label>
-<input type="text" id="lname" name="lname" required>
-
-<label for="nim">Nim:</label>
-<input type="text" id="nim" name="nim" required>
-
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required>
-
-<label for="phone">No Hp:</label>
-<input type="tel" id="phone" name="phone" required>
-
-<input type="submit" value="Daftar">
-</form>
-</div>
-
-</div>
-</div>
-
-</div>
-</body>
-</html>
+    } else
