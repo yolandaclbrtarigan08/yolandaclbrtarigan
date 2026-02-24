@@ -3,57 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yolib</title>
+<title>Intan Library</title>
 
 <style>
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-color: #9CAF88; /* Sage Green */
-    color:white;
+    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); /* Foto perpustakaan dari Unsplash */
+    background-size: cover; /* Agar gambar menutupi seluruh area */
+    background-position: center; /* Posisi tengah */
+    background-repeat: no-repeat; /* Tidak diulang */
+    background-attachment: fixed; /* Tetap saat scroll (opsional, untuk efek parallax) */
+    color: #0D47A1; /* Biru gelap untuk text utama, tetap untuk kontras */
 }
 
 .overlay{
-    background-color: rgba(0,0,0,0.55);
+    background-color: rgba(0,0,0,0.4); /* Hitam transparan lebih ringan untuk kesan terbuka, tetap untuk kontras teks */
     min-height:100vh;
 }
 
 nav{
-    background-color: rgba(0,0,0,0.8);
+    background-color: #1976D2; /* Biru navy untuk nav */
     padding:15px;
-    text-align:center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
+}
+
+.nav-left {
+    display: flex;
 }
 
 nav a{
-    color:white;
+    color: white; /* Putih untuk kontras di nav biru */
     margin:0 15px;
     text-decoration:none;
     font-weight:bold;
 }
 
 nav a:hover{
-    color:#ffd700;
+    color: #FFEB3B; /* Kuning cerah untuk highlight */
     transition:0.3s;
-}
-
-.login-btn {
-    position: absolute;
-    right: 15px;
-    background: none;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.login-btn:hover {
-    color: #ffd700;
-    transition: 0.3s;
 }
 
 .container{
@@ -82,9 +72,13 @@ h1,h2{
 .link-box a{
     display:block;
     margin:10px;
-    color:#ffd700;
+    color: white; /* Putih cerah untuk link About Me dan My Biodata */
     font-size:18px;
     text-decoration:none;
+}
+
+.link-box a:hover {
+    color: #FFEB3B; /* Kuning untuk hover */
 }
 
 .video-box{
@@ -92,44 +86,97 @@ h1,h2{
     margin-top:30px;
 }
 
+.video-box h3 {
+    color: white; /* Putih cerah untuk Video Profil */
+}
+
 iframe{
     max-width:100%;
 }
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: left;
+/* Styling untuk modal form daftar anggota */
+.modal {
+    display: none; /* Awalnya tersembunyi */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Background gelap transparan */
 }
 
-form label {
+.modal-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Putih transparan */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    text-align: left;
+    color: #0D47A1;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.modal-content label {
     display: block;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"] {
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="tel"] {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
 
-form input[type="submit"] {
-    background-color: #ffd700;
-    color: black;
-    padding: 10px 20px;
+.modal-content button {
+    width: 100%;
+    padding: 10px;
+    background-color: #1976D2; /* Biru navy untuk tombol */
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 16px;
 }
 
-form input[type="submit"]:hover {
-    background-color: #e6c200;
+.modal-content button:hover {
+    background-color: #1565C0; /* Biru lebih gelap untuk hover */
+}
+
+/* Warna putih cerah untuk elemen spesifik di dashboard */
+#dashboard h1 {
+    color: white; /* Library Intan */
+}
+
+#dashboard p {
+    color: white; /* Selamat datang di perpustakaan Intan. */
 }
 </style>
 
@@ -140,6 +187,24 @@ function showMenu(menu){
     });
     document.getElementById(menu).classList.add('active');
 }
+
+function showLoginForm(){
+    // Tampilkan modal form daftar anggota
+    document.getElementById('loginModal').style.display = 'block';
+}
+
+function closeModal(){
+    // Sembunyikan modal
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+// Tutup modal jika klik di luar modal
+window.onclick = function(event) {
+    const modal = document.getElementById('loginModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
 </script>
 
 </head>
@@ -148,25 +213,50 @@ function showMenu(menu){
 <div class="overlay">
 
 <nav>
+<div class="nav-left">
 <a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
-<a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
-<a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
-<button class="login-btn" onclick="showMenu('register')">Login</button>
+<a href="javascript:void(0)" onclick="showMenu('katalog')">Katalog</a>
+<a href="javascript:void(0)" onclick="showMenu('kegiatan')">Kegiatan Literasi</a>
+</div>
+<a href="javascript:void(0)" onclick="showLoginForm()">Login</a>
 </nav>
+
+<!-- Modal untuk Form Daftar Anggota -->
+<div id="loginModal" class="modal">
+<div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Daftar Anggota</h3>
+    <form action="#" method="post"> <!-- Ganti action dengan endpoint backend jika diperlukan -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="noHp">No HP:</label>
+        <input type="tel" id="noHp" name="noHp" required>
+
+        <button type="submit">Daftar</button>
+    </form>
+</div>
+</div>
 
 <div class="container">
 
 <div id="dashboard" class="section active">
-<h1>Yolanda Library</h1>
-<p style="text-align:center;">Selamat Datang di Perpustakaan Yolanda.</p>
+<h1>Library Intan</h1>
+<p style="text-align:center;">Selamat datang di perpustakaan Intan.</p>
 
 <div class="link-box">
-<a href="https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
-Who Am I
+<a href="https://www.instagram.com/intan_soo?igsh=bzI5empoYjE5dGGl" target="_blank">
+About Me
 </a>
 
-<a href="https://drive.google.com/drive/folders/1xMDmr45NHah1l_3l9RLZ3CN6YGeiKBb4" target="_blank">
-Profil
+<a href="https://drive.google.com/file/d/1G5itB-_B9wnXcuPKdBqTAqtli1AWduhz/view?usp=sharing" target="_blank">
+My Biodata
 </a>
 </div>
 
@@ -174,7 +264,7 @@ Profil
 <h3>Video Profil</h3>
 
 <iframe width="560" height="315"
-src="https://www.youtube.com/embed/mMNvXhEyY3w"
+src="https://www.youtube.com/embed/rxxNE-s2cSU"
 title="YouTube video"
 frameborder="0"
 allowfullscreen>
@@ -184,45 +274,25 @@ allowfullscreen>
 
 </div>
 
-<div id="koleksi" class="section">
+<div id="katalog" class="section">
 <h2>Daftar Buku</h2>
 <ul>
-<li>Dasar-Dasar Manajemen</li>
-<li>Metodologi Penelitian</li>
-<li>Komunikasi Efektif</li>
-<li>Pemanfaatan Media Digital</li>
+<li>Dasar-dasar Web</li>
+<li>Perkembangan Web</li>
+<li>Skill Komunikasi</li>
+<li>Media Digital</li>
 </ul>
 </div>
 
-<div id="program" class="section">
-<h2>Program Literasi</h2>
+<div id="kegiatan" class="section">
+<h2>Kegiatan Literasi</h2>
+
 <ul>
-<li>Bimbingan Penggunaan OPAC</li>
-<li>Pelatihan Sitasi dan Manajemen Referensi</li>
-<li>Kelas Penulisan Ilmiah</li>
+<li>Bibingan Penerapan Web</li>
+<li>Sosialisasi Penggunaan Web</li>
+<li>Sosialisasi Manfaat Web</li>
 </ul>
-</div>
 
-<div id="register" class="section">
-<h2>Daftar Anggota</h2>
-<form>
-<label for="fname">First Name:</label>
-<input type="text" id="fname" name="fname" required>
-
-<label for="lname">Last Name:</label>
-<input type="text" id="lname" name="lname" required>
-
-<label for="nim">Nim:</label>
-<input type="text" id="nim" name="nim" required>
-
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required>
-
-<label for="phone">No Hp:</label>
-<input type="tel" id="phone" name="phone" required>
-
-<input type="submit" value="Daftar">
-</form>
 </div>
 
 </div>
