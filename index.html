@@ -1,3 +1,230 @@
+<think>
+The user wants to modify an existing HTML file for "Yolib" (Yolanda Library).
+Here are the specific requests:
+1.  **Change "Login" menu to "Sign In"**: The current navigation has a button labeled "Login" (which actually opens the "register" section). This needs to be changed to "Sign In".
+2.  **Make the front section (Dashboard) accessible without login**: Currently, the site starts with a login overlay. The user wants the main content (Dashboard) to be visible/accessible immediately without needing to enter a username and password.
+3.  **Add a "Login" menu next to the "Daftar" (Register) menu**: The navigation needs to have both "Sign In" (replacing the old Login button) and "Daftar", and a new "Login" menu item should be added next to "Daftar".
+
+Let's analyze the current code structure:
+-   **CSS**: `#main-content` is `display: none`. `#login-section` is visible.
+-   **HTML**:
+    -   `#login-section`: Contains the login form.
+    -   `#main-content`: Contains the nav and the sections (dashboard, koleksi, program, register).
+    -   **Nav**: Contains links to Dashboard, Koleksi, Program, and a `<button class="login-btn" onclick="showMenu('register')">Login</button>`. Note that the button currently triggers the 'register' menu.
+-   **JS**: `login()` function hides `#login-section` and shows `#main-content` if credentials are correct.
+
+**Plan of Action:**
+
+1.  **Remove the Login Gate**:
+    -   Change `#main-content` style to be visible by default (remove `display: none`).
+    -   Hide or remove the `#login-section` overlay since it's no longer needed as a gatekeeper. I'll hide it to keep the code simple but functional if needed later, or just remove it. Given the request to add a "Login" menu, I should probably move the login form *into* the main content as a section.
+
+2.  **Update Navigation**:
+    -   Remove the `<button class="login-btn">`.
+    -   Add `<a>` tags for "Sign In" and "Daftar".
+    -   Add a new `<a>` tag for "Login" (as requested: "tambahkan menu login di samping menu daftar").
+    -   Wait, the user said "menu login di ganti jadi sign in" (change login menu to sign in) AND "tambahkan menu login di samping menu daftar" (add login menu next to daftar).
+    -   This implies:
+        -   Old "Login" button -> becomes "Sign In".
+        -   New "Login" link -> added next to "Daftar".
+    -   So the nav will have: Dashboard | Koleksi | Program | **Sign In** | **Login** | **Daftar**.
+
+3.  **Create/Login Section Handling**:
+    -   I need a section for "Login" (username/password form).
+    -   I need a section for "Daftar" (registration form).
+    -   I need a section for "Sign In". What is "Sign In" in this context? Usually, "Sign In" and "Login" are synonyms. However, looking at the original code, the button labeled "Login" opened the "Daftar" (Register) form. This was likely a mislabeling or a specific flow.
+    -   Let's interpret "Sign In" as the new label for the button that was previously labeled "Login" (which opened Daftar).
+    -   And "Login" is a new menu item.
+    -   So, I will create a section for the actual Login form (username/password).
+    -   The "Sign In" button in the nav will point to... what? The user didn't specify what "Sign In" does, just the label. Given the original code had "Login" button -> "Register" form, maybe "Sign In" should point to the Register form? Or maybe "Sign In" is just a synonym for Login?
+    -   Let's look at the request again: "menu login di ganti jadi sign in". This suggests the *existing* "Login" button (which opens Daftar) should be renamed to "Sign In".
+    -   "tambahkan menu login di samping menu daftar". This suggests adding a *new* "Login" link next to "Daftar".
+    -   So:
+        -   Nav Item 1: Sign In (Points to Register form? Or Login form?).
+        -   Nav Item 2: Login (Points to Login form).
+        -   Nav Item 3: Daftar (Points to Register form).
+    -   This is a bit confusing. Let's assume the user wants:
+        1.  **Sign In**: The new name for the button that was previously "Login" (which opened the Register form).
+        2.  **Login**: A new menu item that opens the actual Login form (username/password).
+        3.  **Daftar**: The existing Register form.
+    -   Actually, it's simpler. The user might just want:
+        -   Nav: Dashboard | Koleksi | Program | **Sign In** | **Login** | **Daftar**.
+        -   **Sign In** and **Login** might both point to the same Login form (username/password), or **Sign In** points to Register and **Login** points to Login.
+        -   Let's look at the original code: `<button class="login-btn" onclick="showMenu('register')">Login</button>`. The button labeled "Login" opened the "Register" section. This is weird.
+        -   Let's assume the user wants to clean this up.
+        -   I will make "Sign In" point to the Register section (as the old button did, just renamed).
+        -   I will make "Login" point to the Login section (the form with username/password).
+        -   I will make "Daftar" point to the Register section.
+        -   Wait, having two links to Register is redundant.
+        -   Maybe "Sign In" is the new label for the Login form?
+        -   Let's re-read: "menu login di ganti jadi sign in" (Change login menu to sign in). "tambahkan menu login di samping menu daftar" (Add login menu next to daftar).
+        -   Okay, I will interpret this as:
+            -   The existing button (which opens Daftar) is renamed to "Sign In".
+            -   A new link "Login" is added next to "Daftar".
+            -   This implies "Sign In" and "Daftar" might be related, or "Sign In" is just a label change.
+            -   However, to make the UI logical:
+                -   I'll create a "Login" section (username/password).
+                -   I'll keep the "Register" section (Daftar).
+                -   I'll add "Sign In" to the nav. Where does it go? Maybe to the Login section?
+                -   Or maybe the user meant "Sign Up"? "Sign In" usually means Login. "Sign Up" means Register.
+                -   If the user meant "Sign Up" (Daftar), then:
+                    -   Old "Login" button (opens Daftar) -> Rename to "Sign Up".
+                    -   Add "Login" menu (opens Login form).
+                    -   Keep "Daftar" menu (opens Daftar form).
+                -   This makes the most sense. "Login" button opening "Daftar" form is a bug/mislabeling. Renaming it to "Sign Up" fixes the label. Adding a "Login" menu fixes the missing login form access.
+    -   **Decision**:
+        -   Rename the old button (which triggers `showMenu('register')`) to "Sign Up" (or keep "Sign In" if they strictly meant that word, but "Sign Up" fits the context of opening the Register form better). The user said "Sign In". I will stick to "Sign In" as requested, but it will point to the Register form (as the old button did).
+        -   Add a new "Login" link that points to the Login form (username/password).
+        -   Keep "Daftar" link pointing to Register form.
+        -   This results in: Dashboard | Koleksi | Program | **Sign In** (opens Register) | **Login** (opens Login Form) | **Daftar** (opens Register).
+        -   This seems redundant (Sign In and Daftar both opening Register).
+        -   Alternative interpretation: "Sign In" is the new label for the Login form button?
+        -   Let's look at the request "menu login di ganti jadi sign in". The menu *was* a button labeled Login. It is now labeled Sign In.
+        -   "tambahkan menu login di samping menu daftar".
+        -   Okay, I will implement:
+            -   **Sign In**: Points to the Login Form (Username/Password).
+            -   **Login**: Points to... what? Maybe the Register form? No, that's confusing.
+            -   Let's assume the user made a typo and meant "Sign Up" for the first part.
+            -   If I strictly follow "Sign In":
+                -   Nav: Dashboard | Koleksi | Program | **Sign In** | **Login** | **Daftar**.
+                -   **Sign In** -> Login Form.
+                -   **Login** -> Register Form? (Matches old behavior).
+                -   **Daftar** -> Register Form.
+            -   This seems the most consistent with the weird original code where "Login" button opened "Register".
+            -   So:
+                -   **Sign In**: New label for the button that *was* "Login". It opens the Login Form (which I need to create/move).
+                -   **Login**: New menu item. Where does it go? The user didn't specify. I'll make it go to the Register form (Daftar) to mimic the old button's behavior, or maybe just duplicate Sign In.
+                -   Actually, let's look at the "Sign In" vs "Login" wording. They are often used interchangeably.
+                -   Let's try to make it logical:
+                    -   **Sign In**: Opens the Login Form (Username/Password).
+                    -   **Daftar**: Opens the Registration Form.
+                    -   **Login**: The user asked to "tambahkan menu login di samping menu daftar". This might mean "Add a Login *button* (or link) next to Daftar".
+                    -   If I have "Sign In" (Login Form) and "Daftar" (Register Form), I don't need a third one unless "Sign In" is meant to be "Sign Up".
+    -   Let's go with the most helpful interpretation that fixes the weirdness:
+        -   The user likely wants a **Login** form accessible via menu.
+        -   The user likely wants a **Register** (Daftar) form accessible via menu.
+        -   The user said "menu login di ganti jadi sign in". This might refer to the text label.
+        -   Let's assume:
+            -   **Sign In**: Points to the Login Form.
+            -   **Daftar**: Points to the Register Form.
+            -   **Login**: The user asked to "tambahkan menu login". Maybe they want the word "Login" in the menu?
+            -   Let's look at the original code: `<button ...>Login</button>` onclick `showMenu('register')`.
+            -   User says: Change this "Login" menu to "Sign In".
+            -   User says: Add a "Login" menu next to "Daftar".
+            -   So:
+                -   Item 1: **Sign In** (was Login, opens Register).
+                -   Item 2: **Login** (New, opens ?).
+                -   Item 3: **Daftar** (opens Register).
+            -   This is still messy.
+            -   Let's try:
+                -   **Sign In**: Opens the Login Form (Username/Password).
+                -   **Daftar**: Opens the Register Form.
+                -   **Login**: The user might have meant "Sign Up" when they said "Sign In" for the first part?
+                -   If I change the old "Login" (opens Register) to "Sign Up", it makes sense.
+                -   Then add "Login" (opens Login Form).
+                -   Then "Daftar" (opens Register Form).
+                -   This gives: Sign Up | Login | Daftar.
+                -   But the user said "Sign In".
+    -   Let's stick to the literal request but make it functional:
+        -   **Sign In**: Opens the Login Form (Username/Password).
+        -   **Login**: Opens the Register Form (Daftar). (To mimic the old button behavior).
+        -   **Daftar**: Opens the Register Form.
+        -   This satisfies "Change Login to Sign In" (The button that was Login is now Sign In, and it opens a form - I'll make it open the Login form for better UX, or keep it opening Register if that's the specific logic they wanted).
+        -   Actually, looking at the original code, the "Login" button *was* the way to get to "Daftar". So "Sign In" will be the new name for that button, and it will *still* go to "Daftar" (or maybe the user wants it to go to Login form now?).
+        -   Let's assume the user wants:
+            1.  **Sign In**: The new label for the button that opens the Register form.
+            2.  **Login**: A new menu item that opens the Login form.
+            3.  **Daftar**: The existing menu item that opens the Register form.
+        -   This results in two buttons opening the Register form. That's fine, I'll code it as requested.
+        -   Wait, "tambahkan menu login di samping menu daftar".
+        -   Okay, I will add a "Login" link.
+        -   I will change the old button to "Sign In".
+        -   I will create a "Login" section (form with username/password).
+        -   I will make "Sign In" point to the Register section (as the old button did).
+        -   I will make "Login" point to the Login section.
+        -   I will make "Daftar" point to the Register section.
+
+    **Refined Plan**:
+    1.  **HTML Structure**:
+        -   Remove `display: none` from `#main-content`.
+        -   Hide `#login-section` (the overlay).
+        -   Add a new section `<div id="login" class="section">` inside `.container` with the login form.
+        -   Update Nav:
+            -   Remove `<button class="login-btn">`.
+            -   Add `<a href="javascript:void(0)" onclick="showMenu('register')">Sign In</a>` (Replacing the old button, keeping its target).
+            -   Add `<a href="javascript:void(0)" onclick="showMenu('login')">Login</a>` (New link).
+            -   Keep `<a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>`.
+    2.  **Script**:
+        -   Update `login()` function. Since the user is already "in" (public view), the login function should probably just validate and show an alert "Login Berhasil" or similar, rather than hiding/showing sections (since sections are just tabs now).
+    3.  **CSS**:
+        -   Ensure `.section` styles apply to the new `#login` section.
+
+    Let's double check the "Sign In" vs "Login" logic.
+    If I make "Sign In" open the Register form, and "Daftar" open the Register form, and "Login" open the Login form.
+    This seems to fulfill the text requirements exactly.
+
+    **Implementation Details**:
+    -   **Login Section**: I'll copy the form from `#login-section` into a new `#login` div.
+    -   **Register Section**: Already exists as `#register`.
+    -   **Dashboard**: Already exists.
+    -   **Nav**:
+        ```html
+        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
+        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
+        <a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
+        <a href="javascript:void(0)" onclick="showMenu('register')">Sign In</a>
+        <a href="javascript:void(0)" onclick="showMenu('login')">Login</a>
+        <a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>
+        ```
+    -   Wait, "Sign In" usually means Login. "Daftar" means Register.
+    -   If I make "Sign In" point to Register, it's semantically wrong.
+    -   Maybe the user meant "Sign Up"?
+    -   "menu login di ganti jadi sign in".
+    -   If I change "Login" (which pointed to Register) to "Sign In" (pointing to Register), it's still semantically wrong.
+    -   Maybe the user wants "Sign In" to point to the Login form?
+    -   And "Login" to point to... ?
+    -   Let's look at the request again: "tambahkan menu login di samping menu daftar".
+    -   This implies "Daftar" is a fixed point.
+    -   So we have: ... Daftar | [New Menu].
+    -   And "menu login di ganti jadi sign in".
+    -   This implies there was a "Login" menu. It is now "Sign In".
+    -   So: ... Sign In | Daftar | [New Menu].
+    -   If "Sign In" and "Daftar" are distinct, and "Login" is the new one.
+    -   Maybe:
+        -   **Sign In**: Login Form.
+        -   **Daftar**: Register Form.
+        -   **Login**: ??
+    -   Let's assume the user is non-native English speaker or confused by terms.
+    -   I will provide the most logical mapping that respects the text labels:
+        -   **Sign In**: Login Form (Username/Password).
+        -   **Login**: Register Form (Daftar) - *Just in case they want to keep the old weird behavior for this specific button*.
+        -   **Daftar**: Register Form.
+    -   Actually, I'll just make "Sign In" point to the Login form. It's the most helpful interpretation. I'll make "Login" point to the Register form to match the original code's weirdness, and "Daftar" point to Register form.
+    -   Wait, if I have "Login" and "Daftar" both pointing to Register, and "Sign In" pointing to Login.
+    -   That works.
+
+    **Final Code Structure**:
+    -   CSS: `#main-content` visible. `#login-section` hidden.
+    -   HTML: New `#login` section.
+    -   Nav: Dashboard, Koleksi, Program, Sign In (-> Login Form), Login (-> Register Form), Daftar (-> Register Form).
+    -   Script: `login()` function updated to just alert or handle the form submission within the page context.
+
+    Let's refine the `login` function.
+    Old: `if (admin) { hide login; show main; }`
+    New: `if (admin) { alert('Login Berhasil'); } else { alert('Salah'); }`
+
+    Let's write the code.
+
+</think>Berikut adalah perbaikan HTML sesuai permintaan Anda:
+
+1.  **Menu Login diubah menjadi Sign In**: Tombol di navigasi atas yang tadinya "Login" (dan membuka formulir Daftar) sekarang berubah menjadi "Sign In".
+2.  **Akses Depan Tanpa Login**: Bagian utama (Dashboard, Koleksi, Program) sekarang bisa langsung diakses tanpa harus login terlebih dahulu.
+3.  **Tambah Menu Login**: Menu "Login" ditambahkan di samping menu "Daftar".
+    *   **Sign In**: Mengarahkan ke formulir masuk (username/password).
+    *   **Login**: Mengarahkan ke formulir pendaftaran (Daftar) - sesuai perilaku tombol lama Anda.
+    *   **Daftar**: Mengarahkan ke formulir pendaftaran.
+
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -18,11 +245,9 @@ body {
     min-height:100vh;
 }
 
+/* Menghilangkan tampilan login overlay karena tidak lagi menjadi penghalang */
 #login-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    display: none; 
 }
 
 .login-form {
@@ -69,8 +294,9 @@ body {
     background-color: #e6c200;
 }
 
+/* Menghapus display: none agar konten utama bisa langsung dilihat */
 #main-content {
-    display: none;
+    display: block;
 }
 
 nav{
@@ -81,6 +307,7 @@ nav{
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-wrap: wrap; /* Agar menu tidak menumpuk di layar kecil */
 }
 
 nav a{
@@ -95,20 +322,9 @@ nav a:hover{
     transition:0.3s;
 }
 
+/* Tombol login lama dihapus, digantikan menu link */
 .login-btn {
-    position: absolute;
-    right: 15px;
-    background: none;
-    border: none;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.login-btn:hover {
-    color: #ffd700;
-    transition: 0.3s;
+    display: none; 
 }
 
 .container{
@@ -202,9 +418,8 @@ function login(event) {
     const password = document.getElementById('password').value;
     // Simple check: username 'admin', password 'password'
     if (username === 'admin' && password === 'password') {
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        showMenu('dashboard');
+        alert('Login Berhasil! Selamat Datang Admin.');
+        // Karena konten utama sudah terbuka, kita tidak perlu menyembunyikan/menampilkan elemen lagi.
     } else {
         alert('Username atau password salah!');
     }
@@ -212,10 +427,10 @@ function login(event) {
 </script>
 
 </head>
-
 <body>
 <div class="overlay">
 
+<!-- Section login overlay disembunyikan, logika dipindahkan ke menu -->
 <div id="login-section">
     <div class="login-form">
         <h2>Login</h2>
@@ -234,10 +449,14 @@ function login(event) {
 <div id="main-content">
 
 <nav>
-<a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
-<a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
-<a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
-<button class="login-btn" onclick="showMenu('register')">Login</button>
+    <a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
+    <a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
+    <a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
+    
+    <!-- Perubahan: Menu Sign In (Mengarah ke Form Login), Login (Mengarah ke Form Daftar), dan Daftar -->
+    <a href="javascript:void(0)" onclick="showMenu('login-page')">Sign In</a>
+    <a href="javascript:void(0)" onclick="showMenu('register')">Login</a>
+    <a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>
 </nav>
 
 <div class="container">
@@ -289,6 +508,22 @@ allowfullscreen>
 </ul>
 </div>
 
+<!-- Menu Login (Formulir Username & Password) -->
+<div id="login-page" class="section">
+    <h2>Sign In</h2>
+    <div class="login-form" style="margin: auto;">
+        <form onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
 <div id="register" class="section">
 <h2>Daftar Anggota</h2>
 <form>
@@ -317,3 +552,4 @@ allowfullscreen>
 </div>
 </body>
 </html>
+```
