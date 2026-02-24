@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-color: #9CAF88; /* Sage Green */
+    background-color: #9CAF88;
     color:white;
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 #login-section {
-    display: none; 
+    display: none;
 }
 
 .login-form {
@@ -29,6 +29,7 @@ body {
     max-width: 400px;
     width: 100%;
     text-align: center;
+    margin: auto;
 }
 
 .login-form h2 {
@@ -73,15 +74,10 @@ body {
 nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
-    text-align:center;
     display: flex;
-    justify-content: center; /* Mengatur menu utama di tengah */
     align-items: center;
-    position: relative;
-    flex-wrap: wrap;
 }
 
-/* Styling untuk tautan menu */
 nav a{
     color:white;
     margin:0 15px;
@@ -91,17 +87,15 @@ nav a{
 
 nav a:hover{
     color:#ffd700;
-    transition:0.3s;
 }
 
-/* Spacer untuk mendorong menu ke kanan */
-.nav-spacer {
-    flex-grow: 1;
+.nav-menu {
+    display: flex;
+    margin: auto;
 }
 
-/* Posisi menu di kanan */
 .nav-right {
-    margin-left: auto; 
+    margin-right: 0;
 }
 
 .container{
@@ -180,33 +174,24 @@ form input[type="submit"]:hover {
     background-color: #e6c200;
 }
 
-/* Styling WhatsApp Popup */
 .wa-popup {
     position: fixed;
     bottom: 20px;
     right: 20px;
     background-color: #25D366;
-    color: white;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     z-index: 1000;
-    text-decoration: none;
-    transition: transform 0.3s;
 }
 
-.wa-popup:hover {
-    transform: scale(1.1);
-    background-color: #20b557;
-}
-
-.wa-icon {
-    width: 35px;
-    height: 35px;
+.wa-popup svg {
+    width: 30px;
+    height: 30px;
     fill: white;
 }
 </style>
@@ -223,7 +208,126 @@ function login(event) {
     event.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    // Simple check: username 'admin', password 'password'
+    
     if (username === 'admin' && password === 'password') {
-        alert('Login Berhasil! Selamat Datang Admin.');
-    } else
+        alert('Login Berhasil!');
+    } else {
+        alert('Username atau password salah!');
+    }
+}
+</script>
+
+</head>
+<body>
+<div class="overlay">
+
+<div id="login-section">
+    <div class="login-form">
+        <h2>Login</h2>
+        <form onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+<div id="main-content">
+
+<nav>
+    <div class="nav-menu">
+        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Dashboard</a>
+        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Daftar Koleksi</a>
+        <a href="javascript:void(0)" onclick="showMenu('program')">Program Literasi</a>
+    </div>
+    
+    <div class="nav-menu nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('login-page')">Login</a>
+        <a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<div id="dashboard" class="section active">
+<h1>Yolanda Library</h1>
+<p style="text-align:center;">Selamat Datang di Perpustakaan Yolanda.</p>
+
+<div class="link-box">
+<a href="https://www.instagram.com/yolandabrtrg?igsh=NTFrYWx4eGhyYTNp" target="_blank">
+Who Am I
+</a>
+<a href="https://drive.google.com/drive/folders/1xMDmr45NHah1l_3l9RLZ3CN6YGeiKBb4" target="_blank">
+Profil
+</a>
+</div>
+
+<div class="video-box">
+<h3>Video Profil</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mMNvXhEyY3w" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+
+<div id="koleksi" class="section">
+<h2>Daftar Buku</h2>
+<ul>
+<li>Dasar-Dasar Manajemen</li>
+<li>Metodologi Penelitian</li>
+<li>Komunikasi Efektif</li>
+<li>Pemanfaatan Media Digital</li>
+</ul>
+</div>
+
+<div id="program" class="section">
+<h2>Program Literasi</h2>
+<ul>
+<li>Bimbingan Penggunaan OPAC</li>
+<li>Pelatihan Sitasi dan Manajemen Referensi</li>
+<li>Kelas Penulisan Ilmiah</li>
+</ul>
+</div>
+
+<div id="login-page" class="section">
+    <h2>Login</h2>
+    <div class="login-form">
+        <form onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+
+<div id="register" class="section">
+<h2>Daftar Anggota</h2>
+<form>
+<label for="fname">First Name:</label>
+<input type="text" id="fname" name="fname" required>
+<label for="lname">Last Name:</label>
+<input type="text" id="lname" name="lname" required>
+<label for="nim">Nim:</label>
+<input type="text" id="nim" name="nim" required>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+<label for="phone">No Hp:</label>
+<input type="tel" id="phone" name="phone" required>
+<input type="submit" value="Daftar">
+</form>
+</div>
+
+</div>
+</div>
+
+<a href="https://wa.me/6281234567890" class="wa-popup" target="_blank">
+    <svg viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+</a>
+
+</div>
+</body>
+</html>
