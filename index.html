@@ -18,11 +18,8 @@ body {
     min-height:100vh;
 }
 
-#login-section {
-    display: none;
-}
-
-.login-form {
+/* --- LOGIN & REGISTER STYLES --- */
+.login-container {
     background-color: rgba(0,0,0,0.8);
     padding: 40px;
     border-radius: 8px;
@@ -32,18 +29,20 @@ body {
     margin: auto;
 }
 
-.login-form h2 {
+.login-container h2 {
     margin-bottom: 20px;
 }
 
-.login-form label {
+.login-container label {
     display: block;
     margin-bottom: 5px;
     text-align: left;
 }
 
-.login-form input[type="text"],
-.login-form input[type="password"] {
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container input[type="email"],
+.login-container input[type="tel"] {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
@@ -52,7 +51,7 @@ body {
     box-sizing: border-box;
 }
 
-.login-form input[type="submit"] {
+.login-container input[type="submit"] {
     background-color: #FFD700;
     color: black;
     padding: 10px 20px;
@@ -63,17 +62,31 @@ body {
     width: 100%;
 }
 
-.login-form input[type="submit"]:hover {
+.login-container input[type="submit"]:hover {
     background-color: #e6c200;
 }
 
-#main-content {
-    display: block;
+.toggle-link {
+    margin-top: 15px;
+    font-size: 14px;
 }
 
+.toggle-link a {
+    color: #FFD700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --- NAVIGATION STYLES --- */
 nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
+    display: flex;
+    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
+    align-items: center;
+}
+
+.nav-left, .nav-right {
     display: flex;
     align-items: center;
 }
@@ -89,13 +102,9 @@ nav a:hover{
     color:#FFD700;
 }
 
-.nav-menu {
-    display: flex;
-    margin: auto;
-}
-
-.nav-right {
-    margin-right: 0;
+/* --- MAIN CONTENT STYLES --- */
+#main-content {
+    display: block;
 }
 
 .container{
@@ -138,42 +147,7 @@ iframe{
     max-width:100%;
 }
 
-form {
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="tel"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-form input[type="submit"] {
-    background-color: #FFD700;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-form input[type="submit"]:hover {
-    background-color: #e6c200;
-}
-
+/* --- WHATSAPP POPUP --- */
 .wa-popup {
     position: fixed;
     bottom: 20px;
@@ -187,6 +161,7 @@ form input[type="submit"]:hover {
     align-items: center;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     z-index: 1000;
+    text-decoration: none;
 }
 
 .wa-popup svg {
@@ -197,7 +172,6 @@ form input[type="submit"]:hover {
 
 /* Style khusus untuk background halaman dashboard */
 #dashboard {
-    /* Gambar pola etnis Karo sebagai background */
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Karo_Cultural_Pattern.svg/1200px-Karo_Cultural_Pattern.svg.png');
     background-size: cover;
     background-position: center;
@@ -215,16 +189,35 @@ function showMenu(menu){
     document.getElementById(menu).classList.add('active');
 }
 
+// Fungsi untuk login
 function login(event) {
     event.preventDefault();
     alert('Login Berhasil! Selamat Datang di Jabu Literasi.');
     showMenu('dashboard');
 }
 
+// Fungsi untuk daftar
 function Daftar(event) {
     event.preventDefault();
     alert('Pendaftaran Berhasil!');
     showMenu('dashboard');
+}
+
+// Fungsi untuk toggle antara Login dan Register
+function toggleForm(type) {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const toggleText = document.getElementById('toggle-text');
+
+    if (type === 'register') {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        toggleText.innerHTML = 'Sudah punya akun? <a onclick="toggleForm(\'login\')">Login disini</a>';
+    } else {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        toggleText.innerHTML = 'Belum punya akun? <a onclick="toggleForm(\'register\')">Daftar disini</a>';
+    }
 }
 </script>
 
@@ -232,44 +225,33 @@ function Daftar(event) {
 <body>
 <div class="overlay">
 
-<div id="login-section">
-    <div class="login-form">
-        <h2>Login Anggota</h2>
-        <form onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-            <input type="submit" value="Login">
-        </form>
-    </div>
-</div>
-
 <div id="main-content">
 
 <nav>
-    <div class="nav-menu">
+    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
+    <div class="nav-left">
+        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
+    </div>
+    
+    <!-- Menu Kanan (Beranda, Koleksi, Program) -->
+    <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
         <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
     </div>
-    
-    <div class="nav-menu nav-right">
-        <a href="javascript:void(0)" onclick="showMenu('login-page')">Masuk</a>
-        <a href="javascript:void(0)" onclick="showMenu('register')">Daftar</a>
+
+    <!-- Menu Gabungan Login & Daftar -->
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
     </div>
 </nav>
 
 <div class="container">
 
+<!-- Dashboard / Beranda -->
 <div id="dashboard" class="section active">
 <h1>Jabu Literasi</h1>
 <p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
-
-<!-- Logo dari Google Drive (Link sudah dikonversi ke direct link) -->
-<div style="text-align: center; margin-top: 20px;">
-    <img src="https://drive.google.com/uc?export=view&id=1eHiDryL3xTcJ6oNYtObqhgXyIKQAlNcs" alt="Logo Jabu Literasi" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 3px solid white; background: white;">
-</div>
 
 <div class="link-box">
 <a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
@@ -282,11 +264,11 @@ Sistem Kekerabatan
 
 <div class="video-box">
 <h3>Video Budaya Karo</h3>
-<!-- Video link sudah diperbarui -->
 <iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
 </div>
 </div>
 
+<!-- Koleksi -->
 <div id="koleksi" class="section">
 <h2>Koleksi Budaya Karo</h2>
 <ul>
@@ -298,6 +280,7 @@ Sistem Kekerabatan
 </ul>
 </div>
 
+<!-- Program -->
 <div id="program" class="section">
 <h2>Program Literasi Budaya</h2>
 <ul>
@@ -308,34 +291,39 @@ Sistem Kekerabatan
 </ul>
 </div>
 
-<div id="login-page" class="section">
-    <h2>Login Anggota</h2>
-    <div class="login-form">
-        <form onsubmit="login(event)">
+<!-- Gabungan Login & Register -->
+<div id="login-register" class="section">
+    <div class="login-container">
+        <h2 id="form-title">Masuk Anggota</h2>
+        
+        <!-- Form Login -->
+        <form id="login-form" onsubmit="login(event)">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username">
+            <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" required>
             <input type="submit" value="Login">
         </form>
-    </div>
-</div>
 
-<div id="register" class="section">
-<h2>Daftar Anggota Baru</h2>
-<form onsubmit="Daftar(event)">
-<label for="fname">Nama Depan:</label>
-<input type="text" id="fname" name="fname">
-<label for="lname">Nama Belakang:</label>
-<input type="text" id="lname" name="lname">
-<label for="nim">NIM / ID:</label>
-<input type="text" id="nim" name="nim">
-<label for="email">Email:</label>
-<input type="email" id="email" name="email">
-<label for="phone">No HP:</label>
-<input type="tel" id="phone" name="phone">
-<input type="submit" value="Daftar">
-</form>
+        <!-- Form Daftar -->
+        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+            <label for="fname">Nama Depan:</label>
+            <input type="text" id="fname" name="fname" required>
+            <label for="lname">Nama Belakang:</label>
+            <input type="text" id="lname" name="lname" required>
+            <label for="nim">NIM / ID:</label>
+            <input type="text" id="nim" name="nim" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">No HP:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <input type="submit" value="Daftar">
+        </form>
+
+        <div class="toggle-link" id="toggle-text">
+            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+        </div>
+    </div>
 </div>
 
 </div>
