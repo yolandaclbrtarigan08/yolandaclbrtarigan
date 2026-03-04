@@ -9,35 +9,28 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    /* Background Perpustakaan */
-    background-image: url('https://images.unsplash.com/photo-1507842217121-9e9f147d7190?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Agar background diam saat discroll */
+    background-color: #8B4513; /* Warna dasar coklat tanah */
     color:white;
 }
 
 .overlay{
-    /* Lapisan gelap agar tulisan terbaca */
-    background-color: rgba(0,0,0,0.65); 
+    background-color: rgba(0,0,0,0.55);
     min-height:100vh;
 }
 
 /* --- LOGIN & REGISTER STYLES --- */
 .login-container {
-    background-color: rgba(0,0,0,0.9); /* Lebih gelap agar kontras */
+    background-color: rgba(0,0,0,0.8);
     padding: 40px;
     border-radius: 8px;
     max-width: 400px;
     width: 100%;
     text-align: center;
     margin: auto;
-    border: 1px solid #555;
 }
 
 .login-container h2 {
     margin-bottom: 20px;
-    color: #FFD700;
 }
 
 .login-container label {
@@ -48,4 +41,301 @@ body {
 
 .login-container input[type="text"],
 .login-container input[type="password"],
-.login
+.login-container input[type="email"],
+.login-container input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-container input[type="submit"] {
+    background-color: #FFD700;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #e6c200;
+}
+
+.toggle-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.toggle-link a {
+    color: #FFD700;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* --- NAVIGATION STYLES --- */
+nav{
+    background-color: rgba(0,0,0,0.8);
+    padding:15px;
+    display: flex;
+    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
+    align-items: center;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#FFD700;
+}
+
+/* --- MAIN CONTENT STYLES --- */
+#main-content {
+    display: block;
+}
+
+.container{
+    padding:40px;
+    max-width:900px;
+    margin:auto;
+}
+
+.section{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+}
+
+.link-box{
+    text-align:center;
+    margin-top:25px;
+}
+
+.link-box a{
+    display:block;
+    margin:10px;
+    color:#FFD700;
+    font-size:18px;
+    text-decoration:none;
+}
+
+.video-box{
+    text-align:center;
+    margin-top:30px;
+}
+
+iframe{
+    max-width:100%;
+}
+
+/* --- WHATSAPP POPUP --- */
+.wa-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+    text-decoration: none;
+}
+
+.wa-popup svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+/* Style khusus untuk background halaman dashboard */
+#dashboard {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Karo_Cultural_Pattern.svg/1200px-Karo_Cultural_Pattern.svg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    padding: 20px;
+}
+</style>
+
+<script>
+function showMenu(menu){
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+    document.getElementById(menu).classList.add('active');
+}
+
+// Fungsi untuk login
+function login(event) {
+    event.preventDefault();
+    alert('Login Berhasil! Selamat Datang di Jabu Literasi.');
+    showMenu('dashboard');
+}
+
+// Fungsi untuk daftar
+function Daftar(event) {
+    event.preventDefault();
+    alert('Pendaftaran Berhasil!');
+    showMenu('dashboard');
+}
+
+// Fungsi untuk toggle antara Login dan Register
+function toggleForm(type) {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const toggleText = document.getElementById('toggle-text');
+
+    if (type === 'register') {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        toggleText.innerHTML = 'Sudah punya akun? <a onclick="toggleForm(\'login\')">Login disini</a>';
+    } else {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        toggleText.innerHTML = 'Belum punya akun? <a onclick="toggleForm(\'register\')">Daftar disini</a>';
+    }
+}
+</script>
+
+</head>
+<body>
+<div class="overlay">
+
+<div id="main-content">
+
+<nav>
+    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
+    <div class="nav-left">
+        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
+    </div>
+    
+    <!-- Menu Kanan (Beranda, Koleksi, Program) -->
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
+        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
+        <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
+    </div>
+
+    <!-- Menu Gabungan Login & Daftar -->
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<!-- Dashboard / Beranda -->
+<div id="dashboard" class="section active">
+<h1>Jabu Literasi</h1>
+<p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
+
+<div class="link-box">
+<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
+Sejarah Tanah Karo
+</a>
+<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">
+Sistem Kekerabatan
+</a>
+</div>
+
+<div class="video-box">
+<h3>Video Budaya Karo</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- Koleksi -->
+<div id="koleksi" class="section">
+<h2>Koleksi Budaya Karo</h2>
+<ul>
+<li>Umpasa Karo (Pepatah & Pantun)</li>
+<li>Tambo Karo (Sejarah Lisan)</li>
+<li>Bahasa Karo: Tata Bahasa & Kosakata</li>
+<li>Seni Tari & Musik Tradisional Karo</li>
+<li>Adat Istiadat & Upacara Karo</li>
+</ul>
+</div>
+
+<!-- Program -->
+<div id="program" class="section">
+<h2>Program Literasi Budaya</h2>
+<ul>
+<li>Workshop Umpasa Karo</li>
+<li>Pelatihan Menulis Cerita Rakyat Karo</li>
+<li>Kelas Bahasa Karo Dasar</li>
+<li>Diskusi Sejarah Tanah Karo</li>
+</ul>
+</div>
+
+<!-- Gabungan Login & Register -->
+<div id="login-register" class="section">
+    <div class="login-container">
+        <h2 id="form-title">Masuk Anggota</h2>
+        
+        <!-- Form Login -->
+        <form id="login-form" onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+
+        <!-- Form Daftar -->
+        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+            <label for="fname">Nama Depan:</label>
+            <input type="text" id="fname" name="fname" required>
+            <label for="lname">Nama Belakang:</label>
+            <input type="text" id="lname" name="lname" required>
+            <label for="nim">NIM / ID:</label>
+            <input type="text" id="nim" name="nim" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">No HP:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <input type="submit" value="Daftar">
+        </form>
+
+        <div class="toggle-link" id="toggle-text">
+            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- WhatsApp Popup -->
+<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
+    <svg viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+</a>
+
+</div>
+</body>
+</html>
