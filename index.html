@@ -128,14 +128,14 @@ iframe{ max-width:100%; }
 .barcode-container {
     text-align: center;
     margin-top: 20px;
-    padding: 10px;
+    padding: 15px;
     background-color: white;
     color: black;
     border-radius: 5px;
     display: inline-block;
 }
 .barcode {
-    height: 50px;
+    height: 60px;
     background: repeating-linear-gradient(
         90deg,
         black 0px, black 2px,
@@ -143,13 +143,14 @@ iframe{ max-width:100%; }
         black 3px, black 5px,
         white 5px, white 10px
     );
-    width: 200px;
+    width: 250px;
     margin: 0 auto;
 }
 .barcode-text {
     font-family: monospace;
     font-size: 14px;
     margin-top: 5px;
+    font-weight: bold;
 }
 
 /* --- WHATSAPP POPUP --- */
@@ -218,24 +219,24 @@ function hitung() {
     resultElement.innerHTML = "Hasil: " + hasil;
 }
 
-// --- PENDAFTARAN EVENT ---
+// --- PENDAFTARAN EVENT DENGAN BARCODE ---
 function daftarEvent(event) {
     event.preventDefault();
     const nama = document.getElementById('reg_nama').value;
     const hp = document.getElementById('reg_hp').value;
     const domisili = document.getElementById('reg_domisili').value;
+    
     if(nama && hp && domisili) {
-        // Menampilkan alert dengan pesan yang diminta
+        const kodeKupon = Math.floor(Math.random() * 1000000);
         alert(`mejuah juah, selamat kupon berhasil dia terima`);
-        // Menampilkan barcode di dalam alert (simulasi)
-        alert(`Kode Kupon: ${Math.floor(Math.random() * 1000000)}`);
+        alert(`Kode Kupon: ${kodeKupon}\nSilakan tunjukkan kode ini saat event`);
         document.getElementById('form-event').reset();
     } else {
         alert("Mohon lengkapi semua data!");
     }
 }
 
-// --- ULAASAN ---
+// --- ULAUAN ---
 function kirimUlasan(event) {
     event.preventDefault();
     const nama = document.getElementById('ulas_nama').value;
@@ -348,4 +349,3 @@ function cariBuku() {
     
     <div class="event-card">
         <div class="event-date">📅 31 Juli - 2 Agustus 2026</div>
-        <h3>Festival Bunga dan Buah Tanah Karo</h3>
