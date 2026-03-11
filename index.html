@@ -117,12 +117,20 @@ iframe{ max-width:100%; }
 /* --- KALKULATOR STYLES --- */
 .calculator-box {
     background-color: rgba(0,0,0,0.6); padding: 20px; border-radius: 8px;
-    max-width: 300px; margin: 20px auto; text-align: center;
+    max-width: 400px; margin: 20px auto; text-align: center;
 }
 .calculator-box input { width: 80%; padding: 10px; margin-bottom: 10px; font-size: 16px; }
 .calc-btn { background-color: #FFD700; border: none; padding: 10px 15px; margin: 5px; cursor: pointer; font-weight: bold; border-radius: 4px; }
 .calc-btn:hover { background-color: #e6c200; }
 .result-box { margin-top: 15px; font-size: 18px; font-weight: bold; color: #FFD700; }
+.math-display {
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: left;
+    font-family: monospace;
+}
 
 /* --- BARCODE STYLE --- */
 .barcode-container {
@@ -200,23 +208,56 @@ function hitung() {
     let num2 = parseFloat(document.getElementById('num2').value);
     let operator = document.getElementById('operator').value;
     let resultElement = document.getElementById('result');
+    let displayElement = document.getElementById('math-display');
 
     if (isNaN(num1) || isNaN(num2)) {
         resultElement.innerHTML = "Mohon isi angka dengan benar!";
         return;
     }
     let hasil = 0;
+    let operasi = "";
+    
     switch (operator) {
-        case '+': hasil = num1 + num2; break;
-        case '-': hasil = num1 - num2; break;
-        case '*': hasil = num1 * num2; break;
+        case '+': 
+            hasil = num1 + num2; 
+            operasi = num1 + " + " + num2 + " = " + hasil;
+            break;
+        case '-': 
+            hasil = num1 - num2; 
+            operasi = num1 + " - " + num2 + " = " + hasil;
+            break;
+        case '*': 
+            hasil = num1 * num2; 
+            operasi = num1 + " × " + num2 + " = " + hasil;
+            break;
         case '/': 
             if (num2 === 0) { resultElement.innerHTML = "Tidak bisa dibagi dengan nol!"; return; }
             hasil = num1 / num2; 
+            operasi = num1 + " ÷ " + num2 + " = " + hasil.toFixed(2);
+            break;
+        case '%': 
+            hasil = num1 % num2; 
+            operasi = num1 + " % " + num2 + " = " + hasil;
             break;
         default: resultElement.innerHTML = "Pilih operator!"; return;
     }
+    
     resultElement.innerHTML = "Hasil: " + hasil;
+    
+    // Menampilkan operasi matematika
+    displayElement.innerHTML = `
+        <div class="math-display">
+            <strong>Operasi Matematika:</strong><br>
+            ${operasi}<br>
+            <hr style="border-color: #FFD700;">
+            <strong>Contoh Operasi:</strong><br>
+            20 + 3 = ${20 + 3}<br>
+            20 - 3 = ${20 - 3}<br>
+            20 × 3 = ${20 * 3}<br>
+            20 ÷ 3 = ${(20 / 3).toFixed(2)}<br>
+            20 % 3 = ${20 % 3}
+        </div>
+    `;
 }
 
 // --- PENDAFTARAN EVENT DENGAN BARCODE ---
@@ -321,50 +362,4 @@ function cariBuku() {
 </div>
 
 <!-- KOLEKSI -->
-<div id="koleksi" class="section">
-    <h2>Koleksi Budaya Karo</h2>
-    <ul>
-        <li>Umpasa Karo (Pepatah & Pantun)</li>
-        <li>Tambo Karo (Sejarah Lisan)</li>
-        <li>Bahasa Karo: Tata Bahasa & Kosakata</li>
-        <li>Seni Tari & Musik Tradisional Karo</li>
-        <li>Adat Istiadat & Upacara Karo</li>
-    </ul>
-</div>
-
-<!-- PROGRAM -->
-<div id="program" class="section">
-    <h2>Program Literasi Budaya</h2>
-    <ul>
-        <li>Workshop Umpasa Karo</li>
-        <li>Pelatihan Menulis Cerita Rakyat Karo</li>
-        <li>Kelas Bahasa Karo Dasar</li>
-        <li>Diskusi Sejarah Tanah Karo</li>
-    </ul>
-</div>
-
-<!-- Acara -->
-<div id="event" class="section">
-    <h2>Pengumuman Event Budaya</h2>
-    
-    <div class="event-card">
-        <div class="event-date">📅 31 Juli - 2 Agustus 2026</div>
-        <h3>Festival Bunga dan Buah Tanah Karo</h3>
-        <p>Merayakan hasil bumi terbaik Tanah Karo dengan pameran dan lomba.</p>
-    </div>
-    <div class="event-card">
-        <div class="event-date">📅 8 Maret 2026</div>
-        <h3>Hari Jadi Kabupaten Karo</h3>
-        <p>Peringatan hari jadi Kabupaten Karo dengan berbagai kegiatan budaya.</p>
-    </div>
-    <div class="event-card">
-        <div class="event-date">📅 17 Agustus 2026</div>
-        <h3>Kerja Tahun</h3>
-        <p>Upacara adat syukur panen dan kebersamaan masyarakat Karo.</p>
-    </div>
-
-    <!-- FORM PENDAFTARAN KUPON -->
-    <div class="form-box">
-        <h3>Daftar Kupon Bingkisan</h3>
-        <form id="form-event" onsubmit="daftarEvent(event)">
-            <div class="form-group">
+<div id="kole
