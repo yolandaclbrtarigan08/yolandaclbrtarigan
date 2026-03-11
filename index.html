@@ -82,9 +82,9 @@ nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
     display: flex;
-    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Agar responsif di HP */
+    flex-wrap: wrap;
 }
 
 .nav-left, .nav-right {
@@ -299,6 +299,9 @@ iframe{
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 8px;
 }
 
 .search-box input {
@@ -452,72 +455,4 @@ function cariBuku() {
 <body>
 <div class="overlay">
 
-<div id="main-content">
-
-<nav>
-    <div class="nav-left">
-        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
-    </div>
-    
-    <div class="nav-right">
-        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
-        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
-        <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
-        <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
-        <a href="javascript:void(0)" onclick="showMenu('ulasan')">Ulasan</a>
-        <a href="javascript:void(0)" onclick="showMenu('pencari-buku')">Pencari Buku</a>
-    </div>
-
-    <div class="nav-right">
-        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
-    </div>
-</nav>
-
-<div class="container">
-
-<!-- Dashboard / Beranda -->
-<div id="dashboard" class="section active">
-<h1>Jabu Literasi</h1>
-<p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
-
-<div class="link-box">
-<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">Sejarah Tanah Karo</a>
-<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">Sistem Kekerabatan</a>
-</div>
-
-<div class="video-box">
-<h3>Video Budaya Karo</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-</div>
-</div>
-
-<!-- Koleksi -->
-<div id="koleksi" class="section">
-<h2>Koleksi Budaya Karo</h2>
-<ul>
-<li>Umpasa Karo (Pepatah & Pantun)</li>
-<li>Tambo Karo (Sejarah Lisan)</li>
-<li>Bahasa Karo: Tata Bahasa & Kosakata</li>
-<li>Seni Tari & Musik Tradisional Karo</li>
-<li>Adat Istiadat & Upacara Karo</li>
-</ul>
-</div>
-
-<!-- Program -->
-<div id="program" class="section">
-<h2>Program Literasi Budaya</h2>
-<ul>
-<li>Workshop Umpasa Karo</li>
-<li>Pelatihan Menulis Cerita Rakyat Karo</li>
-<li>Kelas Bahasa Karo Dasar</li>
-<li>Diskusi Sejarah Tanah Karo</li>
-</ul>
-</div>
-
-<!-- PENGUMUMAN EVENT (DIPERBARUI) -->
-<div id="event" class="section">
-<h2>Pengumuman Event Budaya</h2>
-
-<div class="event-card">
-    <div class="event-date">📅 31 Juli - 2 Agustus 2026</div>
-    <h
+<div
