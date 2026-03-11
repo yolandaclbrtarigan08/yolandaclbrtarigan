@@ -233,6 +233,97 @@ iframe{
     font-weight: bold;
     color: #FFD700;
 }
+
+/* --- STYLE BARU UNTUK FORM PENDAFTARAN EVENT & ULAASAN --- */
+.form-box {
+    background-color: rgba(0,0,0,0.7);
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #FFD700;
+}
+
+.form-box h3 {
+    text-align: center;
+    color: #FFD700;
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    box-sizing: border-box;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.btn-submit {
+    background-color: #FFD700;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    background-color: #e6c200;
+}
+
+/* --- STYLE BARU UNTUK PENCARI BUKU --- */
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    background-color: #FFD700;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.book-result {
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
 </style>
 
 <script>
@@ -276,13 +367,11 @@ function toggleForm(type) {
 
 // --- JAVASCRIPT UNTUK KALKULATOR (OPERATOR MATEMATIKA) ---
 function hitung() {
-    // Mengambil nilai dari input
     let num1 = parseFloat(document.getElementById('num1').value);
     let num2 = parseFloat(document.getElementById('num2').value);
     let operator = document.getElementById('operator').value;
     let resultElement = document.getElementById('result');
 
-    // Validasi input
     if (isNaN(num1) || isNaN(num2)) {
         resultElement.innerHTML = "Mohon isi angka dengan benar!";
         return;
@@ -290,30 +379,72 @@ function hitung() {
 
     let hasil = 0;
 
-    // Menggunakan operator matematika
     switch (operator) {
-        case '+':
-            hasil = num1 + num2;
+        case '+': hasil = num1 + num2; break;
+        case '-': hasil = num1 - num2; break;
+        case '*': hasil = num1 * num2; break;
+        case '/': 
+            if (num2 === 0) { resultElement.innerHTML = "Tidak bisa dibagi dengan nol!"; return; }
+            hasil = num1 / num2; 
             break;
-        case '-':
-            hasil = num1 - num2;
-            break;
-        case '*':
-            hasil = num1 * num2;
-            break;
-        case '/':
-            if (num2 === 0) {
-                resultElement.innerHTML = "Tidak bisa dibagi dengan nol!";
-                return;
-            }
-            hasil = num1 / num2;
-            break;
-        default:
-            resultElement.innerHTML = "Pilih operator!";
-            return;
+        default: resultElement.innerHTML = "Pilih operator!"; return;
     }
 
     resultElement.innerHTML = "Hasil: " + hasil;
+}
+
+// --- JAVASCRIPT UNTUK PENDAFTARAN EVENT ---
+function daftarEvent(event) {
+    event.preventDefault();
+    const nama = document.getElementById('reg_nama').value;
+    const hp = document.getElementById('reg_hp').value;
+    const domisili = document.getElementById('reg_domisili').value;
+    
+    if(nama && hp && domisili) {
+        alert(`Terima kasih ${nama}!\nAnda telah terdaftar untuk mendapatkan kupon bingkisan.\nNomor HP: ${hp}\nDomisili: ${domisili}`);
+        // Reset form
+        document.getElementById('form-event').reset();
+    } else {
+        alert("Mohon lengkapi semua data!");
+    }
+}
+
+// --- JAVASCRIPT UNTUK ULAASAN ---
+function kirimUlasan(event) {
+    event.preventDefault();
+    const nama = document.getElementById('ulas_nama').value;
+    const bintang = document.getElementById('ulas_bintang').value;
+    const pesan = document.getElementById('ulas_pesan').value;
+
+    if(nama && bintang && pesan) {
+        alert(`Terima kasih atas ulasan Anda, ${nama}!\nRating: ${bintang} Bintang\n"${pesan}"`);
+        document.getElementById('form-ulasan').reset();
+    } else {
+        alert("Mohon lengkapi semua data ulasan!");
+    }
+}
+
+// --- JAVASCRIPT UNTUK PENCARI BUKU ---
+function cariBuku() {
+    const keyword = document.getElementById('search-input').value;
+    const resultBox = document.getElementById('search-result');
+    
+    if(keyword.trim() === "") {
+        resultBox.innerHTML = "<p>Silakan masukkan judul buku.</p>";
+        return;
+    }
+
+    // Simulasi hasil pencarian
+    resultBox.innerHTML = `
+        <div class="book-result">
+            <h4>Hasil Pencarian untuk: "${keyword}"</h4>
+            <p>Menemukan 1 buku yang cocok:</p>
+            <ul>
+                <li><strong>Tambo Karo: Sejarah Lisan</strong> - Penulis: J. H. Moeliono</li>
+                <li><strong>Umpasa Karo</strong> - Penulis: Kumpulan Sastra</li>
+            </ul>
+        </div>
+    `;
 }
 </script>
 
@@ -324,21 +455,19 @@ function hitung() {
 <div id="main-content">
 
 <nav>
-    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
     <div class="nav-left">
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
     </div>
     
-    <!-- Menu Kanan (Beranda, Koleksi, Program, Event) -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
         <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
         <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
-        <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
+        <a href="javascript:void(0)" onclick="showMenu('ulasan')">Ulasan</a>
+        <a href="javascript:void(0)" onclick="showMenu('pencari-buku')">Pencari Buku</a>
     </div>
 
-    <!-- Menu Gabungan Login & Daftar -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
     </div>
@@ -352,12 +481,8 @@ function hitung() {
 <p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
 
 <div class="link-box">
-<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
-Sejarah Tanah Karo
-</a>
-<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">
-Sistem Kekerabatan
-</a>
+<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">Sejarah Tanah Karo</a>
+<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">Sistem Kekerabatan</a>
 </div>
 
 <div class="video-box">
@@ -389,86 +514,10 @@ Sistem Kekerabatan
 </ul>
 </div>
 
-<!-- PENGUMUMAN EVENT (BARU) -->
+<!-- PENGUMUMAN EVENT (DIPERBARUI) -->
 <div id="event" class="section">
 <h2>Pengumuman Event Budaya</h2>
+
 <div class="event-card">
-    <div class="event-date">📅 17 Agustus 2024</div>
-    <h3>Upacara Gawi Budaya</h3>
-    <p>Merayakan kemerdekaan dengan tarian tradisional dan kuliner khas Karo.</p>
-</div>
-<div class="event-card">
-    <div class="event-date">📅 20 September 2024</div>
-    <h3>Lomba Umpasa Karo</h3>
-    <p>Berlomba kefasihan berbicara menggunakan pepatah Karo untuk pelajar SMA.</p>
-</div>
-<div class="event-card">
-    <div class="event-date">📅 10 Oktober 2024</div>
-    <h3>Pameran Tenun Ulos</h3>
-    <p>Menampilkan karya tenun terbaik dari perajin di Tanah Karo.</p>
-</div>
-</div>
-
-<!-- KALKULATOR (BARU - OPERATOR MATEMATIKA) -->
-<div id="kalkulator" class="section">
-<h2>Kalkulator Sederhana</h2>
-<p style="text-align:center;">Latihan Operator Matematika (+, -, *, /)</p>
-
-<div class="calculator-box">
-    <input type="number" id="num1" placeholder="Angka 1">
-    <select id="operator" style="padding: 10px; margin-bottom: 10px;">
-        <option value="+">Tambah (+)</option>
-        <option value="-">Kurang (-)</option>
-        <option value="*">Kali (*)</option>
-        <option value="/">Bagi (/)</option>
-    </select>
-    <input type="number" id="num2" placeholder="Angka 2">
-    <br>
-    <button class="calc-btn" onclick="hitung()">Hitung</button>
-    
-    <div id="result" class="result-box">Hasil akan muncul di sini</div>
-</div>
-</div>
-
-<!-- Gabungan Login & Register -->
-<div id="login-register" class="section">
-    <div class="login-container">
-        <h2 id="form-title">Masuk Anggota</h2>
-        
-        <!-- Form Login -->
-        <form id="login-form" onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-        </form>
-
-        <!-- Form Daftar -->
-        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
-            <label for="fname">Nama Depan:</label>
-            <input type="text" id="fname" name="fname" required>
-            <label for="lname">Nama Belakang:</label>
-            <input type="text" id="lname" name="lname" required>
-            <label for="nim">NIM / ID:</label>
-            <input type="text" id="nim" name="nim" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="phone">No HP:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <input type="submit" value="Daftar">
-        </form>
-
-        <div class="toggle-link" id="toggle-text">
-            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
-        </div>
-    </div>
-</div>
-
-</div>
-</div>
-
-<!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
-    <svg viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.
+    <div class="event-date">📅 31 Juli - 2 Agustus 2026</div>
+    <h
