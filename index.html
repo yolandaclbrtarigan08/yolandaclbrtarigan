@@ -233,6 +233,43 @@ iframe{
     font-weight: bold;
     color: #FFD700;
 }
+
+/* --- STYLE BARU UNTUK TENTANG KAMI (VISI MISI) --- */
+.vision-mission-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #FFD700;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.vision-mission-card h3 {
+    color: #FFD700;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.vision-mission-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.icon-vision::before {
+    content: "🔭";
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.icon-mission::before {
+    content: "🎯";
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
+}
 </style>
 
 <script>
@@ -329,11 +366,12 @@ function hitung() {
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
     </div>
     
-    <!-- Menu Kanan (Beranda, Koleksi, Program, Event) -->
+    <!-- Menu Kanan (Beranda, Koleksi, Program, Event, TENTANG KAMI) -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
         <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
+        <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
         <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
         <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
     </div>
@@ -389,7 +427,34 @@ Sistem Kekerabatan
 </ul>
 </div>
 
-<!-- PENGUMUMAN EVENT (BARU) -->
+<!-- TENTANG KAMI - VISI MISI (BARU) -->
+<div id="tentang-kami" class="section">
+<h2>Tentang Kami</h2>
+<p style="text-align:center; font-size:18px; margin-bottom:30px;">Jabu Literasi adalah platform digital untuk pelestarian dan pengembangan budaya Karo.</p>
+
+<div class="vision-mission-card icon-vision">
+    <h3>🌟 VISI</h3>
+    <p>"Menjadikan budaya Karo sebagai warisan hidup yang terus berkembang, relevan, dan mendunia melalui literasi digital yang inklusif dan berkelanjutan."</p>
+</div>
+
+<div class="vision-mission-card icon-mission">
+    <h3>🎯 MISI</h3>
+    <ul style="text-align:left; max-width:600px; margin:0 auto; padding-left:20px;">
+        <li>📚 Mendokumentasikan dan mempublikasikan kekayaan budaya Karo secara digital</li>
+        <li>🎓 Memberikan akses pendidikan budaya Karo yang mudah dan menyenangkan</li>
+        <li>🤝 Membangun komunitas pecinta budaya Karo di seluruh dunia</li>
+        <li>✍️ Melatih generasi muda Karo dalam literasi budaya dan kreativitas</li>
+        <li>🌐 Mengintegrasikan budaya Karo dengan teknologi modern</li>
+    </ul>
+</div>
+
+<div style="background-color:rgba(255,215,0,0.1); padding:20px; border-radius:8px; margin-top:30px;">
+    <h3 style="color:#FFD700;">Nilai Inti Kami</h3>
+    <p><strong>Mertuhun</strong> - Kebersamaan | <strong>Margu</strong> - Kebenaran | <strong>Marlawas</strong> - Kebaikan</p>
+</div>
+</div>
+
+<!-- PENGUMUMAN EVENT -->
 <div id="event" class="section">
 <h2>Pengumuman Event Budaya</h2>
 <div class="event-card">
@@ -409,7 +474,7 @@ Sistem Kekerabatan
 </div>
 </div>
 
-<!-- KALKULATOR (BARU - OPERATOR MATEMATIKA) -->
+<!-- KALKULATOR -->
 <div id="kalkulator" class="section">
 <h2>Kalkulator Sederhana</h2>
 <p style="text-align:center;">Latihan Operator Matematika (+, -, *, /)</p>
@@ -469,6 +534,4 @@ Sistem Kekerabatan
 </div>
 
 <!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
-    <svg viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.
+<a href="https://wa.me/6282289121138" class
