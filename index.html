@@ -233,6 +233,99 @@ iframe{
     font-weight: bold;
     color: #FFD700;
 }
+
+/* --- STYLE BARU UNTUK LAYANAN PERPUSTAKAAN --- */
+.service-tabs {
+    display: flex;
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+}
+
+.service-tab {
+    flex: 1;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.service-tab.active {
+    background-color: #FFD700;
+    color: black;
+}
+
+.service-tab:hover {
+    background-color: rgba(255,215,0,0.7);
+    color: black;
+}
+
+.service-content {
+    display: none;
+}
+
+.service-content.active {
+    display: block;
+}
+
+.book-card {
+    background-color: rgba(255,255,255,0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #FFD700;
+}
+
+.book-available {
+    color: #90EE90;
+    font-weight: bold;
+}
+
+.book-borrowed {
+    color: #FFB6C1;
+    font-weight: bold;
+}
+
+.borrow-form, .return-form {
+    background-color: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.history-item {
+    background-color: rgba(255,255,255,0.05);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border-left: 3px solid #FFD700;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-available {
+    background-color: #90EE90;
+    color: black;
+}
+
+.status-borrowed {
+    background-color: #FFB6C1;
+    color: black;
+}
+
+.status-returned {
+    background-color: #87CEEB;
+    color: black;
+}
 </style>
 
 <script>
@@ -274,23 +367,19 @@ function toggleForm(type) {
     }
 }
 
-// --- JAVASCRIPT UNTUK PERHITUNGAN (OPERATOR MATEMATIKA) ---
+// --- JAVASCRIPT UNTUK KALKULATOR ---
 function hitung() {
-    // Mengambil nilai dari input
     let num1 = parseFloat(document.getElementById('num1').value);
     let num2 = parseFloat(document.getElementById('num2').value);
     let operator = document.getElementById('operator').value;
     let resultElement = document.getElementById('result');
 
-    // Validasi input
     if (isNaN(num1) || isNaN(num2)) {
         resultElement.innerHTML = "Mohon isi angka dengan benar!";
         return;
     }
 
     let hasil = 0;
-
-    // Menggunakan operator matematika
     switch (operator) {
         case '+':
             hasil = num1 + num2;
@@ -312,11 +401,10 @@ function hitung() {
             resultElement.innerHTML = "Pilih operator!";
             return;
     }
-
     resultElement.innerHTML = "Hasil: " + hasil;
 }
-</script>
-    // --- JAVASCRIPT UNTUK LAYANAN PERPUSTAKAAN ---
+
+// --- JAVASCRIPT UNTUK LAYANAN PERPUSTAKAAN ---
 function showServiceTab(tabId) {
     // Hide all service contents
     document.querySelectorAll('.service-content').forEach(content => {
@@ -336,7 +424,7 @@ function showServiceTab(tabId) {
 function pinjamBuku() {
     const kodeBuku = document.getElementById('kode-pinjam').value;
     if (kodeBuku) {
-        alert(✅ Buku dengan kode ${kodeBuku} berhasil dipinjam!);
+        alert(`✅ Buku dengan kode ${kodeBuku} berhasil dipinjam!`);
         document.getElementById('kode-pinjam').value = '';
         updateRiwayatPeminjaman(kodeBuku, 'Dipinjam');
     } else {
@@ -347,7 +435,7 @@ function pinjamBuku() {
 function kembalikanBuku() {
     const kodeBuku = document.getElementById('kode-kembali').value;
     if (kodeBuku) {
-        alert(✅ Buku dengan kode ${kodeBuku} berhasil dikembalikan!);
+        alert(`✅ Buku dengan kode ${kodeBuku} berhasil dikembalikan!`);
         document.getElementById('kode-kembali').value = '';
         updateRiwayatPeminjaman(kodeBuku, 'Dikembalikan');
     } else {
@@ -375,21 +463,22 @@ function updateRiwayatPeminjaman(kodeBuku, status) {
 <div id="main-content">
 
 <nav>
-    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
+    <!-- Menu Kiri -->
     <div class="nav-left">
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
     </div>
     
-    <!-- Menu Kanan (Beranda, Koleksi, Program, Event) -->
+    <!-- Menu Kanan (Navigasi Utama) -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
         <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
         <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
+        <a href="javascript:void(0)" onclick="showMenu('layanan')">Layanan</a> <!-- MENU BARU -->
         <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
     </div>
 
-    <!-- Menu Gabungan Login & Daftar -->
+    <!-- Login -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
     </div>
@@ -440,7 +529,7 @@ Sistem Kekerabatan
 </ul>
 </div>
 
-<!-- PENGUMUMAN EVENT (BARU) -->
+<!-- PENGUMUMAN EVENT -->
 <div id="event" class="section">
 <h2>Pengumuman Event Budaya</h2>
 <div class="event-card">
@@ -460,66 +549,38 @@ Sistem Kekerabatan
 </div>
 </div>
 
-<!-- KALKULATOR (BARU - OPERATOR MATEMATIKA) -->
-<div id="kalkulator" class="section">
-<h2>Kalkulator Sederhana</h2>
-<p style="text-align:center;">Latihan Operator Matematika (+, -, *, /)</p>
+<!-- LAYANAN PERPUSTAKAAN (BARU) -->
+<div id="layanan" class="section">
+<h2>🏛️ Layanan Perpustakaan</h2>
+<p style="text-align:center;">Kelola peminjaman dan pengembalian koleksi literasi budaya Karo</p>
 
-<div class="calculator-box">
-    <input type="number" id="num1" placeholder="Angka 1">
-    <select id="operator" style="padding: 10px; margin-bottom: 10px;">
-        <option value="+">Tambah (+)</option>
-        <option value="-">Kurang (-)</option>
-        <option value="*">Kali (*)</option>
-        <option value="/">Bagi (/)</option>
-    </select>
-    <input type="number" id="num2" placeholder="Angka 2">
-    <br>
-    <button class="calc-btn" onclick="hitung()">Hitung</button>
-    
-    <div id="result" class="result-box">Hasil akan muncul di sini</div>
-</div>
+<!-- Tab Navigation -->
+<div class="service-tabs">
+    <button class="service-tab active" onclick="showServiceTab('status-buku')">Status Buku</button>
+    <button class="service-tab" onclick="showServiceTab('peminjaman')">Peminjaman</button>
+    <button class="service-tab" onclick="showServiceTab('pengembalian')">Pengembalian</button>
+    <button class="service-tab" onclick="showServiceTab('riwayat')">Riwayat</button>
 </div>
 
-<!-- Gabungan Login & Register -->
-<div id="login-register" class="section">
-    <div class="login-container">
-        <h2 id="form-title">Masuk Anggota</h2>
-        
-        <!-- Form Login -->
-        <form id="login-form" onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-        </form>
-
-        <!-- Form Daftar -->
-        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
-            <label for="fname">Nama Depan:</label>
-            <input type="text" id="fname" name="fname" required>
-            <label for="lname">Nama Belakang:</label>
-            <input type="text" id="lname" name="lname" required>
-            <label for="nim">NIM / ID:</label>
-            <input type="text" id="nim" name="nim" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="phone">No HP:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <input type="submit" value="Daftar">
-        </form>
-
-        <div class="toggle-link" id="toggle-text">
-            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
-        </div>
+<!-- Status Buku -->
+<div id="status-buku" class="service-content active">
+    <h3>📚 Status Ketersediaan Buku</h3>
+    <div class="book-card">
+        <h4>Umpasa Karo Lengkap</h4>
+        <p>Kode: KAR-001</p>
+        <span class="status-badge status-available">✅ Tersedia</span>
     </div>
-</div>
-
-</div>
-</div>
-
-<!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
-    <svg viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.
+    <div class="book-card">
+        <h4>Tambo Si Raja Lontung</h4>
+        <p>Kode: KAR-002</p>
+        <span class="status-badge status-borrowed">⏳ Dipinjam</span>
+    </div>
+    <div class="book-card">
+        <h4>Bahasa Karo Malela</h4>
+        <p>Kode: KAR-003</p>
+        <span class="status-badge status-available">✅ Tersedia</span>
+    </div>
+    <div class="book-card">
+        <h4>Adat Karo Pekan</h4>
+        <p>Kode: KAR-004</p>
+        <span class="status
