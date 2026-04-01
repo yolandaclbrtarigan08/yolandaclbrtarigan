@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-color: #8B4513;
+    background-color: #8B4513; /* Warna dasar coklat tanah */
     color:white;
 }
 
@@ -82,9 +82,9 @@ nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Agar responsif di HP */
 }
 
 .nav-left, .nav-right {
@@ -257,108 +257,18 @@ iframe{
     margin-bottom: 20px;
 }
 
-/* --- STYLE BARU UNTUK PENCARIAN KOLEKSI --- */
-.search-box {
-    background-color: rgba(0,0,0,0.7);
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px 0;
-    text-align: center;
+.icon-vision::before {
+    content: "🔭";
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
 }
 
-.search-input {
-    width: 70%;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #FFD700;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.9);
-    color: #333;
-    margin-right: 10px;
-}
-
-.search-btn {
-    background-color: #FFD700;
-    color: black;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.search-btn:hover {
-    background-color: #e6c200;
-}
-
-.search-results {
-    margin-top: 20px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.search-item {
-    background: rgba(255,255,255,0.1);
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    border-left: 4px solid #FFD700;
-}
-
-/* --- STYLE BARU UNTUK LAYANAN PERPUSTAKAAN --- */
-.service-card {
-    background-color: rgba(0,0,0,0.6);
-    border: 2px solid #FFD700;
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.service-btn {
-    background-color: rgba(255,215,0,0.2);
-    color: #FFD700;
-    border: 1px solid #FFD700;
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s;
-}
-
-.service-btn:hover {
-    background-color: #FFD700;
-    color: black;
-}
-
-.status-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.status-table th, .status-table td {
-    padding: 10px;
-    border: 1px solid #FFD700;
-    text-align: left;
-}
-
-.status-table th {
-    background-color: #FFD700;
-    color: black;
-    font-weight: bold;
-}
-
-.status-available {
-    color: #00FF00;
-    font-weight: bold;
-}
-
-.status-borrowed {
-    color: #FF0000;
-    font-weight: bold;
+.icon-mission::before {
+    content: "🎯";
+    font-size: 30px;
+    display: block;
+    margin-bottom: 10px;
 }
 </style>
 
@@ -401,124 +311,33 @@ function toggleForm(type) {
     }
 }
 
-// --- JAVASCRIPT UNTUK PENCARIAN KOLEKSI ---
-const koleksiData = [
-    {judul: "Umpasa Karo Lengkap", kategori: "Umpasa", status: "Tersedia"},
-    {judul: "Tambo Karo Si Telon Merga", kategori: "Sejarah", status: "Tersedia"},
-    {judul: "Kamus Bahasa Karo-Indonesia", kategori: "Bahasa", status: "Dipinjam"},
-    {judul: "Tari Guro-Guro", kategori: "Seni Tari", status: "Tersedia"},
-    {judul: "Adat Peresmian Rumah", kategori: "Adat", status: "Tersedia"},
-    {judul: "Musik Gendang Karo", kategori: "Musik", status: "Tersedia"}
-];
-
-function cariKoleksi() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const results = document.getElementById('search-results');
-    
-    if (query === '') {
-        results.innerHTML = '<p style="color:#FFD700;">Ketik kata kunci untuk mencari koleksi...</p>';
-        return;
-    }
-    
-    const hasil = koleksiData.filter(item => 
-        item.judul.toLowerCase().includes(query) || 
-        item.kategori.toLowerCase().includes(query)
-    );
-    
-    if (hasil.length === 0) {
-        results.innerHTML = '<p style="color:#FF6B6B;">Koleksi tidak ditemukan!</p>';
-    } else {
-        results.innerHTML = hasil.map(item => `
-            <div class="search-item">
-                <h4>${item.judul}</h4>
-                <p><strong>Kategori:</strong> ${item.kategori} | <strong>Status:</strong> ${item.status}</p>
-            </div>
-        `).join('');
-    }
-}
-
-// --- JAVASCRIPT UNTUK LAYANAN ---
-function showService(service) {
-    const content = document.getElementById('service-content');
-    
-    switch(service) {
-        case 'peminjaman':
-            content.innerHTML = `
-                <div class="service-card">
-                    <h3>📖 Form Peminjaman Buku</h3>
-                    <p>Silakan login terlebih dahulu untuk meminjam buku.</p>
-                    <button class="service-btn" onclick="showMenu('login-register')">Pinjam Sekarang</button>
-                </div>
-            `;
-            break;
-        case 'penhembalian':
-            content.innerHTML = `
-                <div class="service-card">
-                    <h3>📚 Penhembalian Buku</h3>
-                    <p>Masukkan kode buku yang akan dikembalikan:</p>
-                    <input type="text" placeholder="Kode Buku" style="padding:10px; margin:10px; border-radius:5px;">
-                    <button class="service-btn">Kembalikan Buku</button>
-                </div>
-            `;
-            break;
-        case 'status':
-            content.innerHTML = `
-                <div class="service-card">
-                    <h3>📊 Status Ketersediaan Buku</h3>
-                    <table class="status-table">
-                        <tr>
-                            <th>Kode Buku</th>
-                            <th>Judul</th>
-                            <th>Status</th>
-                        </tr>
-                        <tr>
-                            <td>KR001</td>
-                            <td>Umpasa Karo Lengkap</td>
-                            <td class="status-available">✅ Tersedia</td>
-                        </tr>
-                        <tr>
-                            <td>KR002</td>
-                            <td>Kamus Karo</td>
-                            <td class="status-borrowed">❌ Dipinjam</td>
-                        </tr>
-                        <tr>
-                            <td>KR003</td>
-                            <td>Tambo Karo</td>
-                            <td class="status-available">✅ Tersedia</td>
-                        </tr>
-                    </table>
-                </div>
-            `;
-            break;
-        case 'riwayat':
-            content.innerHTML = `
-                <div class="service-card">
-                    <h3>📜 Riwayat Peminjaman</h3>
-                    <p>Login untuk melihat riwayat peminjaman Anda.</p>
-                    <button class="service-btn" onclick="showMenu('login-register')">Lihat Riwayat</button>
-                </div>
-            `;
-            break;
-    }
-}
-
-// --- JAVASCRIPT UNTUK KALKULATOR ---
+// --- JAVASCRIPT UNTUK KALKULATOR (OPERATOR MATEMATIKA) ---
 function hitung() {
+    // Mengambil nilai dari input
     let num1 = parseFloat(document.getElementById('num1').value);
     let num2 = parseFloat(document.getElementById('num2').value);
     let operator = document.getElementById('operator').value;
     let resultElement = document.getElementById('result');
 
+    // Validasi input
     if (isNaN(num1) || isNaN(num2)) {
         resultElement.innerHTML = "Mohon isi angka dengan benar!";
         return;
     }
 
     let hasil = 0;
+
+    // Menggunakan operator matematika
     switch (operator) {
-        case '+': hasil = num1 + num2; break;
-        case '-': hasil = num1 - num2; break;
-        case '*': hasil = num1 * num2; break;
+        case '+':
+            hasil = num1 + num2;
+            break;
+        case '-':
+            hasil = num1 - num2;
+            break;
+        case '*':
+            hasil = num1 * num2;
+            break;
         case '/':
             if (num2 === 0) {
                 resultElement.innerHTML = "Tidak bisa dibagi dengan nol!";
@@ -526,7 +345,11 @@ function hitung() {
             }
             hasil = num1 / num2;
             break;
+        default:
+            resultElement.innerHTML = "Pilih operator!";
+            return;
     }
+
     resultElement.innerHTML = "Hasil: " + hasil;
 }
 </script>
@@ -538,20 +361,22 @@ function hitung() {
 <div id="main-content">
 
 <nav>
+    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
     <div class="nav-left">
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
     </div>
     
+    <!-- Menu Kanan (Beranda, Koleksi, Program, Event, TENTANG KAMI) -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
-        <a href="javascript:void(0)" onclick="showMenu('layanan')">Layanan</a>
         <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
         <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
-        <a href="javascript:void(0)" onclick="showMenu('event')">Event</a>
+        <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
         <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
     </div>
 
+    <!-- Menu Gabungan Login & Daftar -->
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
     </div>
@@ -559,24 +384,154 @@ function hitung() {
 
 <div class="container">
 
-<!-- Dashboard / Beranda (DITAMBAH PENCARIAN) -->
+<!-- Dashboard / Beranda -->
 <div id="dashboard" class="section active">
 <h1>Jabu Literasi</h1>
 <p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
 
-<!-- PENCARIAN KOLEKSI BARU -->
-<div class="search-box">
-    <h3>🔍 Cari Koleksi Budaya Karo</h3>
-    <input type="text" id="search-input" class="search-input" placeholder="Cari Umpasa, Tambo, Bahasa Karo..." onkeyup="cariKoleksi()">
-    <button class="search-btn" onclick="cariKoleksi()">Cari</button>
-    <div id="search-results" style="margin-top:15px;">
-        <p style="color:#FFD700;">Ketik kata kunci untuk mencari koleksi...</p>
+<div class="link-box">
+<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
+Sejarah Tanah Karo
+</a>
+<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">
+Sistem Kekerabatan
+</a>
+</div>
+
+<div class="video-box">
+<h3>Video Budaya Karo</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- Koleksi -->
+<div id="koleksi" class="section">
+<h2>Koleksi Budaya Karo</h2>
+<ul>
+<li>Umpasa Karo (Pepatah & Pantun)</li>
+<li>Tambo Karo (Sejarah Lisan)</li>
+<li>Bahasa Karo: Tata Bahasa & Kosakata</li>
+<li>Seni Tari & Musik Tradisional Karo</li>
+<li>Adat Istiadat & Upacara Karo</li>
+</ul>
+</div>
+
+<!-- Program -->
+<div id="program" class="section">
+<h2>Program Literasi Budaya</h2>
+<ul>
+<li>Workshop Umpasa Karo</li>
+<li>Pelatihan Menulis Cerita Rakyat Karo</li>
+<li>Kelas Bahasa Karo Dasar</li>
+<li>Diskusi Sejarah Tanah Karo</li>
+</ul>
+</div>
+
+<!-- TENTANG KAMI - VISI MISI (BARU) -->
+<div id="tentang-kami" class="section">
+<h2>Tentang Kami</h2>
+<p style="text-align:center; font-size:18px; margin-bottom:30px;">Jabu Literasi adalah platform digital untuk pelestarian dan pengembangan budaya Karo.</p>
+
+<div class="vision-mission-card icon-vision">
+    <h3>🌟 VISI</h3>
+    <p>"Menjadikan budaya Karo sebagai warisan hidup yang terus berkembang, relevan, dan mendunia melalui literasi digital yang inklusif dan berkelanjutan."</p>
+</div>
+
+<div class="vision-mission-card icon-mission">
+    <h3>🎯 MISI</h3>
+    <ul style="text-align:left; max-width:600px; margin:0 auto; padding-left:20px;">
+        <li>📚 Mendokumentasikan dan mempublikasikan kekayaan budaya Karo secara digital</li>
+        <li>🎓 Memberikan akses pendidikan budaya Karo yang mudah dan menyenangkan</li>
+        <li>🤝 Membangun komunitas pecinta budaya Karo di seluruh dunia</li>
+        <li>✍️ Melatih generasi muda Karo dalam literasi budaya dan kreativitas</li>
+        <li>🌐 Mengintegrasikan budaya Karo dengan teknologi modern</li>
+    </ul>
+</div>
+
+<div style="background-color:rgba(255,215,0,0.1); padding:20px; border-radius:8px; margin-top:30px;">
+    <h3 style="color:#FFD700;">Nilai Inti Kami</h3>
+    <p><strong>Mertuhun</strong> - Kebersamaan | <strong>Margu</strong> - Kebenaran | <strong>Marlawas</strong> - Kebaikan</p>
+</div>
+</div>
+
+<!-- PENGUMUMAN EVENT -->
+<div id="event" class="section">
+<h2>Pengumuman Event Budaya</h2>
+<div class="event-card">
+    <div class="event-date">📅 17 Agustus 2024</div>
+    <h3>Upacara Gawi Budaya</h3>
+    <p>Merayakan kemerdekaan dengan tarian tradisional dan kuliner khas Karo.</p>
+</div>
+<div class="event-card">
+    <div class="event-date">📅 20 September 2024</div>
+    <h3>Lomba Umpasa Karo</h3>
+    <p>Berlomba kefasihan berbicara menggunakan pepatah Karo untuk pelajar SMA.</p>
+</div>
+<div class="event-card">
+    <div class="event-date">📅 10 Oktober 2024</div>
+    <h3>Pameran Tenun Ulos</h3>
+    <p>Menampilkan karya tenun terbaik dari perajin di Tanah Karo.</p>
+</div>
+</div>
+
+<!-- KALKULATOR -->
+<div id="kalkulator" class="section">
+<h2>Kalkulator Sederhana</h2>
+<p style="text-align:center;">Latihan Operator Matematika (+, -, *, /)</p>
+
+<div class="calculator-box">
+    <input type="number" id="num1" placeholder="Angka 1">
+    <select id="operator" style="padding: 10px; margin-bottom: 10px;">
+        <option value="+">Tambah (+)</option>
+        <option value="-">Kurang (-)</option>
+        <option value="*">Kali (*)</option>
+        <option value="/">Bagi (/)</option>
+    </select>
+    <input type="number" id="num2" placeholder="Angka 2">
+    <br>
+    <button class="calc-btn" onclick="hitung()">Hitung</button>
+    
+    <div id="result" class="result-box">Hasil akan muncul di sini</div>
+</div>
+</div>
+
+<!-- Gabungan Login & Register -->
+<div id="login-register" class="section">
+    <div class="login-container">
+        <h2 id="form-title">Masuk Anggota</h2>
+        
+        <!-- Form Login -->
+        <form id="login-form" onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+
+        <!-- Form Daftar -->
+        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+            <label for="fname">Nama Depan:</label>
+            <input type="text" id="fname" name="fname" required>
+            <label for="lname">Nama Belakang:</label>
+            <input type="text" id="lname" name="lname" required>
+            <label for="nim">NIM / ID:</label>
+            <input type="text" id="nim" name="nim" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">No HP:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <input type="submit" value="Daftar">
+        </form>
+
+        <div class="toggle-link" id="toggle-text">
+            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+        </div>
     </div>
 </div>
 
-<div class="link-box">
-<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">Sejarah Tanah Karo</a>
-<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">Sistem Kekerabatan</a>
+</div>
 </div>
 
-<div
+<!-- WhatsApp Popup -->
+<a href="https://wa.me/6282289121138" class
