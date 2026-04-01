@@ -274,7 +274,7 @@ function toggleForm(type) {
     }
 }
 
-// --- JAVASCRIPT UNTUK KALKULATOR (OPERATOR MATEMATIKA) ---
+// --- JAVASCRIPT UNTUK PERHITUNGAN (OPERATOR MATEMATIKA) ---
 function hitung() {
     // Mengambil nilai dari input
     let num1 = parseFloat(document.getElementById('num1').value);
@@ -314,6 +314,57 @@ function hitung() {
     }
 
     resultElement.innerHTML = "Hasil: " + hasil;
+}
+</script>
+    // --- JAVASCRIPT UNTUK LAYANAN PERPUSTAKAAN ---
+function showServiceTab(tabId) {
+    // Hide all service contents
+    document.querySelectorAll('.service-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all tabs
+    document.querySelectorAll('.service-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    
+    // Show selected tab content and activate tab
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+}
+
+function pinjamBuku() {
+    const kodeBuku = document.getElementById('kode-pinjam').value;
+    if (kodeBuku) {
+        alert(✅ Buku dengan kode ${kodeBuku} berhasil dipinjam!);
+        document.getElementById('kode-pinjam').value = '';
+        updateRiwayatPeminjaman(kodeBuku, 'Dipinjam');
+    } else {
+        alert('❌ Mohon masukkan kode buku!');
+    }
+}
+
+function kembalikanBuku() {
+    const kodeBuku = document.getElementById('kode-kembali').value;
+    if (kodeBuku) {
+        alert(✅ Buku dengan kode ${kodeBuku} berhasil dikembalikan!);
+        document.getElementById('kode-kembali').value = '';
+        updateRiwayatPeminjaman(kodeBuku, 'Dikembalikan');
+    } else {
+        alert('❌ Mohon masukkan kode buku!');
+    }
+}
+
+function updateRiwayatPeminjaman(kodeBuku, status) {
+    const riwayatContainer = document.getElementById('riwayat-list');
+    const timestamp = new Date().toLocaleString('id-ID');
+    const newItem = `
+        <div class="history-item">
+            <strong>Buku ${kodeBuku}</strong> - ${timestamp}<br>
+            <span class="status-badge status-${status.toLowerCase()}">${status}</span>
+        </div>
+    `;
+    riwayatContainer.insertAdjacentHTML('afterbegin', newItem);
 }
 </script>
 
