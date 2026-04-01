@@ -9,7 +9,7 @@
 body {
     margin:0;
     font-family: Arial, sans-serif;
-    background-color: #8B4513;
+    background-color: #8B4513; /* Warna dasar coklat tanah */
     color:white;
 }
 
@@ -82,9 +82,9 @@ nav{
     background-color: rgba(0,0,0,0.8);
     padding:15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Agar responsif di HP */
 }
 
 .nav-left, .nav-right {
@@ -182,7 +182,7 @@ iframe{
     padding: 20px;
 }
 
-/* --- STYLE UNTUK EVENT & KALKULATOR --- */
+/* --- STYLE BARU UNTUK EVENT & KALKULATOR --- */
 .event-card {
     background-color: rgba(255, 255, 255, 0.1);
     border-left: 5px solid #FFD700;
@@ -196,6 +196,7 @@ iframe{
     font-weight: bold;
 }
 
+/* Style Kalkulator */
 .calculator-box {
     background-color: rgba(0,0,0,0.6);
     padding: 20px;
@@ -233,7 +234,7 @@ iframe{
     color: #FFD700;
 }
 
-/* --- STYLE LAYANAN PERPUSTAKAAN --- */
+/* --- STYLE BARU UNTUK LAYANAN PERPUSTAKAAN --- */
 .service-tabs {
     display: flex;
     background-color: rgba(0,0,0,0.6);
@@ -296,72 +297,34 @@ iframe{
     margin-bottom: 20px;
 }
 
-.borrow-form input, .return-form input {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-.form-row {
-    display: flex;
-    gap: 10px;
-}
-
-.form-row input {
-    flex: 1;
-}
-
-.btn-pinjam, .btn-kembali {
-    background-color: #FFD700;
-    color: black;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-}
-
-.btn-pinjam:hover, .btn-kembali:hover {
-    background-color: #e6c200;
-}
-
 .history-item {
     background-color: rgba(255,255,255,0.05);
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 6px;
-    border-left: 4px solid #FFD700;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border-left: 3px solid #FFD700;
 }
 
 .status-badge {
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
     font-weight: bold;
-    margin-top: 5px;
-    display: inline-block;
 }
 
-.status-pinjam {
+.status-available {
     background-color: #90EE90;
     color: black;
 }
 
-.status-kembali {
-    background-color: #87CEEB;
+.status-borrowed {
+    background-color: #FFB6C1;
     color: black;
 }
 
-.empty-state {
-    text-align: center;
-    color: #ccc;
-    font-style: italic;
-    padding: 40px;
+.status-returned {
+    background-color: #87CEEB;
+    color: black;
 }
 </style>
 
@@ -373,18 +336,21 @@ function showMenu(menu){
     document.getElementById(menu).classList.add('active');
 }
 
+// Fungsi untuk login
 function login(event) {
     event.preventDefault();
     alert('Login Berhasil! Selamat Datang di Jabu Literasi.');
     showMenu('dashboard');
 }
 
+// Fungsi untuk daftar
 function Daftar(event) {
     event.preventDefault();
     alert('Pendaftaran Berhasil!');
     showMenu('dashboard');
 }
 
+// Fungsi untuk toggle antara Login dan Register
 function toggleForm(type) {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
@@ -401,6 +367,7 @@ function toggleForm(type) {
     }
 }
 
+// --- JAVASCRIPT UNTUK KALKULATOR ---
 function hitung() {
     let num1 = parseFloat(document.getElementById('num1').value);
     let num2 = parseFloat(document.getElementById('num2').value);
@@ -414,9 +381,15 @@ function hitung() {
 
     let hasil = 0;
     switch (operator) {
-        case '+': hasil = num1 + num2; break;
-        case '-': hasil = num1 - num2; break;
-        case '*': hasil = num1 * num2; break;
+        case '+':
+            hasil = num1 + num2;
+            break;
+        case '-':
+            hasil = num1 - num2;
+            break;
+        case '*':
+            hasil = num1 * num2;
+            break;
         case '/':
             if (num2 === 0) {
                 resultElement.innerHTML = "Tidak bisa dibagi dengan nol!";
@@ -431,63 +404,183 @@ function hitung() {
     resultElement.innerHTML = "Hasil: " + hasil;
 }
 
-// --- JAVASCRIPT LAYANAN PERPUSTAKAAN ---
+// --- JAVASCRIPT UNTUK LAYANAN PERPUSTAKAAN ---
 function showServiceTab(tabId) {
+    // Hide all service contents
     document.querySelectorAll('.service-content').forEach(content => {
         content.classList.remove('active');
     });
+    
+    // Remove active class from all tabs
     document.querySelectorAll('.service-tab').forEach(tab => {
         tab.classList.remove('active');
     });
+    
+    // Show selected tab content and activate tab
     document.getElementById(tabId).classList.add('active');
     event.target.classList.add('active');
 }
 
 function pinjamBuku() {
-    const nama = document.getElementById('nama-pinjam').value.trim();
-    const buku = document.getElementById('buku-pinjam').value.trim();
-    
-    if (!nama || !buku) {
-        alert('❌ Mohon lengkapi Nama dan Buku yang akan dipinjam!');
-        return;
+    const kodeBuku = document.getElementById('kode-pinjam').value;
+    if (kodeBuku) {
+        alert(`✅ Buku dengan kode ${kodeBuku} berhasil dipinjam!`);
+        document.getElementById('kode-pinjam').value = '';
+        updateRiwayatPeminjaman(kodeBuku, 'Dipinjam');
+    } else {
+        alert('❌ Mohon masukkan kode buku!');
     }
-    
-    // Tambah ke riwayat
-    tambahKeRiwayat(nama, buku, 'Dipinjam');
-    
-    alert(`✅ Peminjaman berhasil!\nNama: ${nama}\nBuku: ${buku}`);
-    
-    // Reset form
-    document.getElementById('nama-pinjam').value = '';
-    document.getElementById('buku-pinjam').value = '';
 }
 
 function kembalikanBuku() {
-    const nama = document.getElementById('nama-kembali').value.trim();
-    const buku = document.getElementById('buku-kembali').value.trim();
-    
-    if (!nama || !buku) {
-        alert('❌ Mohon lengkapi Nama dan Judul Buku!');
-        return;
+    const kodeBuku = document.getElementById('kode-kembali').value;
+    if (kodeBuku) {
+        alert(`✅ Buku dengan kode ${kodeBuku} berhasil dikembalikan!`);
+        document.getElementById('kode-kembali').value = '';
+        updateRiwayatPeminjaman(kodeBuku, 'Dikembalikan');
+    } else {
+        alert('❌ Mohon masukkan kode buku!');
     }
-    
-    // Tambah ke riwayat
-    tambahKeRiwayat(nama, buku, 'Dikembalikan');
-    
-    alert(`✅ Pengembalian berhasil!\nNama: ${nama}\nBuku: ${buku}`);
-    
-    // Reset form
-    document.getElementById('nama-kembali').value = '';
-    document.getElementById('buku-kembali').value = '';
 }
 
-function tambahKeRiwayat(nama, buku, status) {
+function updateRiwayatPeminjaman(kodeBuku, status) {
     const riwayatContainer = document.getElementById('riwayat-list');
     const timestamp = new Date().toLocaleString('id-ID');
+    const newItem = `
+        <div class="history-item">
+            <strong>Buku ${kodeBuku}</strong> - ${timestamp}<br>
+            <span class="status-badge status-${status.toLowerCase()}">${status}</span>
+        </div>
+    `;
+    riwayatContainer.insertAdjacentHTML('afterbegin', newItem);
+}
+</script>
+
+</head>
+<body>
+<div class="overlay">
+
+<div id="main-content">
+
+<nav>
+    <!-- Menu Kiri -->
+    <div class="nav-left">
+        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
+    </div>
     
-    const riwayatItem = document.createElement('div');
-    riwayatItem.className = 'history-item';
-    riwayatItem.innerHTML = `
-        <div><strong>${nama}</strong></div>
-        <div><em>"${buku}"</em></div>
-        <div
+    <!-- Menu Kanan (Navigasi Utama) -->
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
+        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
+        <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
+        <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
+        <a href="javascript:void(0)" onclick="showMenu('layanan')">Layanan</a> <!-- MENU BARU -->
+        <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
+    </div>
+
+    <!-- Login -->
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
+    </div>
+</nav>
+
+<div class="container">
+
+<!-- Dashboard / Beranda -->
+<div id="dashboard" class="section active">
+<h1>Jabu Literasi</h1>
+<p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
+
+<div class="link-box">
+<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
+Sejarah Tanah Karo
+</a>
+<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">
+Sistem Kekerabatan
+</a>
+</div>
+
+<div class="video-box">
+<h3>Video Budaya Karo</h3>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+</div>
+</div>
+
+<!-- Koleksi -->
+<div id="koleksi" class="section">
+<h2>Koleksi Budaya Karo</h2>
+<ul>
+<li>Umpasa Karo (Pepatah & Pantun)</li>
+<li>Tambo Karo (Sejarah Lisan)</li>
+<li>Bahasa Karo: Tata Bahasa & Kosakata</li>
+<li>Seni Tari & Musik Tradisional Karo</li>
+<li>Adat Istiadat & Upacara Karo</li>
+</ul>
+</div>
+
+<!-- Program -->
+<div id="program" class="section">
+<h2>Program Literasi Budaya</h2>
+<ul>
+<li>Workshop Umpasa Karo</li>
+<li>Pelatihan Menulis Cerita Rakyat Karo</li>
+<li>Kelas Bahasa Karo Dasar</li>
+<li>Diskusi Sejarah Tanah Karo</li>
+</ul>
+</div>
+
+<!-- PENGUMUMAN EVENT -->
+<div id="event" class="section">
+<h2>Pengumuman Event Budaya</h2>
+<div class="event-card">
+    <div class="event-date">📅 17 Agustus 2024</div>
+    <h3>Upacara Gawi Budaya</h3>
+    <p>Merayakan kemerdekaan dengan tarian tradisional dan kuliner khas Karo.</p>
+</div>
+<div class="event-card">
+    <div class="event-date">📅 20 September 2024</div>
+    <h3>Lomba Umpasa Karo</h3>
+    <p>Berlomba kefasihan berbicara menggunakan pepatah Karo untuk pelajar SMA.</p>
+</div>
+<div class="event-card">
+    <div class="event-date">📅 10 Oktober 2024</div>
+    <h3>Pameran Tenun Ulos</h3>
+    <p>Menampilkan karya tenun terbaik dari perajin di Tanah Karo.</p>
+</div>
+</div>
+
+<!-- LAYANAN PERPUSTAKAAN (BARU) -->
+<div id="layanan" class="section">
+<h2>🏛️ Layanan Perpustakaan</h2>
+<p style="text-align:center;">Kelola peminjaman dan pengembalian koleksi literasi budaya Karo</p>
+
+<!-- Tab Navigation -->
+<div class="service-tabs">
+    <button class="service-tab active" onclick="showServiceTab('status-buku')">Status Buku</button>
+    <button class="service-tab" onclick="showServiceTab('peminjaman')">Peminjaman</button>
+    <button class="service-tab" onclick="showServiceTab('pengembalian')">Pengembalian</button>
+    <button class="service-tab" onclick="showServiceTab('riwayat')">Riwayat</button>
+</div>
+
+<!-- Status Buku -->
+<div id="status-buku" class="service-content active">
+    <h3>📚 Status Ketersediaan Buku</h3>
+    <div class="book-card">
+        <h4>Umpasa Karo Lengkap</h4>
+        <p>Kode: KAR-001</p>
+        <span class="status-badge status-available">✅ Tersedia</span>
+    </div>
+    <div class="book-card">
+        <h4>Tambo Si Raja Lontung</h4>
+        <p>Kode: KAR-002</p>
+        <span class="status-badge status-borrowed">⏳ Dipinjam</span>
+    </div>
+    <div class="book-card">
+        <h4>Bahasa Karo Malela</h4>
+        <p>Kode: KAR-003</p>
+        <span class="status-badge status-available">✅ Tersedia</span>
+    </div>
+    <div class="book-card">
+        <h4>Adat Karo Pekan</h4>
+        <p>Kode: KAR-004</p>
+        <span class="status
