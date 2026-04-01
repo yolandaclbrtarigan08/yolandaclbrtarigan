@@ -164,9 +164,42 @@ iframe{
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     z-index: 1000;
     text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.wa-popup:hover {
+    transform: scale(1.1);
 }
 
 .wa-popup svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+/* --- INSTAGRAM POPUP --- */
+.ig-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.ig-popup:hover {
+    transform: scale(1.1);
+}
+
+.ig-popup svg {
     width: 30px;
     height: 30px;
     fill: white;
@@ -515,23 +548,4 @@ Sistem Kekerabatan
             <input type="text" id="fname" name="fname" required>
             <label for="lname">Nama Belakang:</label>
             <input type="text" id="lname" name="lname" required>
-            <label for="nim">NIM / ID:</label>
-            <input type="text" id="nim" name="nim" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="phone">No HP:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <input type="submit" value="Daftar">
-        </form>
-
-        <div class="toggle-link" id="toggle-text">
-            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
-        </div>
-    </div>
-</div>
-
-</div>
-</div>
-
-<!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class
+            <label for="nim">N
