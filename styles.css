@@ -1,37 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary-brown: #6B4423;
-    --secondary-brown: #8B4513;
-    --accent-gold: #DAA520;
-    --dark-brown: #4A2C0B;
-    --light-cream: #F8F1E9;
-    --karo-red: #8B0000;
-    --batak-blue: #4682B4;
-    --shadow-brown: rgba(107, 68, 35, 0.3);
-    --text-dark: #2C1810;
-    --text-light: #8B7355;
-}
-
+/* Copy semua CSS dari <style> tag ke file ini */
 body {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background: linear-gradient(135deg, var(--light-cream) 0%, #FDF2E9 50%, #F5E6CC 100%);
-    position: relative;
+    margin:0;
+    font-family: Arial, sans-serif;
+    background-color: #8B4513;
+    color:white;
 }
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(107,68,35,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(218,165,32,0.08) 0%, transparent 
+/* ... semua CSS lainnya ... */
