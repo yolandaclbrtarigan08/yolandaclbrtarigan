@@ -3,364 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JABU LITERASI - Perpustakaan Khusus Tanah Karo</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #D2691E 50%, #CD853F 75%, #DEB887 100%);
-    background-attachment: fixed;
-    color: #2C1810;
-    min-height: 100vh;
-}
-
-.overlay {
-    background: linear-gradient(135deg, rgba(245, 241, 233, 0.95) 0%, rgba(248, 241, 233, 0.98) 100%);
-    min-height: 100vh;
-    backdrop-filter: blur(5px);
-}
-
-nav {
-    background: linear-gradient(135deg, rgba(107, 68, 35, 0.95) 0%, rgba(139, 69, 19, 0.95) 100%);
-    padding: 20px 15px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(107, 68, 35, 0.4);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav a {
-    color: #F5F5DC;
-    margin: 0 25px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 12px 20px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-nav a:hover {
-    background: rgba(218, 165, 32, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 50px 20px;
-    max-width: 1000px;
-    margin: auto;
-}
-
-.section {
-    display: none;
-    animation: fadeIn 0.8s ease-in;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.active {
-    display: block;
-}
-
-h1 {
-    font-size: 3rem;
-    text-align: center;
-    background: linear-gradient(135deg, #6B4423, #DAA520);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 20px;
-    font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-h2 {
-    font-size: 2.2rem;
-    text-align: center;
-    color: #5D4037;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-h2::after {
-    content: '';
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #8B4513, #DAA520);
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.hero-text {
-    text-align: center;
-    background: rgba(255,255,255,0.9);
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(107, 68, 35, 0.3);
-    margin-bottom: 40px;
-}
-
-.hero-text p {
-    font-size: 1.3rem;
-    line-height: 1.8;
-    color: #4A2C0B;
-    margin-bottom: 30px;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
-}
-
-.stat-item {
-    background: linear-gradient(135deg, #F5F5DC, #FDF6E3);
-    padding: 25px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    border: 2px solid rgba(139, 69, 19, 0.2);
-}
-
-.stat-item h3 {
-    font-size: 2.5rem;
-    color: #8B4513;
-    margin-bottom: 10px;
-}
-
-.link-box {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.link-box a {
-    display: inline-block;
-    margin: 15px;
-    padding: 18px 35px;
-    background: linear-gradient(135deg, #8B4513, #A0522D);
-    color: #F5F5DC;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
-    position: relative;
-    overflow: hidden;
-}
-
-.link-box a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.link-box a:hover::before {
-    left: 100%;
-}
-
-.link-box a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(139, 69, 19, 0.6);
-    color: #FFF;
-}
-
-.video-box {
-    text-align: center;
-    margin-top: 50px;
-    background: rgba(255,255,255,0.95);
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(107, 68, 35, 0.3);
-}
-
-.video-box h3 {
-    color: #5D4037;
-    margin-bottom: 30px;
-    font-size: 1.8rem;
-}
-
-iframe {
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    border: 5px solid rgba(139, 69, 19, 0.3);
-}
-
-ul {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-}
-
-li {
-    background: rgba(255,255,255,0.9);
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(107, 68, 35, 0.2);
-    border-left: 5px solid #DAA520;
-    transition: all 0.3s ease;
-}
-
-li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(107, 68, 35, 0.4);
-}
-
-li::before {
-    content: '📚 ';
-    font-size: 1.5rem;
-    margin-right: 10px;
-}
-
-@media (max-width: 768px) {
-    nav a {
-        display: block;
-        margin: 10px 0;
-    }
-    
-    h1 { font-size: 2.2rem; }
-    .container { padding: 30px 15px; }
-    .stats-grid { grid-template-columns: 1fr; }
-}
-</style>
-
-<script>
-function showMenu(menu){
-    // Smooth scroll effect
-    document.querySelector('.container').scrollIntoView({ 
-        behavior: 'smooth' 
-    });
-    
-    document.querySelectorAll('.section').forEach(sec=>{
-        sec.classList.remove('active');
-    });
-    document.getElementById(menu).classList.add('active');
-    
-    // Update active nav link
-    document.querySelectorAll('nav a').forEach(link => {
-        link.style.background = 'transparent';
-    });
-    event.target.style.background = 'rgba(218, 165, 32, 0.3)';
-}
-
-// Auto-show dashboard on load
-window.onload = function() {
-    setTimeout(() => {
-        document.querySelector('.loader')?.remove();
-    }, 1500);
-}
-</script>
-
+<title>Jabu Literasi - Budaya Karo</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 <div class="overlay">
+    <div id="main-content">
+        <!-- NAVIGATION -->
+        <nav>
+            <div class="nav-left">
+                <span class="logo">Jabu Literasi</span>
+            </div>
+            <div class="nav-right">
+                <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
+                <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
+                <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
+                <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
+                <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
+                <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
+            </div>
+            <div class="nav-right">
+                <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
+            </div>
+        </nav>
 
-<nav>
-<a href="#" onclick="showMenu('dashboard')" style="background: rgba(218, 165, 32, 0.3);">🏔️ Dashboard</a>
-<a href="#" onclick="showMenu('katalog')">📖 Katalog Batak</a>
-<a href="#" onclick="showMenu('kegiatan')">🎉 Kegiatan Karo</a>
-</nav>
-
-<div class="container">
-
-<div id="dashboard" class="section active">
-<div class="hero-text">
-<h1>🏔️ JABU LITERASI</h1>
-<p><strong>Perpustakaan Khusus Tanah Karo</strong><br>
-Pusat pengetahuan budaya Batak Karo di <strong>Kabanjahe</strong>. 
-Koleksi lengkap adat Karo, sejarah Batak, bahasa Karo, dan literasi modern.</p>
-
-<div class="stats-grid">
-    <div class="stat-item">
-        <h3>18.000+</h3>
-        <p>Buku Batak Karo</p>
-    </div>
-    <div class="stat-item">
-        <h3>Kabanjahe</h3>
-        <p>Tanah Karo</p>
-    </div>
-    <div class="stat-item">
-        <h3>07:00-21:00</h3>
-        <p>Buka Setiap Hari</p>
+        <div class="container">
+            <!-- ISI KONTEN SEMUA SECTION -->
+            <!-- (Copy semua section dari file asli ke sini) -->
+        </div>
     </div>
 </div>
-</div>
 
-<div class="link-box">
-<a href="https://wa.me/6281267890123?text=Halo%20Jabu%20Literasi%20Tanah%20Karo" target="_blank">
-📱 WhatsApp (0812-6789-0123)
+<!-- WhatsApp Popup -->
+<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
+    <svg viewBox="0 0 24 24">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+    </svg>
 </a>
 
-<a href="https://goo.gl/maps/TanahKaro" target="_blank">
-📍 Lokasi Kabanjahe
-</a>
-
-<a href="mailto:jabu.literasi@karo.go.id" target="_blank">
-✉️ Email Resmi
-</a>
-</div>
-
-<div class="video-box">
-<h3>🎥 Video Profil Jabu Literasi Tanah Karo</h3>
-<iframe width="100%" height="400"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-title="Profil Perpustakaan Tanah Karo"
-frameborder="0"
-allowfullscreen>
-</iframe>
-</div>
-</div>
-
-<div id="katalog" class="section">
-<h2>📚 Katalog Unggulan Batak Karo</h2>
-<ul>
-<li><strong>Adat Istiadat Karo</strong> - Lengkap tentang Rakut Sitel & Gorga</li>
-<li><strong>Pustaka Batak Toba</strong> - Sejarah marga-marga besar</li>
-<li><strong>Bahasa Karo Kaban</strong> - Kamus lengkap Karo-Indonesia</li>
-<li><strong>Sinabung Chronicles</strong> - Sejarah Gunung Sinabung</li>
-<li><strong>Musik Gendang Karo</strong> - Permainan alat musik tradisional</li>
-<li><strong>GBKP 100 Tahun</strong> - Sejarah Gereja Batak Karo Protestan</li>
-</ul>
-</div>
-
-<div id="kegiatan" class="section">
-<h2>🎉 Kegiatan Literasi Tanah Karo</h2>
-<ul>
-<li><strong>Pojok Baca Karo</strong> - Baca gratis bahasa Karo setiap Sabtu</li>
-<li><strong>Kelas Adat Digital</strong> - Pelatihan budaya Karo online</li>
-<li><strong>Diskusi Buku Batak</strong> - Mingguan di Rumah Adat Kabanjahe</li>
-<li><strong>Storytelling Karo</strong> - Dongeng legenda Karo untuk anak</li>
-<li><strong>Workshop Gorga</strong> - Membuat ukiran tradisional Karo</li>
-<li><strong>Literasi Sinabung</strong> - Edukasi mitigasi bencana gunung</li>
-</ul>
-</div>
-
-</div>
-</div>
-
+<script src="script.js"></script>
 </body>
 </html>
