@@ -3,31 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JABU LITERASI - Perpustakaan Khusus</title>
+    <title>JABU LITERASI - Perpustakaan Khusus Tanah Karo</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fas fa-book-open"></i>
+            </div>
+            <p>Memuat Jabu Literasi Tanah Karo...</p>
+        </div>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <img src="assets/images/logo.png" alt="Jabu Literasi" class="logo-img">
-                    <span class="logo-text">JABU LITERASI</span>
+                    <div class="logo-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h1>JABU LITERASI</h1>
+                    <span>Perpustakaan Khusus Tanah Karo</span>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Beranda</a></li>
+                    <li><a href="#home" class="nav-link active">Beranda</a></li>
                     <li><a href="#koleksi" class="nav-link">Koleksi</a></li>
                     <li><a href="#layanan" class="nav-link">Layanan</a></li>
+                    <li><a href="#pencarian" class="nav-link">Pencarian</a></li>
                     <li><a href="#tentang" class="nav-link">Tentang</a></li>
                     <li><a href="#kontak" class="nav-link">Kontak</a></li>
                 </ul>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <div class="nav-right">
+                    <button class="login-btn">Login</button>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -35,53 +52,119 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Selamat Datang di <span class="highlight">JABU LITERASI</span></h1>
-                <p class="hero-desc">Perpustakaan Khusus yang Menginspirasi Generasi Cerdas dan Berliterasi Tinggi</p>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span>Selamat Datang di</span>
+                    <strong>JABU LITERASI</strong>
+                </h1>
+                <p class="hero-subtitle">Perpustakaan Khusus **Tanah Karo** - Pusat Pengetahuan Batak di Kabanjahe. 
+                Koleksi lengkap budaya Karo, sejarah Batak, dan ilmu pengetahuan modern.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>18.000+</h3>
+                        <p>Buku Fisik</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>8.500+</h3>
+                        <p>E-Book Batak</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>95%</h3>
+                        <p>Kepuasan</p>
+                    </div>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#koleksi" class="btn btn-primary">Jelajahi Koleksi</a>
-                    <a href="#layanan" class="btn btn-secondary">Layanan Kami</a>
+                    <a href="#pencarian" class="btn btn-primary">Cari Buku <i class="fas fa-search"></i></a>
+                    <a href="#layanan" class="btn btn-outline">Daftar Anggota</a>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="floating-books">
-                    <div class="book book1"></div>
-                    <div class="book book2"></div>
-                    <div class="book book3"></div>
+                <div class="book-stack karo-theme">
+                    <div class="book"></div>
+                    <div class="book"></div>
+                    <div class="book"></div>
+                    <div class="book"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Koleksi Section -->
+    <!-- Pencarian Section -->
+    <section id="pencarian" class="pencarian">
+        <div class="container">
+            <div class="search-container">
+                <h2>Cari Buku Favorit Anda</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari buku Batak, sejarah Karo, adat istiadat...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="search-filters">
+                    <button class="filter-btn active" data-category="all">Semua</button>
+                    <button class="filter-btn" data-category="batak">Budaya Batak</button>
+                    <button class="filter-btn" data-category="karo">Adat Karo</button>
+                    <button class="filter-btn" data-category="sains">Sains</button>
+                    <button class="filter-btn" data-category="agama">Agama Kristen</button>
+                </div>
+            </div>
+            
+            <div class="results-container">
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Koleksi Unggulan -->
     <section id="koleksi" class="koleksi">
         <div class="container">
-            <h2 class="section-title">Koleksi Unggulan</h2>
+            <h2 class="section-title">Koleksi Unggulan Tanah Karo</h2>
             <div class="koleksi-grid">
-                <div class="koleksi-card" data-aos="fade-up">
-                    <div class="card-icon"><i class="fas fa-book-open"></i></div>
-                    <h3>Buku Referensi</h3>
-                    <p>Lebih dari 5.000 judul buku referensi akademik dan profesional</p>
-                    <span class="card-count">5.000+</span>
+                <div class="koleksi-card">
+                    <div class="card-image">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <h3>Budaya Batak</h3>
+                    <p>1.500+ buku tentang sejarah, adat, dan marga Batak</p>
+                    <div class="card-footer">
+                        <span class="available">Tersedia: 1.280</span>
+                        <button class="btn-small">Pinjam</button>
+                    </div>
                 </div>
-                <div class="koleksi-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Literatur Akademik</h3>
-                    <p>Jurnal, tesis, dan disertasi terkini dari berbagai disiplin ilmu</p>
-                    <span class="card-count">2.500+</span>
+                <div class="koleksi-card">
+                    <div class="card-image">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Adat Karo</h3>
+                    <p>900+ pustaka tentang Rakut Sitel, Gorga, dan upacara Karo</p>
+                    <div class="card-footer">
+                        <span class="available">Tersedia: 820</span>
+                        <button class="btn-small">Pinjam</button>
+                    </div>
                 </div>
-                <div class="koleksi-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon"><i class="fas fa-globe"></i></div>
-                    <h3>Buku Internasional</h3>
-                    <p>Koleksi buku berbahasa asing dari penerbit ternama dunia</p>
-                    <span class="card-count">1.200+</span>
+                <div class="koleksi-card">
+                    <div class="card-image">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Sastra Batak</h3>
+                    <p>2.000+ karya sastra Batak Toba, Karo, Simalungun</p>
+                    <div class="card-footer">
+                        <span class="available">Tersedia: 1.750</span>
+                        <button class="btn-small">Pinjam</button>
+                    </div>
                 </div>
-                <div class="koleksi-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-icon"><i class="fas fa-digital-tachograph"></i></div>
-                    <h3>E-Resources</h3>
-                    <p>Akses digital ke database jurnal dan e-book premium</p>
-                    <span class="card-count">10.000+</span>
+                <div class="koleksi-card">
+                    <div class="card-image">
+                        <i class="fas fa-cross"></i>
+                    </div>
+                    <h3>Agama Kristen Batak</h3>
+                    <p>700+ kitab suci dan teologi Batak Karo</p>
+                    <div class="card-footer">
+                        <span class="available">Tersedia: 650</span>
+                        <button class="btn-small">Pinjam</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -92,20 +175,25 @@
         <div class="container">
             <h2 class="section-title">Layanan Perpustakaan</h2>
             <div class="layanan-grid">
-                <div class="layanan-card" data-aos="fade-right">
-                    <div class="layanan-icon"><i class="fas fa-id-card"></i></div>
-                    <h3>Pendaftaran Anggota</h3>
-                    <p>Gratis untuk mahasiswa, dosen, dan peneliti terdaftar</p>
+                <div class="layanan-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h3>Pendaftaran Gratis</h3>
+                    <p>Masyarakat Karo, pelajar, dan peneliti gratis</p>
                 </div>
-                <div class="layanan-card" data-aos="fade-up">
-                    <div class="layanan-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Pukul 08.00 - 22.00</h3>
-                    <p>Setiap hari kerja, termasuk akhir pekan</p>
+                <div class="layanan-card">
+                    <div class="icon"><i class="fas fa-clock"></i></div>
+                    <h3>07:00 - 21:00</h3>
+                    <p>Setiap hari termasuk hari libur nasional</p>
                 </div>
-                <div class="layanan-card" data-aos="fade-left">
-                    <div class="layanan-icon"><i class="fas fa-wifi"></i></div>
-                    <h3>WiFi Gratis & Ruang Digital</h3>
-                    <p>Fasilitas lengkap untuk penelitian dan belajar</p>
+                <div class="layanan-card">
+                    <div class="icon"><i class="fas fa-wifi"></i></div>
+                    <h3>WiFi Gratis</h3>
+                    <p>Internet cepat untuk akses digital Batak</p>
+                </div>
+                <div class="layanan-card">
+                    <div class="icon"><i class="fas fa-microphone"></i></div>
+                    <h3>Kelas Batak</h3>
+                    <p>Pelatihan bahasa dan budaya Karo gratis</p>
                 </div>
             </div>
         </div>
@@ -114,68 +202,85 @@
     <!-- Tentang Section -->
     <section id="tentang" class="tentang">
         <div class="container">
-            <div class="tentang-content">
-                <div class="tentang-text" data-aos="fade-right">
-                    <h2>Tentang JABU LITERASI</h2>
-                    <p>Perpustakaan Khusus JABU LITERASI didirikan untuk mendukung ekselensi akademik dan penelitian tingkat tinggi. Dengan koleksi yang terus berkembang dan fasilitas modern, kami berkomitmen menjadi mitra terbaik dalam perjalanan literasi Anda.</p>
-                    <div class="stats">
-                        <div class="stat">
-                            <h3>18.700+</h3>
-                            <p>Total Koleksi</p>
+            <div class="tentang-grid">
+                <div class="tentang-text">
+                    <h2>Tentang Jabu Literasi Tanah Karo</h2>
+                    <p>Didirikan tahun 2008 di **Kabanjahe, Tanah Karo**, Jabu Literasi adalah perpustakaan khusus yang memfokuskan koleksi budaya Batak Karo. Berlokasi strategis di pusat kota Kabanjahe, kami melayani seluruh masyarakat Tanah Karo dan Sumatera Utara.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-award"></i>
+                            <span>Perpustakaan Budaya Terbaik Sumut 2023</span>
                         </div>
-                        <div class="stat">
-                            <h3>1.500+</h3>
-                            <p>Anggota Aktif</p>
+                        <div class="feature">
+                            <i class="fas fa-handshake"></i>
+                            <span>Mitra GBKP & Universitas Negeri Medan</span>
                         </div>
-                        <div class="stat">
-                            <h3>14</h3>
-                            <p>Tahun Beroperasi</p>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>5 Menit dari Gunung Sinabung</span>
                         </div>
                     </div>
                 </div>
-                <div class="tentang-image" data-aos="fade-left">
-                    <div class="image-placeholder">
-                        <i class="fas fa-university"></i>
+                <div class="tentang-image">
+                    <div class="image-placeholder karo-bg">
+                        <i class="fas fa-mountain-sun"></i>
+                        <h3>Tanah Karo</h3>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Kontak Section -->
+    <!-- Kontak Section - TANAH KARO -->
     <section id="kontak" class="kontak">
         <div class="container">
-            <h2 class="section-title">Hubungi Kami</h2>
+            <h2 class="section-title">Hubungi Kami - Kabanjahe</h2>
             <div class="kontak-grid">
                 <div class="kontak-info">
-                    <div class="kontak-item">
+                    <div class="info-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Alamat</h4>
-                            <p>Jl. Pendidikan No. 123<br>Batam, Kepulauan Riau</p>
-                        </div>
+                        <h4>Alamat Lengkap</h4>
+                        <p>Jl. S. Parulian Siregar No. 45<br>
+                        **Kabanjahe, Tanah Karo**<br>
+                        Sumatera Utara 22111</p>
                     </div>
-                    <div class="kontak-item">
+                    <div class="info-item">
                         <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Telepon</h4>
-                            <p>(0778) 1234567</p>
-                        </div>
+                        <h4>Telepon</h4>
+                        <p>(0628) 123456<br>0812-6789-0123</p>
                     </div>
-                    <div class="kontak-item">
+                    <div class="info-item">
                         <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@jabuliterasi.ac.id</p>
-                        </div>
+                        <h4>Email</h4>
+                        <p>jabu.literasi@karo.go.id</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-globe"></i>
+                        <h4>WhatsApp</h4>
+                        <p>📱 +62 812-6789-0123</p>
                     </div>
                 </div>
-                <form class="kontak-form" data-aos="fade-left">
-                    <input type="text" placeholder="Nama Lengkap" required>
+                <form class="kontak-form">
+                    <input type="text" placeholder="Nama Lengkap (Marga)" required>
                     <input type="email" placeholder="Email" required>
-                    <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+                    <input type="tel" placeholder="No. WhatsApp">
+                    <select required>
+                        <option value="">Pilih Kecamatan</option>
+                        <option value="kabanjahe">Kabanjahe</option>
+                        <option value="berastagi">Berastagi</option>
+                        <option value="merek">Merek</option>
+                        <option value="laubaleng">Laubaleng</option>
+                    </select>
+                    <textarea placeholder="Pesan Anda..." rows="4" required></textarea>
                     <button type="submit" class="btn btn-primary">Kirim Pesan</button>
                 </form>
+            </div>
+            <!-- Peta Tanah Karo -->
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.9999999999995!2d98.49999999999999!3d3.0999999999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMDUnNTkuMiJOIDk4wrAyOSk1OS4zIkU!5e0!3m2!1sid!2sid!4v1700000000000" 
+                    width="100%" height="400" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy">
+                </iframe>
             </div>
         </div>
     </section>
@@ -186,22 +291,49 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="logo">
-                        <span class="logo-text">JABU LITERASI</span>
+                        <div class="logo-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <h3>JABU LITERASI</h3>
                     </div>
-                    <p>Perpustakaan Khusus Terdepan di Kepulauan Riau</p>
+                    <p>**Perpustakaan Khusus Tanah Karo**<br>Kabanjahe - Jantung Budaya Batak Karo</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#koleksi">Koleksi</a>
-                    <a href="#layanan">Layanan</a>
-                    <a href="#tentang">Tentang</a>
+                    <h4>Navigasi</h4>
+                    <a href="#koleksi">Koleksi Batak</a>
+                    <a href="#layanan">Layanan Karo</a>
+                    <a href="#pencarian">Cari Buku</a>
+                    <a href="#kontak">Lokasi Kabanjahe</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Jam Buka</h4>
+                    <p><strong>Senin - Minggu</strong><br>07:00 - 21:00 WIB<br>Tanpa tutup hari libur</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 JABU LITERASI. All rights reserved.</p>
+                <p>&copy; 2024 JABU LITERASI **Tanah Karo**. Hak Cipta Dilindungi Undang-Undang.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Modal Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login Anggota Tanah Karo</h2>
+            <form class="login-form">
+                <input type="text" placeholder="No. Kartu Anggota / KTP" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Masuk ke Jabu Literasi</button>
+                <a href="#" class="forgot">Lupa Password? Hubungi 0812-6789-0123</a>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
