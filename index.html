@@ -8,36 +8,65 @@
 </head>
 <body>
 <div class="overlay">
-    <div id="main-content">
-        <!-- NAVIGATION -->
-        <nav>
-            <div class="nav-left">
-                <span class="logo">Jabu Literasi</span>
-            </div>
-            <div class="nav-right">
-                <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
-                <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
-                <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
-                <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
-                <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
-                <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
-            </div>
-            <div class="nav-right">
-                <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
-            </div>
-        </nav>
 
-        <div class="container">
-            <!-- Load semua sections secara dinamis -->
-            <div id="dashboard-container"></div>
-            <div id="koleksi-container"></div>
-            <div id="program-container"></div>
-            <div id="tentang-kami-container"></div>
-            <div id="event-container"></div>
-            <div id="kalkulator-container"></div>
-            <div id="login-register-container"></div>
-        </div>
+<div id="main-content">
+
+<nav>
+    <div class="nav-left">
+        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
     </div>
+    
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
+        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
+        <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
+        <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
+        <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
+        <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- DASHBOARD/BERANDA -->
+    <div id="dashboard" class="section active">
+        <!-- Content dashboard.html -->
+    </div>
+
+    <!-- KOLEKSI -->
+    <div id="koleksi" class="section">
+        <!-- Content koleksi.html -->
+    </div>
+
+    <!-- PROGRAM -->
+    <div id="program" class="section">
+        <!-- Content program.html -->
+    </div>
+
+    <!-- TENTANG KAMI -->
+    <div id="tentang-kami" class="section">
+        <!-- Content tentang-kami.html -->
+    </div>
+
+    <!-- EVENT -->
+    <div id="event" class="section">
+        <!-- Content event.html -->
+    </div>
+
+    <!-- KALKULATOR -->
+    <div id="kalkulator" class="section">
+        <!-- Content kalkulator.html -->
+    </div>
+
+    <!-- LOGIN REGISTER -->
+    <div id="login-register" class="section">
+        <!-- Content login-register.html -->
+    </div>
+</div>
+
 </div>
 
 <!-- WhatsApp Popup -->
@@ -48,5 +77,7 @@
 </a>
 
 <script src="script.js"></script>
+<script src="kalkulator.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>
