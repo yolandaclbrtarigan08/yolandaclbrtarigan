@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jabu Literasi - Perpustakaan Budaya Karo</title>
+    <title>Jabu Literasi - Perpustakaan Digital Budaya Karo</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -62,7 +62,7 @@
         }
 
         .navbar {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
@@ -90,7 +90,7 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
         }
 
         .nav-link {
@@ -102,9 +102,10 @@
             border-radius: 25px;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
             background: rgba(255,215,0,0.2);
             color: #FFD700;
             transform: translateY(-2px);
@@ -125,21 +126,49 @@
             transition: 0.3s;
         }
 
-        /* Hero */
-        .hero {
+        /* Main Content */
+        #main-content {
+            padding-top: 100px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            display: none;
+            padding: 100px 0;
             min-height: 100vh;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #FFD700, white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Hero/Dashboard */
+        .hero {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 150px 20px 100px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
             margin-bottom: 20px;
             background: linear-gradient(45deg, #FFD700, white);
@@ -151,147 +180,151 @@
         .hero-desc {
             font-size: 1.4rem;
             margin-bottom: 40px;
-            max-width: 600px;
+            max-width: 700px;
             opacity: 0.95;
         }
 
-        .hero-buttons {
-            display: flex;
+        .link-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
+            margin: 50px 0;
         }
 
-        .btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
+        .link-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,0,0.3);
             transition: all 0.4s ease;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #FFD700, #FFED4E);
-            color: #8B4513;
-            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(255,215,0,0.6);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #FFD700;
-            border: 2px solid #FFD700;
-        }
-
-        .btn-secondary:hover {
-            background: #FFD700;
-            color: #8B4513;
-            transform: translateY(-3px);
-        }
-
-        /* Sections */
-        .section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 50px;
-            background: linear-gradient(45deg, #FFD700, white);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* About */
-        .about {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 50px 0;
-            padding: 60px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 30px;
-            background: rgba(255,215,0,0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            color: #FFD700;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        /* Koleksi */
-        .koleksi-filter {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,215,0,0.5);
             color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
+        }
+
+        .link-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,215,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .video-box {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .video-box h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #FFD700;
+        }
+
+        iframe {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Login Container */
+        .login-container {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            padding: 50px;
+            border-radius: 25px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            margin: 50px auto;
+            border: 2px solid rgba(255,215,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: #FFD700;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
             transition: all 0.3s ease;
         }
 
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #FFD700;
-            color: #8B4513;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.7);
         }
 
+        .form-group input:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #FFD700, #FFED4E);
+            color: #8B4513;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: all 0.4s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.4);
+        }
+
+        .toggle-link {
+            margin-top: 25px;
+            font-size: 1rem;
+        }
+
+        .toggle-link a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toggle-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Koleksi */
         .koleksi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
 
         .koleksi-item {
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(15px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 40px;
             border: 1px solid rgba(255,215,0,0.3);
             transition: all 0.4s ease;
             cursor: pointer;
@@ -303,98 +336,124 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
 
+        .koleksi-item i {
+            font-size: 3rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
         .koleksi-item h3 {
             color: #FFD700;
             margin-bottom: 15px;
             font-size: 1.5rem;
         }
 
-        /* Layanan */
-        .layanan-grid {
+        /* Program & Event */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
+            margin-top: 50px;
         }
 
-        .layanan-item {
-            text-align: center;
-            padding: 40px 20px;
+        .card {
             background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            border: 1px solid rgba(255,215,0,0.3);
+            border-left: 5px solid #FFD700;
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
-        .layanan-item:hover {
-            background: rgba(255,215,0,0.25);
+        .card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        .layanan-item i {
-            font-size: 4rem;
+        .event-date {
             color: #FFD700;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Vision Mission */
+        .vision-mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .vision-mission-card {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #FFD700;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .vision-mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255,215,0,0.2);
+        }
+
+        .vision-mission-card h3 {
+            color: #FFD700;
+            font-size: 2rem;
             margin-bottom: 20px;
         }
 
-        /* Contact */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(0,0,0,0.5);
+        /* Calculator */
+        .calculator-box {
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(20px);
             padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+            border: 2px solid rgba(255,215,0,0.3);
         }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
+        .calculator-box input, .calculator-box select {
+            width: 80%;
             padding: 15px;
-            border: 2px solid rgba(255,215,0,0.5);
+            margin: 10px 0;
+            border: 2px solid rgba(255,215,0,0.3);
             border-radius: 12px;
             background: rgba(255,255,255,0.1);
             color: white;
-            font-size: 1rem;
-            font-family: inherit;
+            font-size: 1.1rem;
         }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.7);
+        .calc-btn {
+            background: linear-gradient(45deg, #FFD700, #FFED4E);
+            border: none;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #FFD700;
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
         }
 
-        /* Footer */
-        .footer {
-            background: rgba(0,0,0,0.8);
-            padding: 40px 20px;
-            text-align: center;
-            border-top: 2px solid rgba(255,215,0,0.3);
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 700;
+        .result-box {
+            margin-top: 25px;
+            font-size: 1.5rem;
+            font-weight: bold;
             color: #FFD700;
-            margin-bottom: 15px;
-        }
-
-        .footer-brand i {
-            margin-right: 10px;
-            font-size: 2.2rem;
+            padding: 20px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 12px;
         }
 
         /* WhatsApp */
@@ -421,11 +480,6 @@
             box-shadow: 0 15px 40px rgba(37,211,102,0.6);
         }
 
-        .wa-popup i {
-            font-size: 2rem;
-            color: white;
-        }
-
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -437,39 +491,31 @@
             .hamburger {
                 display: flex;
             }
-
             .nav-menu {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.98);
+                flex-direction: column;
+                padding: 20px;
             }
-
+            .nav-menu.active {
+                display: flex;
+            }
             .hero-title {
                 font-size: 2.5rem;
             }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .koleksi-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 60px 15px;
+            .section-title {
+                font-size: 2.5rem;
             }
         }
 
-        /* Animasi Masuk */
+        /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
@@ -482,60 +528,17 @@
         <!-- Header -->
         <header class="header">
             <nav class="navbar">
-                <a href="#" class="logo">
+                <a href="#" class="logo" onclick="showMenu('dashboard')">
                     <i class="fas fa-book-open"></i>
                     <span>Jabu Literasi</span>
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#home" class="nav-link" onclick="scrollToSection('home')">Beranda</a></li>
-                    <li><a href="#about" class="nav-link" onclick="scrollToSection('about')">Tentang</a></li>
-                    <li><a href="#koleksi" class="nav-link" onclick="scrollToSection('koleksi')">Koleksi</a></li>
-                    <li><a href="#layanan" class="nav-link" onclick="scrollToSection('layanan')">Layanan</a></li>
-                    <li><a href="#contact" class="nav-link" onclick="scrollToSection('contact')">Kontak</a></li>
+                    <li><a class="nav-link active" onclick="showMenu('dashboard')">Beranda</a></li>
+                    <li><a class="nav-link" onclick="showMenu('koleksi')">Koleksi Karo</a></li>
+                    <li><a class="nav-link" onclick="showMenu('program')">Program</a></li>
+                    <li><a class="nav-link" onclick="showMenu('event')">Event</a></li>
+                    <li><a class="nav-link" onclick="showMenu('tentang-kami')">Tentang Kami</a></li>
+                    <li><a class="nav-link" onclick="showMenu('kalkulator')">Kalkulator</a></li>
+                    <li><a class="nav-link" onclick="showMenu('login-register')">Masuk/Daftar</a></li>
                 </ul>
-                <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </nav>
-        </header>
-
-        <!-- Hero -->
-        <section id="home" class="hero fade-in">
-            <h1 class="hero-title">Jabu Literasi</h1>
-            <p class="hero-desc">Perpustakaan Digital Khusus Pelestarian Budaya Karo. Umpasa, Tambo, Adat Istiadat, dan Warisan Leluhur tersaji lengkap.</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="scrollToSection('koleksi')">
-                    <i class="fas fa-book"></i> Jelajahi Koleksi
-                </button>
-                <button class="btn btn-secondary" onclick="scrollToSection('layanan')">
-                    <i class="fas fa-users"></i> Layanan Kami
-                </button>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about" class="about fade-in">
-            <h2 class="section-title">Tentang Jabu Literasi</h2>
-            <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto 40px; opacity: 0.95;">
-                Pusat pelestarian budaya Karo digital pertama. Dari cerita lisan hingga dokumentasi modern, semua ada di sini.
-            </p>
-            <div class="stats">
-                <div class="stat-item">
-                    <h3 id="books-count">1.247</h3>
-                    <p>Buku & Dokumen</p>
-                </div>
-                <div class="stat-item">
-                    <h3 id="members-count">2.450</h3>
-                    <p>Anggota Aktif</p>
-                </div>
-                <div class="stat-item">
-                    <h3 id="visits-count">15.320</h3>
-                    <p>Pengunjung Bulan Ini</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Koleksi -->
-        <section id
+                <div
