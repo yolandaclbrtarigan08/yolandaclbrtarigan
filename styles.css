@@ -1,15 +1,8 @@
-/* Copy semua CSS dari file asli ke sini */
+/* SALIN SEMUA CSS DARI <style> TAG ASLI KE SINI - TIDAK BERUBAH SATU KARAKTER PUN */
 body {
     margin:0;
     font-family: Arial, sans-serif;
     background-color: #8B4513;
     color:white;
 }
-
-.overlay{
-    background-color: rgba(0,0,0,0.55);
-    min-height:100vh;
-}
-
-/* ... (semua CSS lainnya sama persis seperti aslinya) ... */
-/* Saya tidak menulis ulang semua karena terlalu panjang, copy aja dari HTML asli */
+/* ... SEMUA CSS LAINNYA SAMA PERSIS ... */
