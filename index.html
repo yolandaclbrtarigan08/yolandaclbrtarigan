@@ -4,139 +4,538 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jabu Literasi - Perpustakaan Budaya Karo</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Background Pattern Karo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="karo" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M0 0h20v20H0z" fill="none"/><circle cx="5" cy="5" r="1" fill="rgba(255,215,0,0.1)"/><circle cx="15" cy="15" r="1.5" fill="rgba(255,255,255,0.05)"/><path d="M2 18 Q10 2 18 18" stroke="rgba(255,215,0,0.08)" stroke-width="0.5" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23karo)"/></svg>'),
+                radial-gradient(circle at 20% 80%, rgba(255,215,0,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            z-index: -2;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .overlay {
+            background: rgba(0,0,0,0.4);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+            background: linear-gradient(45deg, #FFD700, #FFED4E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,215,0,0.2);
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 4px;
+            background: white;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 150px 20px 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-desc {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #FFD700, #FFED4E);
+            color: #8B4513;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255,215,0,0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+
+        .btn-secondary:hover {
+            background: #FFD700;
+            color: #8B4513;
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(45deg, #FFD700, white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* About */
+        .about {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 50px 0;
+            padding: 60px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,215,0,0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: #FFD700;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        /* Koleksi */
+        .koleksi-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,215,0,0.5);
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #FFD700;
+            color: #8B4513;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+        }
+
+        .koleksi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .koleksi-item {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,215,0,0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .koleksi-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255,215,0,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .koleksi-item h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Layanan */
+        .layanan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .layanan-item {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(255,215,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .layanan-item:hover {
+            background: rgba(255,215,0,0.25);
+            transform: translateY(-10px);
+        }
+
+        .layanan-item i {
+            font-size: 4rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        /* Contact */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.5);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255,215,0,0.5);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0,0,0,0.8);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(255,215,0,0.3);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand i {
+            margin-right: 10px;
+            font-size: 2.2rem;
+        }
+
+        /* WhatsApp */
+        .wa-popup {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.4);
+            z-index: 1001;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .wa-popup:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37,211,102,0.6);
+        }
+
+        .wa-popup i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .koleksi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 60px 15px;
+            }
+        }
+
+        /* Animasi Masuk */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="navbar">
-            <div class="nav-container">
-                <div class="logo">
+    <div class="overlay">
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar">
+                <a href="#" class="logo">
                     <i class="fas fa-book-open"></i>
                     <span>Jabu Literasi</span>
-                </div>
+                </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#home" class="nav-link">Beranda</a></li>
-                    <li><a href="#about" class="nav-link">Tentang</a></li>
-                    <li><a href="#koleksi" class="nav-link">Koleksi</a></li>
-                    <li><a href="#layanan" class="nav-link">Layanan</a></li>
-                    <li><a href="#contact" class="nav-link">Kontak</a></li>
+                    <li><a href="#home" class="nav-link" onclick="scrollToSection('home')">Beranda</a></li>
+                    <li><a href="#about" class="nav-link" onclick="scrollToSection('about')">Tentang</a></li>
+                    <li><a href="#koleksi" class="nav-link" onclick="scrollToSection('koleksi')">Koleksi</a></li>
+                    <li><a href="#layanan" class="nav-link" onclick="scrollToSection('layanan')">Layanan</a></li>
+                    <li><a href="#contact" class="nav-link" onclick="scrollToSection('contact')">Kontak</a></li>
                 </ul>
-                <div class="hamburger" id="hamburger">
+                <div class="hamburger" id="hamburger" onclick="toggleMenu()">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Selamat Datang di <span class="highlight">Jabu Literasi</span></h1>
-                <p class="hero-desc">Perpustakaan digital khusus budaya Karo. Melestarikan warisan leluhur melalui literasi dan pengetahuan.</p>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="scrollToSection('koleksi')">Lihat Koleksi</button>
-                    <button class="btn btn-secondary" onclick="scrollToSection('layanan')">Layanan Kami</button>
-                </div>
+        <!-- Hero -->
+        <section id="home" class="hero fade-in">
+            <h1 class="hero-title">Jabu Literasi</h1>
+            <p class="hero-desc">Perpustakaan Digital Khusus Pelestarian Budaya Karo. Umpasa, Tambo, Adat Istiadat, dan Warisan Leluhur tersaji lengkap.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('koleksi')">
+                    <i class="fas fa-book"></i> Jelajahi Koleksi
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('layanan')">
+                    <i class="fas fa-users"></i> Layanan Kami
+                </button>
             </div>
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1507842217343-583bb7278b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Budaya Karo">
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
+        <!-- About -->
+        <section id="about" class="about fade-in">
             <h2 class="section-title">Tentang Jabu Literasi</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Jabu Literasi adalah perpustakaan digital pertama yang khusus mengoleksi karya-karya tentang budaya Karo. Dari cerita rakyat, adat istiadat, hingga sejarah suku Karo tersaji lengkap di sini.</p>
-                    <div class="stats" id="stats">
-                        <div class="stat-item">
-                            <h3 id="books-count">1.247</h3>
-                            <p>Buku</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3 id="members-count">2.450</h3>
-                            <p>Anggota</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3 id="visits-count">15.320</h3>
-                            <p>Kunjungan</p>
-                        </div>
-                    </div>
+            <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto 40px; opacity: 0.95;">
+                Pusat pelestarian budaya Karo digital pertama. Dari cerita lisan hingga dokumentasi modern, semua ada di sini.
+            </p>
+            <div class="stats">
+                <div class="stat-item">
+                    <h3 id="books-count">1.247</h3>
+                    <p>Buku & Dokumen</p>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Jabu Karo">
+                <div class="stat-item">
+                    <h3 id="members-count">2.450</h3>
+                    <p>Anggota Aktif</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="visits-count">15.320</h3>
+                    <p>Pengunjung Bulan Ini</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Koleksi Section -->
-    <section id="koleksi" class="koleksi">
-        <div class="container">
-            <h2 class="section-title">Koleksi Unggulan</h2>
-            <div class="koleksi-filter">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn" data-filter="adat">Adat Istiadat</button>
-                <button class="filter-btn" data-filter="sejarah">Sejarah</button>
-                <button class="filter-btn" data-filter="cerita">Cerita Rakyat</button>
-            </div>
-            <div class="koleksi-grid" id="koleksi-grid">
-                <!-- Koleksi akan di-generate oleh JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Layanan Section -->
-    <section id="layanan" class="layanan">
-        <div class="container">
-            <h2 class="section-title">Layanan Kami</h2>
-            <div class="layanan-grid" id="layanan-grid">
-                <!-- Layanan akan di-generate oleh JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Hubungi Kami</h2>
-            <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="Nama Lengkap" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" placeholder="Pesan Anda" rows="5" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <i class="fas fa-book-open"></i>
-                    <span>Jabu Literasi</span>
-                </div>
-                <p>&copy; 2024 Jabu Literasi. Melestarikan budaya Karo melalui literasi.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+        <!-- Koleksi -->
+        <section id
