@@ -1,0 +1,29 @@
+<div class="login-container">
+    <h2 id="form-title">Masuk Anggota</h2>
+    
+    <form id="login-form" onsubmit="login(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login">
+    </form>
+
+    <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+        <label for="fname">Nama Depan:</label>
+        <input type="text" id="fname" name="fname" required>
+        <label for="lname">Nama Belakang:</label>
+        <input type="text" id="lname" name="lname" required>
+        <label for="nim">NIM / ID:</label>
+        <input type="text" id="nim" name="nim" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="phone">No HP:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <input type="submit" value="Daftar">
+    </form>
+
+    <div class="toggle-link" id="toggle-text">
+        Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+    </div>
+</div>
