@@ -1,537 +1,142 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jabu Literasi - Budaya Karo</title>
-
-<style>
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    background-color: #8B4513; /* Warna dasar coklat tanah */
-    color:white;
-}
-
-.overlay{
-    background-color: rgba(0,0,0,0.55);
-    min-height:100vh;
-}
-
-/* --- LOGIN & REGISTER STYLES --- */
-.login-container {
-    background-color: rgba(0,0,0,0.8);
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    margin: auto;
-}
-
-.login-container h2 {
-    margin-bottom: 20px;
-}
-
-.login-container label {
-    display: block;
-    margin-bottom: 5px;
-    text-align: left;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"],
-.login-container input[type="email"],
-.login-container input[type="tel"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.login-container input[type="submit"] {
-    background-color: #FFD700;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-}
-
-.login-container input[type="submit"]:hover {
-    background-color: #e6c200;
-}
-
-.toggle-link {
-    margin-top: 15px;
-    font-size: 14px;
-}
-
-.toggle-link a {
-    color: #FFD700;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-/* --- NAVIGATION STYLES --- */
-nav{
-    background-color: rgba(0,0,0,0.8);
-    padding:15px;
-    display: flex;
-    justify-content: space-between; /* Memisahkan menu kiri dan kanan */
-    align-items: center;
-    flex-wrap: wrap; /* Agar responsif di HP */
-}
-
-.nav-left, .nav-right {
-    display: flex;
-    align-items: center;
-}
-
-nav a{
-    color:white;
-    margin:0 10px;
-    text-decoration:none;
-    font-weight:bold;
-    font-size: 14px;
-}
-
-nav a:hover{
-    color:#FFD700;
-}
-
-/* --- MAIN CONTENT STYLES --- */
-#main-content {
-    display: block;
-}
-
-.container{
-    padding:40px;
-    max-width:900px;
-    margin:auto;
-}
-
-.section{
-    display:none;
-}
-
-.active{
-    display:block;
-}
-
-h1,h2{
-    text-align:center;
-}
-
-.link-box{
-    text-align:center;
-    margin-top:25px;
-}
-
-.link-box a{
-    display:block;
-    margin:10px;
-    color:#FFD700;
-    font-size:18px;
-    text-decoration:none;
-}
-
-.video-box{
-    text-align:center;
-    margin-top:30px;
-}
-
-iframe{
-    max-width:100%;
-}
-
-/* --- WHATSAPP POPUP --- */
-.wa-popup {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-    z-index: 1000;
-    text-decoration: none;
-}
-
-.wa-popup svg {
-    width: 30px;
-    height: 30px;
-    fill: white;
-}
-
-/* Style khusus untuk background halaman dashboard */
-#dashboard {
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Karo_Cultural_Pattern.svg/1200px-Karo_Cultural_Pattern.svg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-/* --- STYLE BARU UNTUK EVENT & KALKULATOR --- */
-.event-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-left: 5px solid #FFD700;
-    padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-}
-
-.event-date {
-    color: #FFD700;
-    font-weight: bold;
-}
-
-/* Style Kalkulator */
-.calculator-box {
-    background-color: rgba(0,0,0,0.6);
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 300px;
-    margin: 20px auto;
-    text-align: center;
-}
-
-.calculator-box input {
-    width: 80%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.calc-btn {
-    background-color: #FFD700;
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-.calc-btn:hover {
-    background-color: #e6c200;
-}
-
-.result-box {
-    margin-top: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #FFD700;
-}
-
-/* --- STYLE BARU UNTUK TENTANG KAMI (VISI MISI) --- */
-.vision-mission-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid #FFD700;
-    padding: 25px;
-    margin: 20px 0;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.vision-mission-card h3 {
-    color: #FFD700;
-    font-size: 24px;
-    margin-bottom: 15px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.vision-mission-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.icon-vision::before {
-    content: "🔭";
-    font-size: 30px;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.icon-mission::before {
-    content: "🎯";
-    font-size: 30px;
-    display: block;
-    margin-bottom: 10px;
-}
-</style>
-
-<script>
-function showMenu(menu){
-    document.querySelectorAll('.section').forEach(sec=>{
-        sec.classList.remove('active');
-    });
-    document.getElementById(menu).classList.add('active');
-}
-
-// Fungsi untuk login
-function login(event) {
-    event.preventDefault();
-    alert('Login Berhasil! Selamat Datang di Jabu Literasi.');
-    showMenu('dashboard');
-}
-
-// Fungsi untuk daftar
-function Daftar(event) {
-    event.preventDefault();
-    alert('Pendaftaran Berhasil!');
-    showMenu('dashboard');
-}
-
-// Fungsi untuk toggle antara Login dan Register
-function toggleForm(type) {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const toggleText = document.getElementById('toggle-text');
-
-    if (type === 'register') {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-        toggleText.innerHTML = 'Sudah punya akun? <a onclick="toggleForm(\'login\')">Login disini</a>';
-    } else {
-        registerForm.style.display = 'none';
-        loginForm.style.display = 'block';
-        toggleText.innerHTML = 'Belum punya akun? <a onclick="toggleForm(\'register\')">Daftar disini</a>';
-    }
-}
-
-// --- JAVASCRIPT UNTUK KALKULATOR (OPERATOR MATEMATIKA) ---
-function hitung() {
-    // Mengambil nilai dari input
-    let num1 = parseFloat(document.getElementById('num1').value);
-    let num2 = parseFloat(document.getElementById('num2').value);
-    let operator = document.getElementById('operator').value;
-    let resultElement = document.getElementById('result');
-
-    // Validasi input
-    if (isNaN(num1) || isNaN(num2)) {
-        resultElement.innerHTML = "Mohon isi angka dengan benar!";
-        return;
-    }
-
-    let hasil = 0;
-
-    // Menggunakan operator matematika
-    switch (operator) {
-        case '+':
-            hasil = num1 + num2;
-            break;
-        case '-':
-            hasil = num1 - num2;
-            break;
-        case '*':
-            hasil = num1 * num2;
-            break;
-        case '/':
-            if (num2 === 0) {
-                resultElement.innerHTML = "Tidak bisa dibagi dengan nol!";
-                return;
-            }
-            hasil = num1 / num2;
-            break;
-        default:
-            resultElement.innerHTML = "Pilih operator!";
-            return;
-    }
-
-    resultElement.innerHTML = "Hasil: " + hasil;
-}
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jabu Literasi - Perpustakaan Budaya Karo</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<div class="overlay">
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <span>Jabu Literasi</span>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link">Beranda</a></li>
+                    <li><a href="#about" class="nav-link">Tentang</a></li>
+                    <li><a href="#koleksi" class="nav-link">Koleksi</a></li>
+                    <li><a href="#layanan" class="nav-link">Layanan</a></li>
+                    <li><a href="#contact" class="nav-link">Kontak</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-<div id="main-content">
-
-<nav>
-    <!-- Menu Kiri (Kosong atau Logo jika ada, tapi kita fokus ke kanan) -->
-    <div class="nav-left">
-        <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
-    </div>
-    
-    <!-- Menu Kanan (Beranda, Koleksi, Program, Event, TENTANG KAMI) -->
-    <div class="nav-right">
-        <a href="javascript:void(0)" onclick="showMenu('dashboard')">Beranda</a>
-        <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
-        <a href="javascript:void(0)" onclick="showMenu('program')">Program Budaya</a>
-        <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
-        <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
-        <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
-    </div>
-
-    <!-- Menu Gabungan Login & Daftar -->
-    <div class="nav-right">
-        <a href="javascript:void(0)" onclick="showMenu('login-register')">Masuk/Daftar</a>
-    </div>
-</nav>
-
-<div class="container">
-
-<!-- Dashboard / Beranda -->
-<div id="dashboard" class="section active">
-<h1>Jabu Literasi</h1>
-<p style="text-align:center;">Pusat Pelestarian dan Pengembangan Budaya Karo.</p>
-
-<div class="link-box">
-<a href="https://id.wikipedia.org/wiki/Batak_Karo" target="_blank">
-Sejarah Tanah Karo
-</a>
-<a href="https://id.wikipedia.org/wiki/Sistem_kekerabatan_Batak" target="_blank">
-Sistem Kekerabatan
-</a>
-</div>
-
-<div class="video-box">
-<h3>Video Budaya Karo</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-</div>
-</div>
-
-<!-- Koleksi -->
-<div id="koleksi" class="section">
-<h2>Koleksi Budaya Karo</h2>
-<ul>
-<li>Umpasa Karo (Pepatah & Pantun)</li>
-<li>Tambo Karo (Sejarah Lisan)</li>
-<li>Bahasa Karo: Tata Bahasa & Kosakata</li>
-<li>Seni Tari & Musik Tradisional Karo</li>
-<li>Adat Istiadat & Upacara Karo</li>
-</ul>
-</div>
-
-<!-- Program -->
-<div id="program" class="section">
-<h2>Program Literasi Budaya</h2>
-<ul>
-<li>Workshop Umpasa Karo</li>
-<li>Pelatihan Menulis Cerita Rakyat Karo</li>
-<li>Kelas Bahasa Karo Dasar</li>
-<li>Diskusi Sejarah Tanah Karo</li>
-</ul>
-</div>
-
-<!-- TENTANG KAMI - VISI MISI (BARU) -->
-<div id="tentang-kami" class="section">
-<h2>Tentang Kami</h2>
-<p style="text-align:center; font-size:18px; margin-bottom:30px;">Jabu Literasi adalah platform digital untuk pelestarian dan pengembangan budaya Karo.</p>
-
-<div class="vision-mission-card icon-vision">
-    <h3>🌟 VISI</h3>
-    <p>"Menjadikan budaya Karo sebagai warisan hidup yang terus berkembang, relevan, dan mendunia melalui literasi digital yang inklusif dan berkelanjutan."</p>
-</div>
-
-<div class="vision-mission-card icon-mission">
-    <h3>🎯 MISI</h3>
-    <ul style="text-align:left; max-width:600px; margin:0 auto; padding-left:20px;">
-        <li>📚 Mendokumentasikan dan mempublikasikan kekayaan budaya Karo secara digital</li>
-        <li>🎓 Memberikan akses pendidikan budaya Karo yang mudah dan menyenangkan</li>
-        <li>🤝 Membangun komunitas pecinta budaya Karo di seluruh dunia</li>
-        <li>✍️ Melatih generasi muda Karo dalam literasi budaya dan kreativitas</li>
-        <li>🌐 Mengintegrasikan budaya Karo dengan teknologi modern</li>
-    </ul>
-</div>
-
-<div style="background-color:rgba(255,215,0,0.1); padding:20px; border-radius:8px; margin-top:30px;">
-    <h3 style="color:#FFD700;">Nilai Inti Kami</h3>
-    <p><strong>Mertuhun</strong> - Kebersamaan | <strong>Margu</strong> - Kebenaran | <strong>Marlawas</strong> - Kebaikan</p>
-</div>
-</div>
-
-<!-- PENGUMUMAN EVENT -->
-<div id="event" class="section">
-<h2>Pengumuman Event Budaya</h2>
-<div class="event-card">
-    <div class="event-date">📅 17 Agustus 2024</div>
-    <h3>Upacara Gawi Budaya</h3>
-    <p>Merayakan kemerdekaan dengan tarian tradisional dan kuliner khas Karo.</p>
-</div>
-<div class="event-card">
-    <div class="event-date">📅 20 September 2024</div>
-    <h3>Lomba Umpasa Karo</h3>
-    <p>Berlomba kefasihan berbicara menggunakan pepatah Karo untuk pelajar SMA.</p>
-</div>
-<div class="event-card">
-    <div class="event-date">📅 10 Oktober 2024</div>
-    <h3>Pameran Tenun Ulos</h3>
-    <p>Menampilkan karya tenun terbaik dari perajin di Tanah Karo.</p>
-</div>
-</div>
-
-<!-- KALKULATOR -->
-<div id="kalkulator" class="section">
-<h2>Kalkulator Sederhana</h2>
-<p style="text-align:center;">Latihan Operator Matematika (+, -, *, /)</p>
-
-<div class="calculator-box">
-    <input type="number" id="num1" placeholder="Angka 1">
-    <select id="operator" style="padding: 10px; margin-bottom: 10px;">
-        <option value="+">Tambah (+)</option>
-        <option value="-">Kurang (-)</option>
-        <option value="*">Kali (*)</option>
-        <option value="/">Bagi (/)</option>
-    </select>
-    <input type="number" id="num2" placeholder="Angka 2">
-    <br>
-    <button class="calc-btn" onclick="hitung()">Hitung</button>
-    
-    <div id="result" class="result-box">Hasil akan muncul di sini</div>
-</div>
-</div>
-
-<!-- Gabungan Login & Register -->
-<div id="login-register" class="section">
-    <div class="login-container">
-        <h2 id="form-title">Masuk Anggota</h2>
-        
-        <!-- Form Login -->
-        <form id="login-form" onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-        </form>
-
-        <!-- Form Daftar -->
-        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
-            <label for="fname">Nama Depan:</label>
-            <input type="text" id="fname" name="fname" required>
-            <label for="lname">Nama Belakang:</label>
-            <input type="text" id="lname" name="lname" required>
-            <label for="nim">NIM / ID:</label>
-            <input type="text" id="nim" name="nim" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="phone">No HP:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <input type="submit" value="Daftar">
-        </form>
-
-        <div class="toggle-link" id="toggle-text">
-            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Selamat Datang di <span class="highlight">Jabu Literasi</span></h1>
+                <p class="hero-desc">Perpustakaan digital khusus budaya Karo. Melestarikan warisan leluhur melalui literasi dan pengetahuan.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('koleksi')">Lihat Koleksi</button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('layanan')">Layanan Kami</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1507842217343-583bb7278b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Budaya Karo">
+            </div>
         </div>
-    </div>
-</div>
+    </section>
 
-</div>
-</div>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Jabu Literasi</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Jabu Literasi adalah perpustakaan digital pertama yang khusus mengoleksi karya-karya tentang budaya Karo. Dari cerita rakyat, adat istiadat, hingga sejarah suku Karo tersaji lengkap di sini.</p>
+                    <div class="stats" id="stats">
+                        <div class="stat-item">
+                            <h3 id="books-count">1.247</h3>
+                            <p>Buku</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="members-count">2.450</h3>
+                            <p>Anggota</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 id="visits-count">15.320</h3>
+                            <p>Kunjungan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Jabu Karo">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class
+    <!-- Koleksi Section -->
+    <section id="koleksi" class="koleksi">
+        <div class="container">
+            <h2 class="section-title">Koleksi Unggulan</h2>
+            <div class="koleksi-filter">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="adat">Adat Istiadat</button>
+                <button class="filter-btn" data-filter="sejarah">Sejarah</button>
+                <button class="filter-btn" data-filter="cerita">Cerita Rakyat</button>
+            </div>
+            <div class="koleksi-grid" id="koleksi-grid">
+                <!-- Koleksi akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="layanan">
+        <div class="container">
+            <h2 class="section-title">Layanan Kami</h2>
+            <div class="layanan-grid" id="layanan-grid">
+                <!-- Layanan akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" placeholder="Pesan Anda" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-book-open"></i>
+                    <span>Jabu Literasi</span>
+                </div>
+                <p>&copy; 2024 Jabu Literasi. Melestarikan budaya Karo melalui literasi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
