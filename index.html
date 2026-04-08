@@ -572,6 +572,91 @@ document.addEventListener('keydown', function(e) {
 </div>
 </div>
 
-<!-- KALKULATOR -->
-<div id="kalkulator" class="section">
-<h2>🧮 Kalkulator Sederhana</h2
+/* --- STYLE BARU UNTUK EVENT & KALKULATOR --- */
+.event-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 5px solid #FFD700;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.event-date {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+/* Style Kalkulator */
+.calculator-box {
+    background-color: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.calculator-box input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.calc-btn {
+    background-color: #FFD700;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.calc-btn:hover {
+    background-color: #e6c200;
+}
+
+.result-box {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+}
+    <!-- Gabungan Login & Register -->
+<div id="login-register" class="section">
+    <div class="login-container">
+        <h2 id="form-title">Masuk Anggota</h2>
+        
+        <!-- Form Login -->
+        <form id="login-form" onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Login">
+        </form>
+
+        <!-- Form Daftar -->
+        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+            <label for="fname">Nama Depan:</label>
+            <input type="text" id="fname" name="fname" required>
+            <label for="lname">Nama Belakang:</label>
+            <input type="text" id="lname" name="lname" required>
+            <label for="nim">NIM / ID:</label>
+            <input type="text" id="nim" name="nim" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">No HP:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <input type="submit" value="Daftar">
+        </form>
+
+        <div class="toggle-link" id="toggle-text">
+            Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
