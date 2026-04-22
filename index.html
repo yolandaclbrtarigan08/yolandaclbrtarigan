@@ -478,6 +478,14 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') goBack();
     if (e.key === 'ArrowRight') goForward();
 });
+    
+    function tampilkanHari() {
+    let hasil = "";
+    for (let i = 1; i <= 1000; i++) {
+        hasil += "Ini adalah hari ke-" + i + " aku belajar PHP <br>";
+    }
+    document.getElementById("hasil-hari").innerHTML = hasil;
+}
 </script>
 
 </head>
@@ -508,6 +516,7 @@ document.addEventListener('keydown', function(e) {
         <a href="javascript:void(0)" onclick="showMenu('tentang-kami')">Tentang Kami</a>
         <a href="javascript:void(0)" onclick="showMenu('event')">Pengumuman Event</a>
         <a href="javascript:void(0)" onclick="showMenu('kalkulator')">Kalkulator</a>
+        <a href="javascript:void(0)" onclick="showMenu('uji-coba')">Uji Coba</a>
     </div>
 
     <div class="nav-right">
@@ -710,6 +719,23 @@ document.addEventListener('keydown', function(e) {
 </div>
 </div>
 
+  <!-- UJI COBA -->
+<div id="uji-coba" class="section">
+    <h2 style="text-align:center; color:#FFD700;">🧪 Ruang Uji Coba</h2>
+
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="tampilkanHari()" 
+        style="background:#FFD700; border:none; padding:12px 20px; font-weight:bold; border-radius:6px; cursor:pointer;">
+            1000 Hari Belajar PHP
+        </button>
+    </div>
+
+    <div id="hasil-hari" 
+    style="margin:30px auto; max-width:700px; background:rgba(0,0,0,0.6); padding:20px; border-radius:10px; color:#22c55e; line-height:1.8;">
+        <!-- hasil muncul di sini -->
+    </div>
+</div>  
+
 <!-- Gabungan Login & Register -->
 <div id="login-register" class="section">
     <div class="login-container">
@@ -749,5 +775,6 @@ document.addEventListener('keydown', function(e) {
 </div>
 
 <!-- WhatsApp Popup -->
-<a href="https://wa.me/6282289121138" class
-="https://wa.me/6282289121138" class
+<a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
+    💬
+</a>
