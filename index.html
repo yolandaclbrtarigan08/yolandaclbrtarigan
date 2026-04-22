@@ -403,11 +403,19 @@ function goForward() {
     }
 }
 
-// Fungsi untuk login
 function login(event) {
     event.preventDefault();
-    alert('Login Berhasil! Selamat Datang di Jabu Literasi.');
-    showMenu('dashboard');
+
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    // Username & Password yang kamu tentukan
+    if (username === "Yolanda Cl Br Tarigan" && password === "Kabanjahe") {
+        alert('Login Berhasil! Selamat Datang Yolanda 🎉');
+        showMenu('dashboard');
+    } else {
+        alert('Username atau Password salah!');
+    }
 }
 
 // Fungsi untuk daftar
