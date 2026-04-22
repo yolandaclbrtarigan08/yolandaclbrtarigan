@@ -338,38 +338,23 @@ iframe{
 }
 
 /* Responsive */
-/* HAMBURGER MENU */
-.menu-toggle {
-    display: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #FFD700;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-right {
+    .nav-arrows {
         display: none;
+    }
+    
+    nav {
         flex-direction: column;
-        width: 100%;
-        background: rgba(0,0,0,0.9);
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 10px;
+        gap: 10px;
+    }
+    
+    .nav-right {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .nav-right a {
-        padding: 10px;
-        text-align: center;
-        display: block;
-    }
-
-    .nav-right.show {
-        display: flex;
+    #google-maps {
+        height: 300px;
     }
 }
 </style>
@@ -505,13 +490,9 @@ document.addEventListener('keydown', function(e) {
     function tampilkanHari() {
     let hasil = "";
     for (let i = 1; i <= 1000; i++) {
-        hasil += "Ini adalah hari ke-" + i + "belajar PHP <br>";
+        hasil += "Ini adalah hari ke-" + i + " aku belajar PHP <br>";
     }
     document.getElementById("hasil-hari").innerHTML = hasil;
-}
-    function toggleMenu() {
-    const menu = document.querySelector('.nav-right');
-    menu.classList.toggle('active');
 }
 </script>
 
@@ -535,10 +516,6 @@ document.addEventListener('keydown', function(e) {
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
         <span style="font-size:12px; opacity:0.8;">(← Kembali | → Lanjut)</span>
     </div>
-    <!-- Tombol Menu ☰ -->
-<div class="menu-toggle" onclick="toggleMenu()">
-    ☰
-</div>
     
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')" style="color:#FFD700;">🏠 Beranda</a>
@@ -550,7 +527,7 @@ document.addEventListener('keydown', function(e) {
         <a href="javascript:void(0)" onclick="showMenu('uji-coba')">Uji Coba</a>
     </div>
 
-    <div class="nav-right" id="menu">
+    <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('login-register')">🔐 Masuk/Daftar</a>
     </div>
 </nav>
