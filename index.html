@@ -357,6 +357,41 @@ iframe{
         height: 300px;
     }
 }
+
+    .menu-toggle {
+    display: none;
+    font-size: 30px;
+    color: #FFD700;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-right {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(0,0,0,0.95);
+        margin-top: 10px;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .nav-right.show {
+        display: flex;
+    }
+
+    .nav-right a {
+        display: block;
+        padding: 10px;
+        margin: 5px 0;
+    }
+}
 </style>
 
 <script>
@@ -490,9 +525,14 @@ document.addEventListener('keydown', function(e) {
     function tampilkanHari() {
     let hasil = "";
     for (let i = 1; i <= 1000; i++) {
-        hasil += "Ini adalah hari ke-" + i + " aku belajar PHP <br>";
+        hasil += "Ini adalah hari ke-" + i + " belajar PHP <br>";
     }
     document.getElementById("hasil-hari").innerHTML = hasil;
+}
+
+    function toggleMenu() {
+    const menu = document.querySelector('.nav-right');
+    menu.classList.toggle('show');
 }
 </script>
 
@@ -516,7 +556,10 @@ document.addEventListener('keydown', function(e) {
         <span style="font-weight:bold; font-size:1.2em; margin-right:20px;">Jabu Literasi</span>
         <span style="font-size:12px; opacity:0.8;">(← Kembali | → Lanjut)</span>
     </div>
-    
+
+    <div class="menu-toggle" onclick="toggleMenu()">
+    ☰
+</div>
     <div class="nav-right">
         <a href="javascript:void(0)" onclick="showMenu('dashboard')" style="color:#FFD700;">🏠 Beranda</a>
         <a href="javascript:void(0)" onclick="showMenu('koleksi')">Koleksi Karo</a>
