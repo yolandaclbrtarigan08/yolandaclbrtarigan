@@ -361,15 +361,22 @@ iframe{
 
 <script>
 let menuHistory = ['dashboard']; // Riwayat navigasi
-
 function showMenu(menu){
-    // Simpan menu saat ini ke history
-    if (!menuHistory.includes(menu)) {
-        menuHistory.push(menu);
-        if (menuHistory.length > 10) { // Batasi history max 10
-            menuHistory.shift();
-        }
-    }
+
+    // sembunyikan semua section
+    document.querySelectorAll('.section').forEach(sec=>{
+        sec.classList.remove('active');
+    });
+
+    // tampilkan section yang dipilih
+    document.getElementById(menu).classList.add('active');
+
+    // ubah warna menu aktif
+    document.querySelectorAll('.nav-right a').forEach(link => {
+        link.style.color = 'white';
+    });
+
+}
     
     document.querySelectorAll('.section').forEach(sec=>{
         sec.classList.remove('active');
@@ -380,6 +387,7 @@ function showMenu(menu){
     document.querySelectorAll('.nav-right a').forEach(link => {
         link.style.color = 'white';
     });
+    if (window.event) {
     event.target.style.color = '#FFD700';
 }
 
@@ -414,22 +422,11 @@ function login(event) {
         return;
     }
 
+    // Tampilkan nama di dashboard
     document.getElementById("welcome-text").innerHTML =
         "SELAMAT DATANG, " + nama + " 🎉";
 
-    alert("Login berhasil!");
-
-    showMenu('dashboard');
-}
-
-    // Simpan nama user
-    localStorage.setItem("namaUser", nama);
-
-    // Tampilkan ucapan selamat datang
-    document.getElementById("welcome-text").innerHTML =
-        "SELAMAT DATANG, " + nama + " 🎉";
-
-    // Pindah ke dashboard
+    // Buka dashboard
     showMenu('dashboard');
 
     alert("Login berhasil!");
