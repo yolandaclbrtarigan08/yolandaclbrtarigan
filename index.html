@@ -415,17 +415,18 @@ function login(event) {
     event.preventDefault();
 
     let nama = document.getElementById('login-nama').value;
+    let email = document.getElementById('login-email').value;
 
-    if (nama === "") {
-        alert("Nama wajib diisi!");
+    if (nama === "" || email === "") {
+        alert("Nama dan Email wajib diisi!");
         return;
     }
 
-    // tampilkan nama sesuai yang login
+    // Tampilkan nama di dashboard
     document.getElementById("welcome-text").innerHTML =
         "SELAMAT DATANG, " + nama + " 🎉";
 
-    // pindah ke dashboard
+    // Buka dashboard
     showMenu('dashboard');
 
     alert("Login berhasil!");
@@ -507,38 +508,6 @@ document.addEventListener('keydown', function(e) {
     }
     document.getElementById("hasil-hari").innerHTML = hasil;
 }
-    <!DOCTYPE html>
-<html>
-<head>
-    <title>Hasil Kalkulator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container" style="text-align: center; padding: 100px 20px;">
-        <h1 style="color: #ff9800; font-size: 48px;">HASIL</h1>
-        <div id="result" style="font-size: 36px; margin: 40px 0; color: #2196f3;"></div>
-        <a href="uji-coba.html" class="cta-btn" style="display: inline-block;">Kembali</a>
-    </div>
-
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const a1 = urlParams.get('a1');
-        const a2 = urlParams.get('a2');
-        const op = urlParams.get('op');
-        
-        if (a1 && a2 && op) {
-            let hasil;
-            switch(op) {
-                case '+': hasil = parseFloat(a1) + parseFloat(a2); break;
-                case '-': hasil = parseFloat(a1) - parseFloat(a2); break;
-                case '*': hasil = parseFloat(a1) * parseFloat(a2); break;
-                case '/': hasil = parseFloat(a1) / parseFloat(a2); break;
-            }
-            document.getElementById('result').textContent = `${a1} ${op} ${a2} = ${hasil}`;
-        }
-    </script>
-</body>
-</html>
 </script>
 
 </head>
