@@ -415,18 +415,17 @@ function login(event) {
     event.preventDefault();
 
     let nama = document.getElementById('login-nama').value;
-    let email = document.getElementById('login-email').value;
 
-    if (nama === "" || email === "") {
-        alert("Nama dan Email wajib diisi!");
+    if (nama === "") {
+        alert("Nama wajib diisi!");
         return;
     }
 
-    // Tampilkan nama di dashboard
+    // tampilkan nama sesuai yang login
     document.getElementById("welcome-text").innerHTML =
         "SELAMAT DATANG, " + nama + " 🎉";
 
-    // Buka dashboard
+    // pindah ke dashboard
     showMenu('dashboard');
 
     alert("Login berhasil!");
