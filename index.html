@@ -404,17 +404,23 @@ function goForward() {
 }
 
 function login(event) {
-    function login(event) {
     event.preventDefault();
 
     let nama = document.getElementById('login-nama').value;
     let email = document.getElementById('login-email').value;
 
-    // Cek apakah input kosong
     if (nama === "" || email === "") {
         alert("Nama dan Email wajib diisi!");
         return;
     }
+
+    document.getElementById("welcome-text").innerHTML =
+        "SELAMAT DATANG, " + nama + " 🎉";
+
+    alert("Login berhasil!");
+
+    showMenu('dashboard');
+}
 
     // Simpan nama user
     localStorage.setItem("namaUser", nama);
@@ -761,15 +767,6 @@ document.addEventListener('keydown', function(e) {
     <div class="login-container">
         <h2 id="form-title">Masuk Anggota</h2>
         
-        <!-- Form Login -->
-        <form id="login-form" onsubmit="login(event)">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <input type="submit" value="Login">
-        </form>
-
         <!-- Form Daftar -->
         <form id="login-form" onsubmit="login(event)">
 
