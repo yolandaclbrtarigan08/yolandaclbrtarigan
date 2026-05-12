@@ -936,38 +936,76 @@ function tampilkanHari() {
 </div>
 
 <!-- UJI COBA -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hasil Kalkulator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container" style="text-align: center; padding: 100px 20px;">
-        <h1 style="color: #ff9800; font-size: 48px;">HASIL</h1>
-        <div id="result" style="font-size: 36px; margin: 40px 0; color: #2196f3;"></div>
-        <a href="uji-coba.html" class="cta-btn" style="display: inline-block;">Kembali</a>
+<div id="uji-coba" class="section">
+
+    <div class="uji-container">
+
+        <a href="#" class="kembali-link">← Kembali ke Halaman Utama</a>
+
+        <h2 class="uji-title">Ruang Uji Coba</h2>
+
+        <div class="uji-menu">
+            <button class="uji-btn" onclick="tampilkanHari()">1. Belajar PHP</button>
+            <button class="uji-btn">2. Menu Berhitung</button>
+            <button class="uji-btn active">3. Menu Database</button>
+        </div>
+
+        <div class="crud-box">
+
+            <h3 class="crud-title">Sistem Manajemen Database (CRUD)</h3>
+
+            <div class="crud-form">
+                <input type="text" placeholder="Judul Buku...">
+                <input type="text" placeholder="Penulis...">
+                <input type="text" placeholder="Tahun">
+                <button class="btn-tambah">Tambah</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Judul Buku</th>
+                        <th>Penulis</th>
+                        <th>Tahun</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>7</td>
+                        <td><input type="text" value="Ensiklopedia"></td>
+                        <td><input type="text" value="Rusmanto"></td>
+                        <td><input type="text" value="2004"></td>
+                        <td>
+                            <button class="btn-simpan">Simpan</button>
+                            <button class="btn-hapus">Hapus</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>5</td>
+                        <td><input type="text" value="Laskar Pelangi"></td>
+                        <td><input type="text" value="Andrea Hinata"></td>
+                        <td><input type="text" value="2005"></td>
+                        <td>
+                            <button class="btn-simpan">Simpan</button>
+                            <button class="btn-hapus">Hapus</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="hasil-hari" 
+            style="margin-top:20px; color:#22c55e; line-height:1.8;">
+            </div>
+
+        </div>
+
     </div>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const a1 = urlParams.get('a1');
-        const a2 = urlParams.get('a2');
-        const op = urlParams.get('op');
-        
-        if (a1 && a2 && op) {
-            let hasil;
-            switch(op) {
-                case '+': hasil = parseFloat(a1) + parseFloat(a2); break;
-                case '-': hasil = parseFloat(a1) - parseFloat(a2); break;
-                case '*': hasil = parseFloat(a1) * parseFloat(a2); break;
-                case '/': hasil = parseFloat(a1) / parseFloat(a2); break;
-            }
-            document.getElementById('result').textContent = `${a1} ${op} ${a2} = ${hasil}`;
-        }
-    </script>
-</body>
-</html>  
+</div> 
 
 <!-- Gabungan Login & Register -->
 <div id="login-register" class="section">
