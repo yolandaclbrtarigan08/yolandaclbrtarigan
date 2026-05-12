@@ -936,338 +936,38 @@ function tampilkanHari() {
 </div>
 
 <!-- UJI COBA -->
-<div id="uji-coba" class="section">
-    <h2 style="text-align:center; color:#FFD700;">🧪 Ruang Uji Coba</h2>
-
-    <div style="text-align:center; margin-top:20px;">
-        <button onclick="tampilkanHari()" 
-        style="background:#FFD700; border:none; padding:12px 20px; font-weight:bold; border-radius:6px; cursor:pointer;">
-            1000 Hari Belajar PHP
-        </button>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasil Kalkulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" style="text-align: center; padding: 100px 20px;">
+        <h1 style="color: #ff9800; font-size: 48px;">HASIL</h1>
+        <div id="result" style="font-size: 36px; margin: 40px 0; color: #2196f3;"></div>
+        <a href="uji-coba.html" class="cta-btn" style="display: inline-block;">Kembali</a>
     </div>
 
-    <div id="hasil-hari" 
-    style="margin:30px auto; max-width:700px; background:rgba(0,0,0,0.6); padding:20px; border-radius:10px; color:#22c55e; line-height:1.8;">
-        <!-- hasil muncul di sini -->
-    <!-- UJI COBA -->
-<div id="uji-coba" class="section" style="
-background-image:url('https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1200');
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-border-radius:15px;
-padding:30px;
-position:relative;
-overflow:hidden;
-min-height:100vh;
-">
-
-<!-- Overlay Gelap -->
-<div style="
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.65);
-z-index:1;
-"></div>
-
-<!-- Isi -->
-<div style="
-position:relative;
-z-index:2;
-max-width:900px;
-margin:auto;
-background:rgba(8,15,40,0.85);
-padding:30px;
-border-radius:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-">
-
-<!-- Tombol Kembali -->
-<div style="margin-bottom:25px;">
-<a href="javascript:void(0)" onclick="showMenu('dashboard')" style="
-color:white;
-text-decoration:none;
-font-weight:bold;
-font-size:15px;
-">
-← Kembali ke Halaman Utama
-</a>
-</div>
-
-<!-- Judul -->
-<h2 style="
-text-align:center;
-color:#FFD700;
-font-size:42px;
-margin-bottom:25px;
-">
-Ruang Uji Coba
-</h2>
-
-<!-- Menu -->
-<div style="
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-bottom:35px;
-">
-
-<button onclick="tampilkanHari()" style="
-background:#1e293b;
-color:white;
-border:1px solid #FFD700;
-padding:12px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-">
-1. Belajar PHP
-</button>
-
-<button style="
-background:#1e293b;
-color:white;
-border:1px solid #FFD700;
-padding:12px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-">
-2. Menu Berhitung
-</button>
-
-<button style="
-background:#FFD700;
-color:black;
-border:none;
-padding:12px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-">
-3. Menu Database
-</button>
-
-</div>
-
-<!-- Box CRUD -->
-<div style="
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.1);
-overflow-x:auto;
-">
-
-<h3 style="
-text-align:center;
-color:#FFD700;
-margin-bottom:25px;
-font-size:28px;
-">
-Sistem Manajemen Database (CRUD)
-</h3>
-
-<!-- Form -->
-<div style="
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:20px;
-">
-
-<input type="text" placeholder="Judul Buku..." style="
-flex:1;
-min-width:150px;
-padding:10px;
-border:none;
-border-radius:4px;
-">
-
-<input type="text" placeholder="Penulis..." style="
-flex:1;
-min-width:150px;
-padding:10px;
-border:none;
-border-radius:4px;
-">
-
-<input type="text" placeholder="Tahun" style="
-width:120px;
-padding:10px;
-border:none;
-border-radius:4px;
-">
-
-<button style="
-background:#22c55e;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-">
-Tambah
-</button>
-
-</div>
-
-<!-- Table -->
-<table style="
-width:100%;
-border-collapse:collapse;
-">
-
-<thead>
-<tr style="background:#0f172a;">
-<th style="padding:12px; color:#FFD700;">ID</th>
-<th style="padding:12px; color:#FFD700;">Judul Buku</th>
-<th style="padding:12px; color:#FFD700;">Penulis</th>
-<th style="padding:12px; color:#FFD700;">Tahun</th>
-<th style="padding:12px; color:#FFD700;">Aksi</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
-<td style="padding:10px;">7</td>
-
-<td style="padding:10px;">
-<input type="text" value="Ensiklopedia" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<input type="text" value="Rusmanto" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<input type="text" value="2004" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<button style="
-background:#f59e0b;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-">
-Simpan
-</button>
-
-<button style="
-background:#ef4444;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-">
-Hapus
-</button>
-</td>
-</tr>
-
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
-<td style="padding:10px;">5</td>
-
-<td style="padding:10px;">
-<input type="text" value="Laskar Pelangi" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<input type="text" value="Andrea Hinata" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<input type="text" value="2005" style="
-width:100%;
-padding:8px;
-border:none;
-border-radius:4px;
-">
-</td>
-
-<td style="padding:10px;">
-<button style="
-background:#f59e0b;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-">
-Simpan
-</button>
-
-<button style="
-background:#ef4444;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-">
-Hapus
-</button>
-</td>
-</tr>
-
-</tbody>
-</table>
-
-<!-- HASIL PHP -->
-<div id="hasil-hari" style="
-margin-top:25px;
-background:rgba(0,0,0,0.4);
-padding:20px;
-border-radius:10px;
-color:#22c55e;
-line-height:1.8;
-max-height:300px;
-overflow:auto;
-">
-</div>
-
-</div>
-</div>
-</div>  
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const a1 = urlParams.get('a1');
+        const a2 = urlParams.get('a2');
+        const op = urlParams.get('op');
+        
+        if (a1 && a2 && op) {
+            let hasil;
+            switch(op) {
+                case '+': hasil = parseFloat(a1) + parseFloat(a2); break;
+                case '-': hasil = parseFloat(a1) - parseFloat(a2); break;
+                case '*': hasil = parseFloat(a1) * parseFloat(a2); break;
+                case '/': hasil = parseFloat(a1) / parseFloat(a2); break;
+            }
+            document.getElementById('result').textContent = `${a1} ${op} ${a2} = ${hasil}`;
+        }
+    </script>
+</body>
+</html>  
 
 <!-- Gabungan Login & Register -->
 <div id="login-register" class="section">
