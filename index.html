@@ -337,6 +337,98 @@ iframe{
     margin-bottom: 10px;
 }
 
+/* --- STYLE FITUR PEMINJAMAN --- */
+.book-card {
+    background: rgba(0,0,0,0.8);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+}
+
+.book-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-available {
+    background: rgba(0,255,0,0.2);
+    color: #00ff00;
+    border: 1px solid #00ff00;
+}
+
+.status-borrowed {
+    background: rgba(255,0,0,0.2);
+    color: #ff4444;
+    border: 1px solid #ff4444;
+}
+
+.status-returned {
+    background: rgba(255,215,0,0.2);
+    color: #FFD700;
+    border: 1px solid #FFD700;
+}
+
+.btn-borrow, .btn-return {
+    background: #FFD700;
+    color: #8B4513;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-borrow:hover, .btn-return:hover {
+    background: #e6c200;
+    transform: scale(1.05);
+}
+
+.btn-borrow:disabled, .btn-return:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.borrow-form {
+    background: rgba(0,0,0,0.9);
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    max-width: 500px;
+}
+
+.borrow-history {
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.history-item {
+    padding: 10px;
+    margin: 10px 0;
+    background: rgba(255,215,0,0.1);
+    border-left: 4px solid #FFD700;
+    border-radius: 5px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .nav-arrows {
@@ -361,8 +453,11 @@ iframe{
 
 <script>
 let menuHistory = ['dashboard']; // Riwayat navigasi
-function showMenu(menu){
+let userLoggedIn = false;
+let userName = '';
+let peminjamanHistory = [];
 
+function showMenu(menu){
     // sembunyikan semua section
     document.querySelectorAll('.section').forEach(sec=>{
         sec.classList.remove('active');
@@ -375,26 +470,21 @@ function showMenu(menu){
     document.querySelectorAll('.nav-right a').forEach(link => {
         link.style.color = 'white';
     });
-
-}
     
-    document.querySelectorAll('.section').forEach(sec=>{
-        sec.classList.remove('active');
-    });
-    document.getElementById(menu).classList.add('active');
-    
-    // Update active nav link
-    document.querySelectorAll('.nav-right a').forEach(link => {
-        link.style.color = 'white';
-    });
     if (window.event) {
-    event.target.style.color = '#FFD700';
+        event.target.style.color = '#FFD700';
+    }
+
+    // Update menu history
+    if (!menuHistory.includes(menu)) {
+        menuHistory.push(menu);
+    }
 }
 
 // Navigasi mundur
 function goBack() {
     if (menuHistory.length > 1) {
-        menuHistory.pop(); // Hapus menu saat ini
+        menuHistory.pop();
         const previousMenu = menuHistory[menuHistory.length - 1];
         showMenu(previousMenu);
     }
@@ -422,6 +512,9 @@ function login(event) {
         return;
     }
 
+    userLoggedIn = true;
+    userName = nama;
+
     // Tampilkan nama di dashboard
     document.getElementById("welcome-text").innerHTML =
         "SELAMAT DATANG, " + nama + " 🎉";
@@ -429,7 +522,7 @@ function login(event) {
     // Buka dashboard
     showMenu('dashboard');
 
-    alert("Login berhasil!");
+    alert("Login berhasil! Sekarang Anda bisa meminjam koleksi.");
 }
 
 // Fungsi untuk daftar
@@ -454,6 +547,77 @@ function toggleForm(type) {
         loginForm.style.display = 'block';
         toggleText.innerHTML = 'Belum punya akun? <a onclick="toggleForm(\'register\')">Daftar disini</a>';
     }
+}
+
+// --- FUNGSI PEMINJAMAN ---
+function pinjamBuku(idBuku, namaBuku) {
+    if (!userLoggedIn) {
+        alert('Silakan login terlebih dahulu untuk meminjam!');
+        showMenu('login-register');
+        return;
+    }
+
+    const statusEl = document.getElementById('status-' + idBuku);
+    const btnPinjam = document.getElementById('btn-pinjam-' + idBuku);
+    
+    statusEl.textContent = 'Dipinjam';
+    statusEl.className = 'book-status status-borrowed';
+    btnPinjam.disabled = true;
+    btnPinjam.textContent = 'Sedang Dipinjam';
+
+    // Tambah ke riwayat peminjaman
+    peminjamanHistory.push({
+        id: idBuku,
+        nama: namaBuku,
+        tanggalPinjam: new Date().toLocaleDateString('id-ID'),
+        status: 'Dipinjam'
+    });
+
+    updateRiwayatPeminjaman();
+    alert(`✅ ${namaBuku} berhasil dipinjam oleh ${userName}!`);
+}
+
+function kembalikanBuku(idBuku, namaBuku) {
+    const statusEl = document.getElementById('status-' + idBuku);
+    const btnPinjam = document.getElementById('btn-pinjam-' + idBuku);
+    const btnKembalikan = document.getElementById('btn-kembali-' + idBuku);
+    
+    statusEl.textContent = 'Tersedia';
+    statusEl.className = 'book-status status-available';
+    btnPinjam.disabled = false;
+    btnPinjam.textContent = 'Pinjam';
+    btnKembalikan.style.display = 'none';
+
+    // Update riwayat
+    const pinjaman = peminjamanHistory.find(p => p.id === idBuku && p.status === 'Dipinjam');
+    if (pinjaman) {
+        pinjaman.status = 'Dikembalikan';
+        pinjaman.tanggalKembali = new Date().toLocaleDateString('id-ID');
+    }
+
+    updateRiwayatPeminjaman();
+    alert(`✅ ${namaBuku} berhasil dikembalikan! Terima kasih ${userName}!`);
+}
+
+function updateRiwayatPeminjaman() {
+    const riwayatContainer = document.getElementById('riwayat-peminjaman');
+    riwayatContainer.innerHTML = '';
+
+    if (peminjamanHistory.length === 0) {
+        riwayatContainer.innerHTML = '<p style="text-align:center; opacity:0.7;">Belum ada riwayat peminjaman</p>';
+        return;
+    }
+
+    peminjamanHistory.forEach(pinjaman => {
+        const item = document.createElement('div');
+        item.className = 'history-item';
+        item.innerHTML = `
+            📚 ${pinjaman.nama}<br>
+            <small>Pinjam: ${pinjaman.tanggalPinjam} | 
+            ${pinjaman.status === 'Dikembalikan' ? 'Kembali: ' + pinjaman.tanggalKembali : 'Status: ' + pinjaman.status}</small>
+        `;
+        riwayatContainer.appendChild(item);
+    });
 }
 
 // --- JAVASCRIPT UNTUK KALKULATOR (OPERATOR MATEMATIKA) ---
@@ -501,7 +665,7 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') goForward();
 });
     
-    function tampilkanHari() {
+function tampilkanHari() {
     let hasil = "";
     for (let i = 1; i <= 1000; i++) {
         hasil += "Ini adalah hari ke-" + i + " aku belajar PHP <br>";
@@ -568,12 +732,7 @@ document.addEventListener('keydown', function(e) {
 <iframe width="560" height="315" src="https://www.youtube.com/embed/p_EEzx3wspI" title="YouTube video" frameborder="0" allowfullscreen></iframe>
 </div>
 
-<!-- GOOGLE MAPS - Ditambahkan di bagian paling bawah beranda -->
-<div class="maps-container">
-    <h3>📍 Lokasi Jabu Literasi</h3>
-    <p>Kunjungi kantor pusat kami di Tanah Karo untuk kegiatan dan workshop budaya</p>
-    <iframe 
-        <!-- MAPS YANG PASTI MUNCUL -->
+<!-- GOOGLE MAPS -->
 <div class="maps-container">
     <h3 style="color:#FFD700;">📍 Lokasi Jabu Literasi</h3>
     <p style="text-align:center; margin-bottom:20px;">Tanah Karo - Pusat Pelestarian Budaya Karo</p>
@@ -588,38 +747,72 @@ document.addEventListener('keydown', function(e) {
             loading="lazy">
         </iframe>
     </div>
-    
-    <p style="text-align:center; margin-top:15px; font-size:14px; opacity:0.9;">
-        <a href="https://share.google/1VTFbb0DtKQ9nX6Rp" target="_blank" style="color:#FFD700;">
-            🔗 Buka di Google Maps
-        </a>
-    </p>
 </div>
 </div>
 
-<!-- Koleksi - CENTER + CARD STYLE -->
+<!-- KOLEKSI - DENGAN FITUR PEMINJAMAN -->
 <div id="koleksi" class="section">
     <h2 style="text-align:center; color:#FFD700; margin-bottom:30px;">📚 Koleksi Budaya Karo</h2>
     
-    <div style="max-width:700px; margin:0 auto; text-align:center;">
-        <div style="background:rgba(0,0,0,0.6); padding:30px; border-radius:15px; border:2px solid #FFD700; box-shadow:0 8px 25px rgba(0,0,0,0.5);">
-            <ul style="font-size:18px; line-height:2.2; text-align:left; max-width:500px; margin:0 auto; list-style:none; padding:0;">
-                <li style="margin-bottom:15px; padding:10px; background:rgba(255,215,0,0.1); border-radius:8px; border-left:4px solid #FFD700;">
-                    🎭 <strong>Umpasa Karo</strong> (Pepatah & Pantun)
-                </li>
-                <li style="margin-bottom:15px; padding:10px; background:rgba(255,215,0,0.1); border-radius:8px; border-left:4px solid #FFD700;">
-                    📜 <strong>Tambo Karo</strong> (Sejarah Lisan)
-                </li>
-                <li style="margin-bottom:15px; padding:10px; background:rgba(255,215,0,0.1); border-radius:8px; border-left:4px solid #FFD700;">
-                    🗣️ <strong>Bahasa Karo</strong>: Tata Bahasa & Kosakata
-                </li>
-                <li style="margin-bottom:15px; padding:10px; background:rgba(255,215,0,0.1); border-radius:8px; border-left:4px solid #FFD700;">
-                    💃 <strong>Seni Tari & Musik</strong> Tradisional Karo
-                </li>
-                <li style="padding:10px; background:rgba(255,215,0,0.1); border-radius:8px; border-left:4px solid #FFD700;">
-                    🎉 <strong>Adat Istiadat & Upacara</strong> Karo
-                </li>
-            </ul>
+    <div style="max-width:800px; margin:0 auto;">
+        
+        <!-- NOTIFIKASI LOGIN UNTUK PEMINJAMAN -->
+        <div style="background:rgba(255,215,0,0.2); border:2px solid #FFD700; padding:15px; border-radius:10px; margin-bottom:25px; text-align:center;">
+            <strong>💡 Login untuk meminjam koleksi!</strong><br>
+            <small style="opacity:0.8;">Klik tombol "Pinjam" pada koleksi yang tersedia</small>
+        </div>
+
+        <!-- BUKU 1 -->
+        <div class="book-card">
+            <div class="book-status status-available" id="status-1">Tersedia</div>
+            <h3 style="color:#FFD700; margin-bottom:10px;">🎭 Umpasa Karo (Pepatah & Pantun)</h3>
+            <p style="margin-bottom:15px;">Koleksi lengkap pepatah dan pantun Karo tradisional dengan terjemahan.</p>
+            <button class="btn-borrow" id="btn-pinjam-1" onclick="pinjamBuku('1', 'Umpasa Karo')">Pinjam</button>
+            <button class="btn-return" id="btn-kembali-1" onclick="kembalikanBuku('1', 'Umpasa Karo')" style="display:none;">Kembalikan</button>
+        </div>
+
+        <!-- BUKU 2 -->
+        <div class="book-card">
+            <div class="book-status status-available" id="status-2">Tersedia</div>
+            <h3 style="color:#FFD700; margin-bottom:10px;">📜 Tambo Karo (Sejarah Lisan)</h3>
+            <p style="margin-bottom:15px;">Catatan sejarah lisan suku Karo dari generasi ke generasi.</p>
+            <button class="btn-borrow" id="btn-pinjam-2" onclick="pinjamBuku('2', 'Tambo Karo')">Pinjam</button>
+            <button class="btn-return" id="btn-kembali-2" onclick="kembalikanBuku('2', 'Tambo Karo')" style="display:none;">Kembalikan</button>
+        </div>
+
+        <!-- BUKU 3 -->
+        <div class="book-card">
+            <div class="book-status status-available" id="status-3">Tersedia</div>
+            <h3 style="color:#FFD700; margin-bottom:10px;">🗣️ Bahasa Karo: Tata Bahasa & Kosakata</h3>
+            <p style="margin-bottom:15px;">Panduan lengkap belajar bahasa Karo untuk pemula dan lanjutan.</p>
+            <button class="btn-borrow" id="btn-pinjam-3" onclick="pinjamBuku('3', 'Bahasa Karo')">Pinjam</button>
+            <button class="btn-return" id="btn-kembali-3" onclick="kembalikanBuku('3', 'Bahasa Karo')" style="display:none;">Kembalikan</button>
+        </div>
+
+        <!-- BUKU 4 -->
+        <div class="book-card">
+            <div class="book-status status-available" id="status-4">Tersedia</div>
+            <h3 style="color:#FFD700; margin-bottom:10px;">💃 Seni Tari & Musik Tradisional Karo</h3>
+            <p style="margin-bottom:15px;">Dokumentasi lengkap tarian dan alat musik tradisional Karo.</p>
+            <button class="btn-borrow" id="btn-pinjam-4" onclick="pinjamBuku('4', 'Seni Tari & Musik Karo')">Pinjam</button>
+            <button class="btn-return" id="btn-kembali-4" onclick="kembalikanBuku('4', 'Seni Tari & Musik Karo')" style="display:none;">Kembalikan</button>
+        </div>
+
+        <!-- BUKU 5 -->
+        <div class="book-card">
+            <div class="book-status status-available" id="status-5">Tersedia</div>
+            <h3 style="color:#FFD700; margin-bottom:10px;">🎉 Adat Istiadat & Upacara Karo</h3>
+            <p style="margin-bottom:15px;">Panduan lengkap adat istiadat dan upacara adat Karo.</p>
+            <button class="btn-borrow" id="btn-pinjam-5" onclick="pinjamBuku('5', 'Adat Istiadat Karo')">Pinjam</button>
+            <button class="btn-return" id="btn-kembali-5" onclick="kembalikanBuku('5', 'Adat Istiadat Karo')" style="display:none;">Kembalikan</button>
+        </div>
+
+        <!-- RIWAYAT PEMINJAMAN -->
+        <div class="borrow-history">
+            <h3 style="color:#FFD700; margin-bottom:15px;">📋 Riwayat Peminjaman ${userLoggedIn ? userName : ''}</h3>
+            <div id="riwayat-peminjaman">
+                <p style="text-align:center; opacity:0.7;">Login untuk melihat riwayat peminjaman</p>
+            </div>
         </div>
     </div>
 </div>
@@ -728,10 +921,10 @@ document.addEventListener('keydown', function(e) {
 
 <div class="calculator-box">
     <input type="number" id="num1" placeholder="Angka 1">
-    <select id="operator" style="padding: 10px; margin-bottom: 10px;">
+    <select id="operator" style="padding: 10px; margin-bottom: 10px; width:80%;">
         <option value="+">Tambah (+)</option>
         <option value="-">Kurang (-)</option>
-        <option value="">Kali ()</option>
+        <option value="*">Kali (*)</option>
         <option value="/">Bagi (/)</option>
     </select>
     <input type="number" id="num2" placeholder="Angka 2">
@@ -742,7 +935,7 @@ document.addEventListener('keydown', function(e) {
 </div>
 </div>
 
-  <!-- UJI COBA -->
+<!-- UJI COBA -->
 <div id="uji-coba" class="section">
     <h2 style="text-align:center; color:#FFD700;">🧪 Ruang Uji Coba</h2>
 
@@ -764,18 +957,30 @@ document.addEventListener('keydown', function(e) {
     <div class="login-container">
         <h2 id="form-title">Masuk Anggota</h2>
         
-        <!-- Form Daftar -->
+        <!-- Form Login -->
         <form id="login-form" onsubmit="login(event)">
+            <label for="login-nama">Nama:</label>
+            <input type="text" id="login-nama" required>
 
-    <label for="login-nama">Nama:</label>
-    <input type="text" id="login-nama" required>
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" required>
 
-    <label for="login-email">Email:</label>
-    <input type="email" id="login-email" required>
+            <input type="submit" value="Login">
+        </form>
 
-    <input type="submit" value="Login">
+        <!-- Form Register (hidden by default) -->
+        <form id="register-form" onsubmit="Daftar(event)" style="display:none;">
+            <label for="reg-nama">Nama Lengkap:</label>
+            <input type="text" id="reg-nama" required>
 
-</form>
+            <label for="reg-email">Email:</label>
+            <input type="email" id="reg-email" required>
+
+            <label for="reg-tel">No. Telepon:</label>
+            <input type="tel" id="reg-tel" required>
+
+            <input type="submit" value="Daftar">
+        </form>
 
         <div class="toggle-link" id="toggle-text">
             Belum punya akun? <a onclick="toggleForm('register')">Daftar disini</a>
@@ -790,3 +995,5 @@ document.addEventListener('keydown', function(e) {
 <a href="https://wa.me/6282289121138" class="wa-popup" target="_blank">
     💬
 </a>
+</body>
+</html>
