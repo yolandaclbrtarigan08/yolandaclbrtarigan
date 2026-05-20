@@ -858,8 +858,6 @@ function pinjamBuku(idBuku, namaBuku) {
     statusEl.className = 'book-status status-borrowed';
     btnPinjam.disabled = true;
     btnPinjam.textContent = 'Sedang Dipinjam';
-    document.getElementById('pdf-' + idBuku).style.display = 'inline-block';
-document.getElementById('btn-kembali-' + idBuku).style.display = 'inline-block';
 
     // Tambah ke riwayat peminjaman
     peminjamanHistory.push({
@@ -883,7 +881,6 @@ function kembalikanBuku(idBuku, namaBuku) {
     btnPinjam.disabled = false;
     btnPinjam.textContent = 'Pinjam';
     btnKembalikan.style.display = 'none';
-    document.getElementById('pdf-' + idBuku).style.display = 'none';
 
     // Update riwayat
     const pinjaman = peminjamanHistory.find(p => p.id === idBuku && p.status === 'Dipinjam');
@@ -1059,111 +1056,40 @@ function tampilkanHari() {
             <small style="opacity:0.8;">Klik tombol "Pinjam" pada koleksi yang tersedia</small>
         </div>
 
-       https://drive.google.com/file/d/1Psev9Hs_71ePM_JhEylf3X7A7SkKciAG/view?usp=drive_link
+        <!-- BUKU 1 -->
+<div class="book-card">
+    <div class="book-status status-available" id="status-1">Tersedia</div>
+    <h3 style="color:#FFD700; margin-bottom:10px;">📘 Kamus Bahasa Karo</h3>
+    <p style="margin-bottom:15px;">Kamus lengkap bahasa Karo beserta arti dan kosakata sehari-hari.</p>
+    <button class="btn-borrow" id="btn-pinjam-1" onclick="pinjamBuku('1', 'Kamus Bahasa Karo')">Pinjam</button>
+    <button class="btn-return" id="btn-kembali-1" onclick="kembalikanBuku('1', 'Kamus Bahasa Karo')" style="display:none;">Kembalikan</button>
+</div>
 
 <!-- BUKU 2 -->
 <div class="book-card">
     <div class="book-status status-available" id="status-2">Tersedia</div>
-
-    <h3 style="color:#FFD700; margin-bottom:10px;">
-        📖 Sastra Lisan Karo
-    </h3>
-
-    <p style="margin-bottom:15px;">
-        Kumpulan sastra lisan Karo berupa cerita rakyat, pantun, dan pepatah.
-    </p>
-
-    <button class="btn-borrow"
-    id="btn-pinjam-2"
-    onclick="pinjamBuku('2', 'Sastra Lisan Karo')">
-        Pinjam
-    </button>
-
-    <button class="btn-return"
-    id="btn-kembali-2"
-    onclick="kembalikanBuku('2', 'Sastra Lisan Karo')"
-    style="display:none;">
-        Kembalikan
-    </button>
-
-    <a href="https://drive.google.com/file/d/1Psev9Hs_71ePM_JhEylf3X7A7SkKciAG/view?usp=drive_link"
-    target="_blank"
-    id="pdf-2"
-    style="display:none;">
-        <button class="btn-return">
-            📖 Baca PDF
-        </button>
-    </a>
+    <h3 style="color:#FFD700; margin-bottom:10px;">📖 Sastra Lisan Karo</h3>
+    <p style="margin-bottom:15px;">Kumpulan sastra lisan Karo berupa cerita rakyat, pantun, dan pepatah.</p>
+    <button class="btn-borrow" id="btn-pinjam-2" onclick="pinjamBuku('2', 'Sastra Lisan Karo')">Pinjam</button>
+    <button class="btn-return" id="btn-kembali-2" onclick="kembalikanBuku('2', 'Sastra Lisan Karo')" style="display:none;">Kembalikan</button>
 </div>
 
 <!-- BUKU 3 -->
 <div class="book-card">
     <div class="book-status status-available" id="status-3">Tersedia</div>
-
-    <h3 style="color:#FFD700; margin-bottom:10px;">
-        🗣️ Bahasa Karo
-    </h3>
-
-    <p style="margin-bottom:15px;">
-        Panduan mempelajari bahasa Karo mulai dari dasar hingga percakapan.
-    </p>
-
-    <button class="btn-borrow"
-    id="btn-pinjam-3"
-    onclick="pinjamBuku('3', 'Bahasa Karo')">
-        Pinjam
-    </button>
-
-    <button class="btn-return"
-    id="btn-kembali-3"
-    onclick="kembalikanBuku('3', 'Bahasa Karo')"
-    style="display:none;">
-        Kembalikan
-    </button>
-
-    <a href="https://drive.google.com/file/d/15AXmy3QDXmuTnSkRXAiJkzezKAKDMN5Q/view?usp=drive_link"
-    target="_blank"
-    id="pdf-3"
-    style="display:none;">
-        <button class="btn-return">
-            📖 Baca PDF
-        </button>
-    </a>
+    <h3 style="color:#FFD700; margin-bottom:10px;">🗣️ Bahasa Karo</h3>
+    <p style="margin-bottom:15px;">Panduan mempelajari bahasa Karo mulai dari dasar hingga percakapan.</p>
+    <button class="btn-borrow" id="btn-pinjam-3" onclick="pinjamBuku('3', 'Bahasa Karo')">Pinjam</button>
+    <button class="btn-return" id="btn-kembali-3" onclick="kembalikanBuku('3', 'Bahasa Karo')" style="display:none;">Kembalikan</button>
 </div>
 
 <!-- BUKU 4 -->
 <div class="book-card">
     <div class="book-status status-available" id="status-4">Tersedia</div>
-
-    <h3 style="color:#FFD700; margin-bottom:10px;">
-        🏡 Mengenal Permukiman Masyarakat Batak Karo
-    </h3>
-
-    <p style="margin-bottom:15px;">
-        Pembahasan mengenai lingkungan dan permukiman tradisional masyarakat Batak Karo.
-    </p>
-
-    <button class="btn-borrow"
-    id="btn-pinjam-4"
-    onclick="pinjamBuku('4', 'Mengenal Permukiman Masyarakat Batak Karo')">
-        Pinjam
-    </button>
-
-    <button class="btn-return"
-    id="btn-kembali-4"
-    onclick="kembalikanBuku('4', 'Mengenal Permukiman Masyarakat Batak Karo')"
-    style="display:none;">
-        Kembalikan
-    </button>
-
-    <a href="https://drive.google.com/file/d/1tERtYghOKobMG7mw6AL7a--Wg8EQ8ILK/view?usp=drive_link"
-    target="_blank"
-    id="pdf-4"
-    style="display:none;">
-        <button class="btn-return">
-            📖 Baca PDF
-        </button>
-    </a>
+    <h3 style="color:#FFD700; margin-bottom:10px;">🏡 Mengenal Permukiman Masyarakat Batak Karo di Kabupaten Karo</h3>
+    <p style="margin-bottom:15px;">Pembahasan mengenai lingkungan dan permukiman tradisional masyarakat Batak Karo.</p>
+    <button class="btn-borrow" id="btn-pinjam-4" onclick="pinjamBuku('4', 'Mengenal Permukiman Masyarakat Batak Karo di Kabupaten Karo')">Pinjam</button>
+    <button class="btn-return" id="btn-kembali-4" onclick="kembalikanBuku('4', 'Mengenal Permukiman Masyarakat Batak Karo di Kabupaten Karo')" style="display:none;">Kembalikan</button>
 </div>
 
         <!-- RIWAYAT PEMINJAMAN -->
